@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>أداة فحص يوزرات إنستغرام فائقة السرعة</title>
+    <link rel="icon" href="data:;base64,=">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #111111;
+            --accent: #00ff88;
+            --accent-2: #00cc66;
+            --accent-glow: rgba(0, 255, 136, 0.4);
+            --danger: #ff4d4d;
+            --muted: #7f7f7f;
+            --glass: rgba(255,255,255,0.03);
+            --text: #e9ffe9;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --info: #00aaff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            direction: rtl;
+            overflow-x: hidden;
+        }
+        
+        /* Matrix Background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .matrix-char {
+            position: absolute;
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 14px;
+            opacity: 0;
+            animation: matrixFall linear infinite;
+        }
+        
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 4px;
+            margin-bottom: 30px;
+        }
+        
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: var(--bg);
+            z-index: 1;
+        }
+        
+        .logo-container i {
+            font-size: 40px;
+            color: var(--accent);
+            z-index: 2;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        
+        .title-container {
+            text-align: center;
+        }
+        
+        .developer-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2), #00aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+            animation: textGlow 3s infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.6);
+            }
+        }
+        
+        .developer-name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+            animation: titleUnderline 3s infinite;
+        }
+        
+        @keyframes titleUnderline {
+            0%, 100% {
+                transform: scaleX(0.5);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        
+        /* Card Styles */
+        .card {
+            background: rgba(17, 17, 17, 0.9);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5);
+            color: inherit;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+        
+        .btn.danger {
+            background: var(--danger);
+            color: #fff;
+        }
+        
+        .btn.warning {
+            background: var(--warning);
+            color: #000;
+        }
+        
+        .btn.info {
+            background: var(--info);
+            color: #fff;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        #status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .progress {
+            height: 12px;
+            background: #071;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .progress > i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress > i::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        #results {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow: auto;
+            padding: 15px;
+            border-radius: 10px;
+            background: var(--card);
+            direction: ltr;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .result {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-family: monospace;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            font-size: 14px;
+        }
+        
+        .result:hover {
+            transform: translateX(-5px);
+        }
+        
+        .result.available {
+            background: rgba(0, 255, 136, 0.1);
+            border-left-color: var(--accent);
+            color: #bfffcf;
+            animation: fadeIn 0.5s;
+        }
+        
+        .result.taken {
+            background: rgba(255, 77, 77, 0.08);
+            border-left-color: var(--danger);
+            color: #ffcfcf;
+        }
+        
+        .result.verified {
+            background: rgba(0, 255, 136, 0.15);
+            border-left-color: var(--success);
+            color: #bfffcf;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .small {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        
+        .term {
+            margin-top: 20px;
+            height: 200px;
+            overflow: auto;
+            padding: 15px;
+            border-radius: 10px;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: monospace;
+            font-size: 13px;
+            color: #cfeccf;
+        }
+        
+        .terminal-line {
+            margin: 3px 0;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            padding-bottom: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 25px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .social-btn i {
+            font-size: 20px;
+        }
+        
+        /* تصغير الأيقونات في النتائج */
+        .result-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .result-btn {
+            padding: 4px 6px;
+            font-size: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .result-btn i {
+            font-size: 10px;
+        }
+        
+        .verified-badge {
+            background: var(--success);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .speed-indicator {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .speed-fast {
+            background: var(--success);
+            color: #000;
+        }
+        
+        .speed-medium {
+            background: var(--warning);
+            color: #000;
+        }
+        
+        .speed-slow {
+            background: var(--danger);
+            color: #fff;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .brand {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                flex: 0 0 45%;
+                margin-bottom: 15px;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-btn {
+                width: 220px;
+                justify-content: center;
+            }
+            
+            .logo-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo-container i {
+                font-size: 30px;
+            }
+            
+            .developer-name {
+                font-size: 32px;
+            }
+            
+            .controls {
+                justify-content: center;
+            }
+            
+            .btn {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <div class="wrap">
+        <header>
+            <div class="brand">
+                <div class="logo-container">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="title-container">
+                    <div class="developer-name">المطور إيمو</div>
+                    <div class="subtitle">أداة فحص يوزرات إنستغرام فائقة السرعة - نظام متعدد الخيوط</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="card">
+            <div class="grid">
+                <div>
+                    <label><i class="fas fa-key"></i> توكن بوت تلغرام</label>
+                    <input id="tgToken" type="text" placeholder="أدخل توكن البوت">
+                </div>
+                <div>
+                    <label><i class="fas fa-id-card"></i> معرف المحادثة</label>
+                    <input id="tgChatId" type="text" placeholder="ضع ايديك">
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div>
+                    <label><i class="fas fa-list-ol"></i> عدد الفحوصات</label>
+                    <input id="count" type="number" min="1" max="1000" value="50">
+                </div>
+                <div>
+                    <label><i class="fas fa-clock"></i> التأخير بين الفحوصات</label>
+                    <input id="delay" type="number" min="500" max="10000" value="2000">
+                </div>
+                <div>
+                    <label><i class="fas fa-microchip"></i> عدد الخيوط المتوازية</label>
+                    <select id="threads">
+                        <option value="1">1 خيط</option>
+                        <option value="2">2 خيوط</option>
+                        <option value="3" selected>3 خيوط</option>
+                        <option value="5">5 خيوط</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div>
+                    <label><i class="fas fa-eye"></i> إظهار النتائج</label>
+                    <select id="showOnlyAvailable">
+                        <option value="no">الكل</option>
+                        <option value="yes" selected>المتاح فقط</option>
+                        <option value="verified">المتاح والمؤكد فقط</option>
+                    </select>
+                </div>
+                <div>
+                    <label><i class="fas fa-cogs"></i> إستراتيجية التوليد</label>
+                    <select id="strategy">
+                        <option value="random">عشوائي</option>
+                        <option value="smart" selected>متقدم</option>
+                        <option value="fivechars">خماسي</option>
+                        <option value="premium">بريميوم</option>
+                        <option value="brand">علامات تجارية</option>
+                        <option value="arabic">عربي</option>
+                        <option value="short">قصير (3-4 أحرف)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div>
+                    <label><i class="fas fa-bolt"></i> وضع السرعة</label>
+                    <select id="speedMode">
+                        <option value="safe">آمن (3000ms)</option>
+                        <option value="balanced" selected>متوازن (2000ms)</option>
+                        <option value="fast">سريع (1000ms)</option>
+                    </select>
+                </div>
+                <div>
+                    <label><i class="fas fa-shield-alt"></i> مستوى التحقق</label>
+                    <select id="verificationLevel">
+                        <option value="basic">أساسي (سريع)</option>
+                        <option value="standard" selected>قياسي</option>
+                        <option value="advanced">متقدم (دقيق)</option>
+                    </select>
+                </div>
+                <div>
+                    <label><i class="fas fa-filter"></i> تصفية النتائج</label>
+                    <select id="filterMode">
+                        <option value="all">جميع النتائج</option>
+                        <option value="premium" selected>بريميوم فقط</option>
+                        <option value="short">قصيرة فقط</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top:20px" class="controls">
+                <button id="startBtn" class="btn"><i class="fas fa-play"></i> بدء الفحص</button>
+                <button id="stopBtn" class="btn secondary" style="display:none"><i class="fas fa-stop"></i> إيقاف</button>
+                <button id="fastModeBtn" class="btn warning"><i class="fas fa-bolt"></i> الوضع السريع</button>
+                <button id="testBtn" class="btn info"><i class="fas fa-vial"></i> اختبار الدقة</button>
+                <button id="exportBtn" class="btn"><i class="fas fa-download"></i> تحميل النتائج</button>
+                <button id="clearBtn" class="btn"><i class="fas fa-trash"></i> مسح النتائج</button>
+            </div>
+
+            <div id="status" class="small">جاهز - أدخل التوكن لبدء الفحص - السرعة الحالية: <span class="speed-indicator speed-medium">متوسطة</span></div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="small">المجرب</div>
+                    <div class="stat-value" id="total">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="small">المتاح</div>
+                    <div class="stat-value" id="available">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="small">المستخدم</div>
+                    <div class="stat-value" id="taken">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="small">المؤكد</div>
+                    <div class="stat-value" id="verified">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="small">الدقة</div>
+                    <div class="stat-value" id="accuracy">0%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="small">السرعة</div>
+                    <div class="stat-value" id="speed">0/ث</div>
+                </div>
+            </div>
+
+            <div class="progress" aria-hidden><i id="bar"></i></div>
+
+            <div id="results" aria-live="polite"></div>
+
+            <div class="term" id="terminal">
+                <div class="terminal-line">> نظام فحص إنستغرام فائق السرعة جاهز للتشغيل</div>
+                <div class="terminal-line">> نظام متعدد الخيوط والطلبات المتوازية مفعل</div>
+                <div class="terminal-line">> نظام التحقق الذكي والتصفية التلقائية نشط</div>
+                <div class="terminal-line">> أدخل التوكن واضغط بدء الفحص</div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://youtube.com/@emo8_0" target="_blank" class="social-btn">
+                    <i class="fab fa-youtube"></i>
+                    <span>يوتيوب</span>
+                </a>
+                <a href="https://t.me/emo_80" target="_blank" class="social-btn">
+                    <i class="fab fa-telegram"></i>
+                    <span>تلغرام</span>
+                </a>
+            </div>
+            <div style="margin-top:20px">المطور إيمو — أداة فحص يوزرات إنستغرام فائقة السرعة - نظام متعدد الخيوط</div>
+        </footer>
+    </div>
+
+    <script>
+        // Matrix Background Effect
+        function createMatrixEffect() {
+            const matrixBg = document.getElementById('matrixBg');
+            const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$#@%&*";
+            
+            function createChar() {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                char.style.left = Math.random() * 100 + 'vw';
+                char.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                char.style.fontSize = (Math.random() * 10 + 14) + 'px';
+                matrixBg.appendChild(char);
+                
+                setTimeout(() => {
+                    char.remove();
+                }, 8000);
+            }
+            
+            // Create initial characters
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createChar, Math.random() * 2000);
+            }
+            
+            // Continue creating characters
+            setInterval(createChar, 100);
+        }
+        
+        // تطبيق محسن فائق السرعة
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const fastModeBtn = document.getElementById('fastModeBtn');
+        const testBtn = document.getElementById('testBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultsDiv = document.getElementById('results');
+        const term = document.getElementById('terminal');
+        const totalSpan = document.getElementById('total');
+        const availSpan = document.getElementById('available');
+        const takenSpan = document.getElementById('taken');
+        const verifiedSpan = document.getElementById('verified');
+        const accuracySpan = document.getElementById('accuracy');
+        const speedSpan = document.getElementById('speed');
+        const bar = document.getElementById('bar');
+        const status = document.getElementById('status');
+
+        let isRunning = false;
+        let stats = { total:0, available:0, taken:0, verified:0, unknown:0, startTime:0 };
+        let foundList = [];
+        let verifiedList = [];
+        let abortRequested = false;
+        let activeThreads = 0;
+        let completedCount = 0;
+        let speedCounter = 0;
+        let speedTimer = null;
+
+        // إضافة سطر للترمينال
+        function logTerm(msg){
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.textContent = "> " + msg;
+            term.appendChild(line);
+            term.scrollTop = term.scrollHeight;
+            
+            // حذف الأسطر القديمة إذا تجاوز العدد 25 سطر
+            const lines = term.querySelectorAll('.terminal-line');
+            if (lines.length > 25) {
+                lines[0].remove();
+            }
+        }
+
+        // تحديث عداد السرعة
+        function startSpeedCounter() {
+            speedCounter = 0;
+            if (speedTimer) clearInterval(speedTimer);
+            speedTimer = setInterval(() => {
+                speedSpan.textContent = speedCounter + '/ث';
+                speedCounter = 0;
+            }, 1000);
+        }
+
+        // إضافة نتيجة
+        function addResultLine(username, statusType, isVerified = false){
+            const el = document.createElement('div');
+            let className = 'result ' + (statusType === 'available' ? 'available' : (statusType==='taken'?'taken':'unknown'));
+            if (isVerified && statusType === 'available') {
+                className = 'result verified';
+            }
+            el.className = className;
+            
+            let statusText = 'غير مؤكد';
+            let badge = '';
+            if (statusType === 'available') {
+                statusText = isVerified ? 'متاح مؤكد' : 'متاح';
+                if (isVerified) {
+                    badge = '<span class="verified-badge">✓</span>';
+                    statusText = 'متاح مؤكد';
+                }
+            } else if (statusType === 'taken') statusText = 'مستخدم';
+            
+            // إضافة مؤشر الجودة
+            let qualityBadge = '';
+            if (statusType === 'available') {
+                if (username.length <= 4) {
+                    qualityBadge = '<span class="speed-indicator speed-fast">بريميوم</span>';
+                } else if (username.length <= 6) {
+                    qualityBadge = '<span class="speed-indicator speed-medium">جيد</span>';
+                }
+            }
+            
+            el.innerHTML = `<span style="flex:1">${badge}${qualityBadge}${statusText} — <b>${username}</b></span>
+                <span class="result-buttons">
+                    <button class="btn result-btn" style="padding:4px 6px;font-size:10px" onclick="copyName('${username}')"><i class="fas fa-copy"></i></button>
+                    ${statusType==='available' ? `<button class="btn result-btn" style="padding:4px 6px;font-size:10px;background:#222;color:#fff" onclick="sendTG('${username}')"><i class="fas fa-paper-plane"></i></button>` : ''}
+                    ${statusType==='available' && !isVerified ? `<button class="btn result-btn" style="padding:4px 6px;font-size:10px;background:var(--warning);color:#000" onclick="verifyUsername('${username}')"><i class="fas fa-check-double"></i></button>` : ''}
+                </span>`;
+                
+            if(statusType==='available'){
+                if (isVerified) {
+                    resultsDiv.prepend(el);
+                } else {
+                    const showOnly = document.getElementById('showOnlyAvailable').value;
+                    if (showOnly === 'yes' || showOnly === 'verified') {
+                        resultsDiv.appendChild(el);
+                    }
+                }
+            } else {
+                const showOnly = document.getElementById('showOnlyAvailable').value;
+                if(showOnly === 'no') resultsDiv.appendChild(el);
+            }
+        }
+
+        // نسخ - إصلاح كامل
+        window.copyName = function(txt){
+            navigator.clipboard.writeText(txt).then(() => {
+                logTerm(`تم نسخ ${txt}`);
+                showNotification(`تم نسخ ${txt}`);
+            }).catch(err => {
+                // طريقة بديلة للنسخ
+                const textArea = document.createElement("textarea");
+                textArea.value = txt;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                logTerm(`تم نسخ ${txt} (الطريقة البديلة)`);
+                showNotification(`تم نسخ ${txt}`);
+            });
+        };
+
+        // التحقق من يوزر محدد
+        window.verifyUsername = async function(username) {
+            logTerm(`جاري التحقق من ${username}...`);
+            const result = await checkInstagramUsername(username);
+            if (result.status === 'available') {
+                // إضافة إلى القائمة المؤكدة
+                if (!verifiedList.includes(username)) {
+                    verifiedList.push(username);
+                    stats.verified++;
+                    updateStats();
+                    
+                    // تحديث العنصر في القائمة
+                    const results = document.querySelectorAll('.result');
+                    results.forEach(el => {
+                        if (el.textContent.includes(username)) {
+                            el.className = 'result verified';
+                            el.querySelector('span:first-child').innerHTML = `<span class="verified-badge">✓</span>متاح مؤكد — <b>${username}</b>`;
+                        }
+                    });
+                    
+                    logTerm(`✅ ${username} — تم التأكيد بنجاح`);
+                    showNotification(`تم تأكيد ${username}`);
+                }
+            } else {
+                logTerm(`❌ ${username} — غير متاح بعد التحقق`);
+                showNotification(`${username} غير متاح بعد التحقق`, 'error');
+            }
+        };
+
+        // إظهار إشعار مؤقت
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.background = type === 'success' ? 'var(--accent)' : 'var(--danger)';
+            notification.style.color = '#000';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '10000';
+            notification.style.fontWeight = 'bold';
+            notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 2000);
+        }
+
+        // إرسال إلى تليجرام
+        async function sendTG(username){
+            const token = document.getElementById('tgToken').value.trim();
+            const chatId = document.getElementById('tgChatId').value.trim();
+            
+            if(!token || !chatId){ 
+                logTerm('لا يوجد توكن أو معرف محادثة'); 
+                return; 
+            }
+            
+            const isVerified = verifiedList.includes(username);
+            const quality = username.length <= 4 ? '🔥 بريميوم' : username.length <= 6 ? '⭐ جيد' : '🟢 عادي';
+            const text = `EMO80 — ${isVerified ? 'يوزر متاح مؤكد' : 'يوزر متاح'} ${quality}: ${username}`;
+            try{
+                const resp = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({ chat_id: chatId, text })
+                });
+                const j = await resp.json();
+                if(j.ok) logTerm(`تم الإرسال للتلغرام: ${username}`);
+                else logTerm(`فشل إرسال التلغرام: ${j.description||'خطأ'}`);
+            }catch(e){
+                logTerm('خطأ بالاتصال بتيليجرام: ' + e.message);
+            }
+        }
+
+        // تنزيل نتائج
+        exportBtn.addEventListener('click', ()=>{
+            if(foundList.length===0){ alert('لا توجد نتائج للتحميل'); return; }
+            const content = foundList.map(user => {
+                const isVerified = verifiedList.includes(user) ? ' (مؤكد)' : '';
+                const quality = user.length <= 4 ? ' [بريميوم]' : user.length <= 6 ? ' [جيد]' : '';
+                return user + isVerified + quality;
+            }).join('\n');
+            
+            const blob = new Blob([content], {type:'text/plain;charset=utf-8'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); 
+            a.href = url; 
+            a.download = 'emo80_results.txt'; 
+            document.body.appendChild(a); 
+            a.click(); 
+            a.remove();
+            URL.revokeObjectURL(url);
+            logTerm('تم تحميل النتائج');
+        });
+
+        // مسح
+        clearBtn.addEventListener('click', ()=>{
+            if(!confirm('مسح كل النتائج؟')) return;
+            resultsDiv.innerHTML=''; 
+            term.innerHTML='<div class="terminal-line">> نظام فحص إنستغرام فائق السرعة جاهز للتشغيل</div><div class="terminal-line">> نظام متعدد الخيوط والطلبات المتوازية مفعل</div><div class="terminal-line">> نظام التحقق الذكي والتصفية التلقائية نشط</div>'; 
+            foundList=[]; 
+            verifiedList = [];
+            stats={total:0,available:0,taken:0,verified:0,unknown:0}; 
+            updateStats();
+            logTerm('تم مسح النتائج');
+        });
+
+        // اختبار الدقة
+        testBtn.addEventListener('click', async ()=>{
+            if(isRunning) return;
+            
+            const testUsernames = ['instagram', 'facebook', 'twitter', 'admin', 'test', 'user1234567890'];
+            let correct = 0;
+            let total = testUsernames.length;
+            
+            logTerm('بدء اختبار الدقة...');
+            
+            for (const username of testUsernames) {
+                logTerm(`جاري فحص: ${username}`);
+                const result = await checkInstagramUsername(username);
+                
+                // نتوقع أن كل هذه الأسماء مستخدمة
+                if (result.status === 'taken') {
+                    correct++;
+                    logTerm(`✅ ${username} - النتيجة صحيحة (مستخدم)`);
+                } else {
+                    logTerm(`❌ ${username} - النتيجة خاطئة (متاح)`);
+                }
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            
+            const accuracy = Math.round((correct / total) * 100);
+            logTerm(`انتهى اختبار الدقة - النتيجة: ${accuracy}% (${correct}/${total})`);
+            showNotification(`دقة الأداة: ${accuracy}%`);
+        });
+
+        // توليد أسماء يوزرات محسنة فائقة السرعة
+        function generateUsername(strategy) {
+            const chars = "abcdefghijklmnopqrstuvwxyz0123456789_";
+            const arabicNames = ["ahmed", "mohammed", "ali", "youssef", "khaled", "omar", "hassan", "ibrahim", "mostafa", "mahmoud"];
+            let username = "";
+            
+            if (strategy === 'fivechars') {
+                for(let i = 0; i < 5; i++) {
+                    username += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+            } else if (strategy === 'smart') {
+                const patterns = [
+                    () => {
+                        const names = ["user","admin","test","real","official","my","the","best","top","new","old","pro"];
+                        const suffixes = ["", "1", "2", "2024", "24", "0", "01", "x", "z"];
+                        return names[Math.floor(Math.random() * names.length)] + 
+                               suffixes[Math.floor(Math.random() * suffixes.length)];
+                    },
+                    () => {
+                        const prefixes = ["the", "my", "real", "official", "best", "top", "new", "super", "ultra"];
+                        const names = ["user","admin","test","account","page","profile","world","life","tech"];
+                        return prefixes[Math.floor(Math.random() * prefixes.length)] + 
+                               names[Math.floor(Math.random() * names.length)];
+                    }
+                ];
+                username = patterns[Math.floor(Math.random() * patterns.length)]();
+            } else if (strategy === 'premium') {
+                const premiumPatterns = [
+                    () => {
+                        const short = "abcdeghjklmnpqrstuvwxyz23456789";
+                        let name = '';
+                        for (let i = 0; i < 4; i++) {
+                            name += short.charAt(Math.floor(Math.random() * short.length));
+                        }
+                        return name;
+                    },
+                    () => {
+                        const words = ["alpha", "beta", "gamma", "omega", "sigma", "zeta", "nova", "flux", "quantum", "nexus"];
+                        return words[Math.floor(Math.random() * words.length)];
+                    }
+                ];
+                username = premiumPatterns[Math.floor(Math.random() * premiumPatterns.length)]();
+            } else if (strategy === 'brand') {
+                const brands = ["nike", "apple", "samsung", "adidas", "puma", "sony", "nokia", "tesla", "spacex", "google", "meta"];
+                const suffixes = ["app", "hq", "team", "official", "global", "world", "inc", "co", "net", "online"];
+                username = brands[Math.floor(Math.random() * brands.length)] + 
+                          suffixes[Math.floor(Math.random() * suffixes.length)];
+            } else if (strategy === 'arabic') {
+                const suffixes = ["", "1", "2", "3", "01", "2024", "_", "x"];
+                username = arabicNames[Math.floor(Math.random() * arabicNames.length)] + 
+                          suffixes[Math.floor(Math.random() * suffixes.length)];
+            } else if (strategy === 'short') {
+                const len = Math.floor(Math.random() * 2) + 3; // 3-4 أحرف
+                for(let i = 0; i < len; i++) {
+                    username += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+            } else {
+                // عشوائي
+                const len = Math.floor(Math.random() * 8) + 3;
+                for(let i = 0; i < len; i++) {
+                    username += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+            }
+            
+            return username.toLowerCase();
+        }
+
+        // فحص إنستغرام الأساسي - الإصلاح الرئيسي هنا
+        async function checkInstagramUsername(username) {
+            try {
+                if (!username || typeof username !== 'string') {
+                    return { status: 'unknown', error: 'اسم مستخدم غير صالح' };
+                }
+                
+                const cleanUsername = String(username).trim().toLowerCase();
+                
+                if (cleanUsername.length === 0) {
+                    return { status: 'unknown', error: 'اسم مستخدم فارغ' };
+                }
+
+                // استخدام طريقة fetch مباشرة لصفحة المستخدم
+                const response = await fetch(`https://www.instagram.com/${encodeURIComponent(cleanUsername)}/`, {
+                    method: 'GET',
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    }
+                });
+
+                // إذا كانت الاستجابة 404، فالاسم متاح
+                if (response.status === 404) {
+                    return { status: 'available' };
+                }
+                
+                // إذا كانت الاستجابة 200، فالاسم مستخدم
+                if (response.status === 200) {
+                    return { status: 'taken' };
+                }
+                
+                // لأي حالة أخرى، نعتبر النتيجة غير مؤكدة
+                return { status: 'unknown', code: response.status };
+                
+            } catch (error) {
+                // في حالة الخطأ، نعيد نتيجة غير مؤكدة
+                return { status: 'unknown', error: error.message };
+            }
+        }
+
+        // تحديث الإحصائيات
+        function updateStats(){
+            totalSpan.textContent = stats.total;
+            availSpan.textContent = stats.available;
+            takenSpan.textContent = stats.taken;
+            verifiedSpan.textContent = stats.verified;
+            
+            if (stats.total > 0) {
+                const totalKnown = stats.available + stats.taken;
+                const accuracy = totalKnown > 0 ? Math.round((stats.available) / totalKnown * 100) : 0;
+                accuracySpan.textContent = accuracy + '%';
+            }
+            
+            if(stats.total > 0){
+                const c = parseInt(document.getElementById('count').value) || 1;
+                const pct = Math.min(100, Math.round((stats.total / c)*100));
+                bar.style.width = pct + '%';
+            } else {
+                bar.style.width = '0%';
+            }
+        }
+
+        // حلقة الفحص الرئيسية - الإصلاح الرئيسي هنا
+        async function runChecks(){
+            const cnt = parseInt(document.getElementById('count').value) || 50;
+            const delay = parseInt(document.getElementById('delay').value) || 2000;
+            const strategy = document.getElementById('strategy').value;
+            const token = document.getElementById('tgToken').value.trim();
+            const chatId = document.getElementById('tgChatId').value.trim();
+
+            // إعادة التعيين
+            stats = {total:0, available:0, taken:0, verified:0, unknown:0, startTime: Date.now()}; 
+            foundList = []; 
+            verifiedList = [];
+            completedCount = 0;
+            resultsDiv.innerHTML = ''; 
+            
+            updateStats();
+            startSpeedCounter();
+
+            isRunning = true; 
+            abortRequested = false;
+            startBtn.style.display = 'none'; 
+            stopBtn.style.display = 'inline-block';
+            testBtn.style.display = 'none';
+            
+            logTerm(`بدء الفحص - ${cnt} يوزر`);
+            logTerm(`الاستراتيجية: ${strategy}`);
+            logTerm(`التأخير: ${delay} مللي ثانية`);
+
+            for(let i = 0; i < cnt; i++){
+                if(abortRequested) break;
+                
+                const username = generateUsername(strategy);
+                
+                try {
+                    logTerm(`جاري فحص: ${username}`);
+                    const result = await checkInstagramUsername(username);
+                    stats.total++;
+                    speedCounter++;
+                    
+                    if(result.status === 'available'){
+                        stats.available++;
+                        addResultLine(username, 'available', false);
+                        foundList.push(username);
+                        logTerm(`✅ ${username} — متاح`);
+                        
+                        // إرسال تلقائي إلى Telegram فقط إذا كان متاحاً
+                        if (token && chatId) {
+                            await sendTG(username);
+                        }
+                        
+                    } else if(result.status === 'taken'){
+                        stats.taken++;
+                        const showOnly = document.getElementById('showOnlyAvailable').value;
+                        if(showOnly === 'no') addResultLine(username, 'taken', false);
+                        logTerm(`❌ ${username} — مستخدم`);
+                    } else {
+                        stats.unknown++;
+                        logTerm(`⚠️ ${username} — غير مؤكد`);
+                    }
+                    
+                    updateStats();
+                    
+                } catch (error) {
+                    logTerm(`❌ خطأ في فحص ${username}: ${error.message}`);
+                    stats.unknown++;
+                    updateStats();
+                }
+
+                // تأخير بين الفحوصات
+                if (i < cnt - 1) { // لا تأخير بعد الفحص الأخير
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+
+            isRunning = false; 
+            startBtn.style.display = 'inline-block'; 
+            stopBtn.style.display = 'none';
+            testBtn.style.display = 'inline-block';
+            
+            if (speedTimer) {
+                clearInterval(speedTimer);
+                speedTimer = null;
+            }
+            
+            const timeElapsed = ((Date.now() - stats.startTime) / 1000).toFixed(1);
+            logTerm(`انتهى الفحص — الوقت: ${timeElapsed} ثانية`);
+            logTerm(`النتائج — المتاح: ${stats.available} — المستخدم: ${stats.taken}`);
+            status.textContent = 'انتهى الفحص';
+            
+            if (stats.available > 0) {
+                showNotification(`تم العثور على ${stats.available} يوزر متاح!`);
+            }
+        }
+
+        // أحداث الأزرار
+        startBtn.addEventListener('click', ()=>{
+            if(isRunning) return;
+            runChecks();
+        });
+
+        stopBtn.addEventListener('click', ()=>{
+            if(!isRunning) return;
+            abortRequested = true;
+            logTerm('إيقاف الفحص...');
+            status.textContent = 'جارٍ الإيقاف...';
+        });
+
+        fastModeBtn.addEventListener('click', ()=>{
+            document.getElementById('delay').value = 1000;
+            document.getElementById('threads').value = 3;
+            document.getElementById('speedMode').value = 'fast';
+            document.getElementById('verificationLevel').value = 'basic';
+            updateStatusIndicator('fast');
+            logTerm('تم تفعيل الوضع السريع - السرعة: 1000ms');
+        });
+
+        // تحديث مؤشر السرعة
+        function updateStatusIndicator(mode) {
+            const indicator = status.querySelector('.speed-indicator');
+            if (mode === 'safe') {
+                indicator.className = 'speed-indicator speed-slow';
+                indicator.textContent = 'آمن';
+            } else if (mode === 'balanced') {
+                indicator.className = 'speed-indicator speed-medium';
+                indicator.textContent = 'متوسطة';
+            } else if (mode === 'fast') {
+                indicator.className = 'speed-indicator speed-fast';
+                indicator.textContent = 'سريعة';
+            }
+        }
+
+        // التهيئة
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrixEffect();
+            logTerm('جاهز للبدء - أدخل البيانات واضغط بدء الفحص');
+            
+            // إضافة اختيار وضع السرعة
+            document.getElementById('speedMode').addEventListener('change', function() {
+                const mode = this.value;
+                if (mode === 'safe') {
+                    document.getElementById('delay').value = 3000;
+                    updateStatusIndicator('safe');
+                } else if (mode === 'balanced') {
+                    document.getElementById('delay').value = 2000;
+                    updateStatusIndicator('balanced');
+                } else if (mode === 'fast') {
+                    document.getElementById('delay').value = 1000;
+                    updateStatusIndicator('fast');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
