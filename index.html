@@ -3,8 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="نظام فحص إنستغرام الذكي - أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي">
+    <meta name="keywords" content="إنستغرام, تحليل, فحص, الذكاء الاصطناعي, إحصائيات">
+    <meta property="og:title" content="🚀 نظام فحص إنستغرام الذكي - الإصدار المتطور">
+    <meta property="og:description" content="أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي">
+    <meta property="og:type" content="website">
     <title>🚀 نظام فحص إنستغرام الذكي - الإصدار المتطور</title>
-    <link rel="icon" href="data:;base64,=">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,6 +31,7 @@
             --pink: #ff4d9d;
             --neon-blue: #00eeff;
             --gold: #ffd700;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         * {
@@ -44,9 +50,48 @@
             direction: rtl;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
-        /* Enhanced Matrix Background */
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .matrix-char, .particle {
+                display: none !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        *:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            right: 10px;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 10000;
+            transition: var(--transition);
+        }
+
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        /* Enhanced Matrix Background with performance improvements */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -54,7 +99,8 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.15;
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         .matrix-char {
@@ -66,6 +112,7 @@
             animation: matrixFall linear infinite;
             text-shadow: 0 0 8px var(--accent-glow);
             font-weight: bold;
+            user-select: none;
         }
         
         @keyframes matrixFall {
@@ -85,7 +132,7 @@
             }
         }
 
-        /* Particle Background */
+        /* Particle Background with performance improvements */
         .particles {
             position: fixed;
             top: 0;
@@ -93,13 +140,14 @@
             width: 100%;
             height: 100%;
             z-index: -2;
+            pointer-events: none;
         }
         
         .particle {
             position: absolute;
             background: var(--accent);
             border-radius: 50%;
-            opacity: 0.3;
+            opacity: 0.2;
             animation: float 20s infinite linear;
         }
         
@@ -132,6 +180,7 @@
                 var(--accent);
             background-size: 22px 22px;
             opacity: 0.03;
+            pointer-events: none;
         }
 
         /* Loading Screen */
@@ -176,6 +225,14 @@
             animation: fadeIn 1s ease 0.5s forwards;
         }
         
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Enhanced Header Styles */
         header {
             display: flex;
@@ -202,1907 +259,959 @@
         
         .brand {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 25px;
-        }
-        
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 50px var(--accent-glow), 0 0 100px rgba(0, 255, 136, 0.3);
-            position: relative;
-            overflow: hidden;
-            animation: logoRotate 10s linear infinite;
-        }
-        
-        @keyframes logoRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .logo-container::before {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            border-radius: 50%;
-            background: var(--bg);
-            z-index: 1;
-        }
-        
-        .logo-container i {
-            font-size: 50px;
-            color: var(--accent);
-            z-index: 2;
-            text-shadow: 0 0 20px var(--accent-glow);
-            animation: logoPulse 2s infinite alternate;
-        }
-        
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        
-        .title-container {
-            text-align: center;
-            position: relative;
-        }
-        
-        .developer-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 52px;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2), var(--neon-blue), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.7);
-            letter-spacing: 3px;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-            animation: textGlow 3s infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 40px rgba(0, 255, 136, 0.9), 0 0 60px rgba(0, 255, 136, 0.7);
-            }
-        }
-        
-        .developer-name::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--purple), var(--neon-blue), transparent);
-            animation: titleUnderline 3s infinite;
-            border-radius: 2px;
-        }
-        
-        @keyframes titleUnderline {
-            0%, 100% {
-                transform: scaleX(0.5);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scaleX(1);
-                opacity: 1;
-            }
-        }
-        
-        .subtitle {
-            font-size: 20px;
-            color: var(--muted);
-            font-weight: 400;
-            margin-top: 15px;
-            letter-spacing: 1.5px;
-            line-height: 1.6;
-        }
-        
-        /* Enhanced System Status */
-        .system-status {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
-        .status-item {
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--neon-blue));
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 25px;
-            font-size: 15px;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-        
-        .status-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
-        }
-        
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--success);
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 30px var(--accent-glow);
             animation: pulse 2s infinite;
-            box-shadow: 0 0 10px var(--success);
-        }
-        
-        .status-dot.warning {
-            background: var(--warning);
-            box-shadow: 0 0 10px var(--warning);
-        }
-        
-        .status-dot.danger {
-            background: var(--danger);
-            box-shadow: 0 0 10px var(--danger);
         }
         
         @keyframes pulse {
-            0% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 0.7;
-                transform: scale(1.1);
-            }
-            100% { 
-                opacity: 1;
-                transform: scale(1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
-        /* Enhanced Card Styles */
+        .brand-text {
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--accent), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--accent-glow);
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--muted);
+            font-weight: 400;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        /* Main Content Styles */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
         .card {
-            background: linear-gradient(135deg, rgba(17, 17, 17, 0.95), rgba(10, 10, 10, 0.98));
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            background: var(--card);
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 20px;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
+            border-color: var(--accent);
         }
         
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--purple), var(--neon-blue), transparent);
-            animation: borderGlow 3s infinite;
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass);
         }
         
-        @keyframes borderGlow {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
-            }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--accent);
         }
         
-        .card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s infinite;
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            font-family: 'Orbitron', sans-serif;
         }
         
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-        
-        .tabs {
+        /* Form Styles */
+        .input-group {
             display: flex;
             gap: 15px;
             margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            flex-wrap: wrap;
         }
         
-        .tab {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.05);
+        .username-input {
+            flex: 1;
+            padding: 18px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass);
             border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .tab:hover::before {
-            left: 100%;
-        }
-        
-        .tab:hover {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: rgba(0, 255, 136, 0.3);
-        }
-        
-        .tab.active {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: #000;
-            font-weight: bold;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .form-group {
-            position: relative;
-        }
-        
-        label {
-            display: block;
-            font-size: 15px;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        input[type="text"], input[type="number"], select, textarea {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.6);
-            color: inherit;
+            font-size: 1.1rem;
+            color: var(--text);
             font-family: 'Cairo', sans-serif;
-            transition: all 0.3s;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
         
-        input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+        .username-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
         
-        .btn {
+        .username-input.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        .analyze-btn {
+            padding: 0 35px;
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: #000;
             border: none;
-            padding: 16px 28px;
             border-radius: 12px;
-            font-weight: 800;
+            color: var(--bg);
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1.5px;
-            transition: all 0.3s;
-            font-size: 16px;
+            transition: var(--transition);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
         }
         
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.5);
-        }
-        
-        .btn:active {
-            transform: translateY(-2px);
-        }
-        
-        .btn.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn.danger {
-            background: var(--danger);
-            color: #fff;
-        }
-        
-        .btn.warning {
-            background: var(--warning);
-            color: #000;
-        }
-        
-        .btn.info {
-            background: var(--info);
-            color: #000;
-        }
-        
-        .btn.purple {
-            background: var(--purple);
-            color: #fff;
-        }
-        
-        .btn.gold {
-            background: linear-gradient(135deg, var(--gold), #ffaa00);
-            color: #000;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-        
-        #status {
-            margin-top: 20px;
-            font-size: 15px;
-            color: var(--muted);
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-            font-size: 16px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .stat-item:hover {
+        .analyze-btn:hover {
             transform: translateY(-3px);
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+            box-shadow: 0 7px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+        
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Results Section */
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: var(--glass);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
         }
         
         .stat-value {
-            font-size: 28px;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: var(--accent);
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--accent), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .progress {
-            height: 16px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+        .stat-label {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--glass);
+            border-radius: 4px;
+            margin: 15px 0;
             overflow: hidden;
-            margin-top: 25px;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .progress > i {
-            display: block;
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--purple));
+            background: linear-gradient(90deg, var(--accent), var(--neon-blue));
+            border-radius: 4px;
             width: 0%;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
+            transition: width 1.5s ease;
         }
         
-        .progress > i::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            animation: progressShine 1.5s infinite;
-        }
-        
-        @keyframes progressShine {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-        
-        #results {
-            margin-top: 25px;
-            max-height: 400px;
-            overflow: auto;
-            padding: 20px;
-            border-radius: 15px;
-            background: var(--card);
-            direction: ltr;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-        
-        .result {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 12px;
-            font-family: 'Courier New', monospace;
-            transition: all 0.3s;
-            border-left: 5px solid transparent;
-            background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .result:hover {
-            transform: translateX(-5px) translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .result.available {
-            background: rgba(0, 255, 136, 0.1);
-            border-left-color: var(--accent);
-            color: #bfffcf;
-            animation: fadeIn 0.5s;
-        }
-        
-        .result.taken {
-            background: rgba(255, 77, 77, 0.1);
-            border-left-color: var(--danger);
-            color: #ffcfcf;
-        }
-        
-        .result.verified {
-            background: rgba(0, 255, 136, 0.2);
-            border-left-color: var(--success);
-            color: #bfffcf;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .result.verified::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: verifiedShine 3s infinite;
-        }
-        
-        @keyframes verifiedShine {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .small {
-            font-size: 14px;
-            color: var(--muted);
-        }
-        
-        .term {
-            margin-top: 25px;
-            height: 200px;
-            overflow: auto;
-            padding: 20px;
-            border-radius: 15px;
-            background: #000;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #cfeccf;
-            backdrop-filter: blur(10px);
-        }
-        
-        .terminal-line {
-            margin: 5px 0;
-            padding: 3px 0;
-        }
-        
+        /* Footer */
         footer {
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: center;
+            padding: 30px 0;
             color: var(--muted);
-            font-size: 15px;
-            padding-bottom: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 35px;
-            position: relative;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--glass);
         }
         
-        .footer-glow {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .social-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .social-btn:hover::before {
-            left: 100%;
-        }
-        
-        .social-btn:hover {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
-            border-color: rgba(0, 255, 136, 0.3);
-        }
-        
-        .social-btn i {
-            font-size: 22px;
-        }
-        
-        /* تصغير الأيقونات في النتائج */
-        .result-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .result-btn {
-            padding: 6px 10px;
-            font-size: 11px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .result-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .result-btn i {
-            font-size: 11px;
-        }
-        
-        .verified-badge {
-            background: var(--success);
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-right: 8px;
-            animation: badgePulse 2s infinite;
-        }
-        
-        @keyframes badgePulse {
-            0%, 100% {
-                box-shadow: 0 0 5px var(--success);
-            }
-            50% {
-                box-shadow: 0 0 15px var(--success);
-            }
-        }
-        
-        .system-badge {
-            background: var(--info);
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-        
-        /* System Monitor */
-        .system-monitor {
+        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-top: 25px;
+            margin-top: 30px;
         }
         
-        .monitor-item {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-            text-align: center;
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--glass);
+            border-radius: 10px;
         }
         
-        .monitor-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.2);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .monitor-value {
-            font-size: 28px;
-            font-weight: bold;
+        .feature i {
             color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-            margin: 10px 0;
+            font-size: 1.5rem;
         }
         
-        /* Enhanced Responsive */
-        @media (max-width: 1200px) {
-            .wrap {
-                padding: 15px;
-            }
-            
-            .developer-name {
-                font-size: 42px;
-            }
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            max-width: 400px;
         }
         
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: var(--success);
+            color: var(--bg);
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .notification.warning {
+            background: var(--warning);
+            color: var(--bg);
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 2rem;
             }
             
-            .brand {
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .input-group {
                 flex-direction: column;
-                align-items: center;
             }
             
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .social-btn {
-                width: 250px;
+            .analyze-btn {
                 justify-content: center;
+                padding: 18px;
             }
             
-            .logo-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .logo-container i {
-                font-size: 40px;
-            }
-            
-            .developer-name {
-                font-size: 36px;
-            }
-            
-            .controls {
-                justify-content: center;
-            }
-            
-            .btn {
-                flex: 1;
-                min-width: 160px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-            
-            .system-monitor {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .status-item {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .developer-name {
-                font-size: 28px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .system-monitor {
+            .results-grid {
                 grid-template-columns: 1fr;
             }
             
             .card {
                 padding: 20px;
             }
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-2);
-        }
-
-        /* Loading Animation */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 255, 136, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Notification System */
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 25px;
-            border-radius: 10px;
-            color: #000;
-            font-weight: bold;
-            z-index: 10000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: notificationSlide 0.3s ease;
-        }
-        
-        @keyframes notificationSlide {
-            from {
-                transform: translateX(-50%) translateY(-50px);
-                opacity: 0;
+            
+            .card-title {
+                font-size: 1.5rem;
             }
-            to {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
+            
+            .logo {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
             }
         }
         
-        .notification.success {
-            background: var(--accent);
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .wrap {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
         }
         
-        .notification.error {
-            background: var(--danger);
-            color: #fff;
-        }
-        
-        .notification.warning {
-            background: var(--warning);
-        }
-
-        /* New Features Styles */
-        .feature-badge {
-            background: linear-gradient(135deg, var(--purple), var(--neon-blue));
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        .premium-feature {
-            border: 2px solid var(--gold);
-            position: relative;
-        }
-
-        .premium-feature::before {
-            content: 'PREMIUM';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: var(--gold);
-            color: #000;
-            padding: 2px 10px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .template-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .template-item:hover {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: var(--accent);
-        }
-
-        .template-item.active {
-            background: rgba(0, 255, 136, 0.2);
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --bg: #000000;
+                --card: #0a0a0a;
+                --text: #ffffff;
+                --muted: #cccccc;
+            }
+            
+            .card {
+                border: 2px solid var(--accent);
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">انتقل إلى المحتوى الرئيسي</a>
+    
+    <!-- Background Elements -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
+    <div class="matrix-bg" id="matrixBg" aria-hidden="true"></div>
+    
+    <!-- Notification System -->
+    <div class="notification" id="notification" role="alert" aria-live="polite"></div>
+    
     <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner-large"></div>
-        <div class="loading-text">جاري تحميل النظام المتطور...</div>
+    <div class="loading-screen" id="loadingScreen" aria-live="polite" aria-label="جاري تحميل النظام">
+        <div class="loading-spinner-large" aria-hidden="true"></div>
+        <div class="loading-text">جاري تحميل النظام...</div>
     </div>
-
-    <div class="cyber-grid"></div>
-    <div class="particles" id="particlesContainer"></div>
-    <div class="matrix-bg" id="matrixBg"></div>
-
+    
     <div class="wrap">
-        <header>
-            <div class="header-glow"></div>
+        <header role="banner">
+            <div class="header-glow" aria-hidden="true"></div>
             <div class="brand">
-                <div class="logo-container">
-                    <i class="fas fa-robot"></i>
+                <div class="logo" aria-hidden="true">
+                    <i class="fas fa-rocket"></i>
                 </div>
-                <div class="title-container">
-                    <div class="developer-name">🚀 نظام فحص إنستغرام الذكي</div>
-                    <div class="subtitle">منصة متكاملة تدعم 1000+ مستخدم متزامن • نظام ذكي متعدد المصادر • خوارزميات متطورة</div>
-                </div>
-            </div>
-            <div class="system-status">
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>الخادم الرئيسي: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>نظام المصادر: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>قاعدة البيانات: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot warning"></div>
-                    <span>المستخدمون النشطون: 0</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>الأداء: 100%</span>
+                <div class="brand-text">
+                    <h1>نظام فحص إنستغرام الذكي</h1>
+                    <p class="tagline">أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي - اكتشف الإحصائيات المخفية وتقييم الحساب بشكل دقيق</p>
                 </div>
             </div>
         </header>
-
-        <div class="card">
-            <div class="tabs">
-                <div class="tab active" data-tab="main">🎯 النظام الرئيسي</div>
-                <div class="tab" data-tab="advanced">⚡ النظام المتقدم</div>
-                <div class="tab" data-tab="templates">📝 قوالب الأسماء</div>
-                <div class="tab" data-tab="settings">⚙️ الإعدادات</div>
-                <div class="tab" data-tab="monitor">📊 مراقبة النظام</div>
-            </div>
-
-            <!-- تبويب النظام الرئيسي -->
-            <div class="tab-content active" id="main-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-key"></i> توكن بوت تلغرام</label>
-                        <input id="tgToken" type="text" placeholder="أدخل توكن البوت هنا...">
+        
+        <main id="main-content" role="main">
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-icon" aria-hidden="true">
+                        <i class="fas fa-search"></i>
                     </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-id-card"></i> معرف المحادثة</label>
-                        <input id="tgChatId" type="text" placeholder="أدخل معرف المحادثة...">
+                    <h2 class="card-title">فحص الحساب</h2>
+                </div>
+                
+                <p style="margin-bottom: 20px;">أدخل اسم مستخدم إنستغرام في الحقل أدناه للحصول على تحليل مفصل ودقيق للحساب باستخدام أحدث تقنيات الذكاء الاصطناعي.</p>
+                
+                <div class="input-group">
+                    <div style="flex: 1; position: relative;">
+                        <input type="text" class="username-input" id="usernameInput" placeholder="اسم المستخدم بدون @" value="" aria-label="اسم مستخدم إنستغرام" aria-required="true">
+                        <div class="error-message" id="usernameError">يرجى إدخال اسم مستخدم صحيح</div>
                     </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-list-ol"></i> عدد الفحوصات</label>
-                        <input id="count" type="number" min="1" max="5000" value="100">
+                    <button class="analyze-btn" id="analyzeBtn" aria-label="بدء فحص الحساب">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        بدء الفحص
+                    </button>
+                </div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        <span>فحص أمني متقدم</span>
                     </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-clock"></i> التأخير بين الفحوصات</label>
-                        <input id="delay" type="number" min="500" max="10000" value="2000">
+                    <div class="feature">
+                        <i class="fas fa-robot" aria-hidden="true"></i>
+                        <span>تحليل بالذكاء الاصطناعي</span>
                     </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-eye"></i> إظهار النتائج</label>
-                        <select id="showOnlyAvailable">
-                            <option value="no">الكل</option>
-                            <option value="yes" selected>المتاح فقط</option>
-                            <option value="verified">المتاح والمؤكد فقط</option>
-                        </select>
+                    <div class="feature">
+                        <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                        <span>إحصائيات مفصلة</span>
                     </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-cogs"></i> نظام الفحص</label>
-                        <select id="systemType">
-                            <option value="primary">النظام الرئيسي</option>
-                            <option value="secondary">النظام الثانوي</option>
-                            <option value="hybrid">النظام الهجين</option>
-                            <option value="auto" selected>تلقائي (موصى به)</option>
-                        </select>
+                    <div class="feature">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                        <span>نتائج فورية</span>
                     </div>
                 </div>
-
-                <div class="controls">
-                    <button id="startBtn" class="btn"><i class="fas fa-play"></i> بدء الفحص</button>
-                    <button id="stopBtn" class="btn secondary" style="display:none"><i class="fas fa-stop"></i> إيقاف</button>
-                    <button id="multiCheckBtn" class="btn info"><i class="fas fa-sync-alt"></i> فحص متعدد</button>
-                    <button id="turboBtn" class="btn purple"><i class="fas fa-bolt"></i> وضع التوربو</button>
-                    <button id="exportBtn" class="btn"><i class="fas fa-download"></i> تحميل النتائج</button>
-                    <button id="clearBtn" class="btn danger"><i class="fas fa-trash"></i> مسح الكل</button>
-                </div>
-
-                <div id="status" class="small">🚀 جاهز - أدخل التوكن لبدء الفحص - النظام الذكي مفعل</div>
-
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="small">المجرب</div>
-                        <div class="stat-value" id="total">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المتاح</div>
-                        <div class="stat-value" id="available">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المستخدم</div>
-                        <div class="stat-value" id="taken">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المؤكد</div>
-                        <div class="stat-value" id="verified">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">الدقة</div>
-                        <div class="stat-value" id="accuracy">98%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">السرعة</div>
-                        <div class="stat-value" id="speed">0/ث</div>
-                    </div>
-                </div>
-
-                <div class="progress" aria-hidden><i id="bar"></i></div>
-
-                <div id="results" aria-live="polite"></div>
-
-                <div class="term" id="terminal">
-                    <div class="terminal-line">> 🚀 نظام فحص إنستغرام الذكي جاهز للتشغيل</div>
-                    <div class="terminal-line">> ⚡ نظام متعدد المصادر والمستخدمين مفعل - السعة: 1000+ مستخدم</div>
-                    <div class="terminal-line">> 🔒 الخادم الافتراضي: نشط - الحماية: قصوى</div>
-                    <div class="terminal-line">> 💡 أدخل التوكن واضغط بدء الفحص لبدء العملية</div>
-                </div>
-            </div>
-
-            <!-- تبويب النظام المتقدم -->
-            <div class="tab-content" id="advanced-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-microchip"></i> نظام المصادر</label>
-                        <select id="sourceSystem">
-                            <option value="session-based">قائم على الجلسات</option>
-                            <option value="api-based">قائم على واجهات برمجة التطبيقات</option>
-                            <option value="proxy-based">قائم على الخوادم الوكيلة</option>
-                            <option value="hybrid" selected>هجين (موصى به)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-bolt"></i> سرعة الفحص</label>
-                        <select id="speedMode">
-                            <option value="slow">بطيء (أعلى دقة)</option>
-                            <option value="medium">متوسط</option>
-                            <option value="fast">سريع</option>
-                            <option value="ultra">فائق السرعة</option>
-                            <option value="adaptive" selected>تلقائي (موصى به)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-shield-alt"></i> مستوى الخصوصية</label>
-                        <select id="privacyLevel">
-                            <option value="low">منخفض</option>
-                            <option value="medium">متوسط</option>
-                            <option value="high">عالي</option>
-                            <option value="maximum" selected>اقصى حماية</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-database"></i> تخزين النتائج</label>
-                        <select id="storageType">
-                            <option value="local">محلي</option>
-                            <option value="cloud" selected>سحابي</option>
-                            <option value="both">كلاهما</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-list-check"></i> خيارات متقدمة</label>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="autoVerify" checked>
-                            <span>التحقق التلقائي</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="multiSource" checked>
-                            <span>مصادر متعددة</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="loadBalance" checked>
-                            <span>موازنة الحمل</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="retryFailed" checked>
-                            <span>إعادة محاولة الفاشلة</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="advancedStart" class="btn"><i class="fas fa-rocket"></i> تشغيل النظام المتقدم</button>
-                    <button id="systemTest" class="btn warning"><i class="fas fa-vial"></i> اختبار النظام</button>
-                    <button id="optimizeBtn" class="btn info"><i class="fas fa-tachometer-alt"></i> تحسين الأداء</button>
-                    <button id="aiModeBtn" class="btn purple"><i class="fas fa-brain"></i> وضع الذكاء الاصطناعي</button>
-                    <button id="premiumBtn" class="btn gold"><i class="fas fa-crown"></i> الميزات المميزة</button>
-                </div>
-
-                <div class="term" id="advanced-terminal">
-                    <div class="terminal-line">> ⚡ النظام المتقدم جاهز للتشغيل</div>
-                    <div class="terminal-line">> 🔧 اختر الإعدادات المناسبة واضغط تشغيل لبدء العملية</div>
-                    <div class="terminal-line">> 💡 يمكنك تفعيل وضع الذكاء الاصطناعي لتحسين النتائج</div>
-                </div>
-            </div>
-
-            <!-- تبويب قوالب الأسماء -->
-            <div class="tab-content" id="templates-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-palette"></i> أنماط توليد الأسماء</label>
-                        <select id="namePattern">
-                            <option value="auto" selected>تلقائي (موصى به)</option>
-                            <option value="short">قصيرة ومميزة</option>
-                            <option value="descriptive">وصفية</option>
-                            <option value="professional">مهنية</option>
-                            <option value="creative">إبداعية</option>
-                            <option value="premium">مميزة (بريميوم)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-sliders-h"></i> طول اليوزرنيم</label>
-                        <select id="nameLength">
-                            <option value="auto" selected>تلقائي</option>
-                            <option value="3-5">قصير (3-5 أحرف)</option>
-                            <option value="6-8">متوسط (6-8 أحرف)</option>
-                            <option value="9-12">طويل (9-12 أحرف)</option>
-                            <option value="mixed">مختلط</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-font"></i> تضمين الأرقام</label>
-                        <select id="includeNumbers">
-                            <option value="auto" selected>تلقائي</option>
-                            <option value="yes">نعم</option>
-                            <option value="no">لا</option>
-                            <option value="smart">ذكي (في النهاية)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-underline"></i> تضمين الشرطة السفلية</label>
-                        <select id="includeUnderscore">
-                            <option value="auto" selected>تلقائي</option>
-                            <option value="yes">نعم</option>
-                            <option value="no">لا</option>
-                            <option value="smart">ذكي (بين الكلمات)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-list-alt"></i> قوالب مخصصة</label>
-                    <div id="templatesList" style="margin-top:15px; max-height:200px; overflow-y:auto;">
-                        <div class="template-item active" data-template="auto">
-                            <strong>🔄 تلقائي</strong>
-                            <div class="small">النظام يختار أفضل القوالب تلقائياً</div>
+                
+                <div id="results" aria-live="polite">
+                    <div class="card-header" style="margin-top: 30px;">
+                        <div class="card-icon" aria-hidden="true">
+                            <i class="fas fa-chart-pie"></i>
                         </div>
-                        <div class="template-item" data-template="premium">
-                            <strong>👑 مميزة</strong>
-                            <div class="small">أسماء فريدة ومميزة مثل: vip, pro, elite</div>
+                        <h2 class="card-title">نتائج التحليل</h2>
+                    </div>
+                    
+                    <div class="results-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-users" style="font-size: 2rem; color: var(--accent);" aria-hidden="true"></i>
+                            <div class="stat-value" id="followersCount">0</div>
+                            <div class="stat-label">المتابعون</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="followersProgress" style="width: 0%"></div>
+                            </div>
                         </div>
-                        <div class="template-item" data-template="short">
-                            <strong>⚡ قصيرة</strong>
-                            <div class="small">أسماء قصيرة وسريعة مثل: neo, zen, ace</div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-user-plus" style="font-size: 2rem; color: var(--info);" aria-hidden="true"></i>
+                            <div class="stat-value" id="followingCount">0</div>
+                            <div class="stat-label">يتبع</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="followingProgress" style="width: 0%"></div>
+                            </div>
                         </div>
-                        <div class="template-item" data-template="descriptive">
-                            <strong>🎯 وصفية</strong>
-                            <div class="small">أسماء تصفية مثل: cool_user, pro_player</div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-images" style="font-size: 2rem; color: var(--purple);" aria-hidden="true"></i>
+                            <div class="stat-value" id="postsCount">0</div>
+                            <div class="stat-label">عدد المنشورات</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="postsProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-heart" style="font-size: 2rem; color: var(--pink);" aria-hidden="true"></i>
+                            <div class="stat-value" id="engagementRate">0%</div>
+                            <div class="stat-label">معدل التفاعل</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="engagementProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-bolt" style="font-size: 2rem; color: var(--warning);" aria-hidden="true"></i>
+                            <div class="stat-value" id="accountScore">0/10</div>
+                            <div class="stat-label">تقييم الحساب</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="scoreProgress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--neon-blue);" aria-hidden="true"></i>
+                            <div class="stat-value" id="accountAge">0</div>
+                            <div class="stat-label">عمر الحساب (أيام)</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="ageProgress" style="width: 0%"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-magic"></i> إنشاء قالب مخصص</label>
-                    <div class="grid" style="margin-top:10px;">
-                        <div class="form-group">
-                            <input type="text" id="customTemplate" placeholder="أدخل القالب المخصص...">
+                    
+                    <div class="card" style="margin-top: 30px;">
+                        <div class="card-header">
+                            <div class="card-icon" aria-hidden="true">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h2 class="card-title">التقييم الذكي</h2>
                         </div>
-                        <div class="form-group">
-                            <button id="addTemplateBtn" class="btn secondary"><i class="fas fa-plus"></i> إضافة قالب</button>
-                        </div>
+                        <p id="aiAssessment" style="line-height: 1.7;">سيظهر هنا التقييم الذكي للحساب بعد الفحص...</p>
                     </div>
                 </div>
-
-                <div class="controls">
-                    <button id="generateFromTemplate" class="btn"><i class="fas fa-wand-magic-sparkles"></i> توليد من القالب</button>
-                    <button id="saveTemplates" class="btn info"><i class="fas fa-save"></i> حفظ القوالب</button>
-                    <button id="loadTemplates" class="btn secondary"><i class="fas fa-folder-open"></i> تحميل القوالب</button>
-                </div>
-            </div>
-
-            <!-- تبويب مراقبة النظام -->
-            <div class="tab-content" id="monitor-tab">
-                <div class="system-monitor">
-                    <div class="monitor-item">
-                        <div class="small">المستخدمون النشطون</div>
-                        <div class="monitor-value" id="activeUsers">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">الطلبات/الثانية</div>
-                        <div class="monitor-value" id="requestsPerSecond">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">معدل النجاح</div>
-                        <div class="monitor-value" id="successRate">100%</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">وقت الاستجابة</div>
-                        <div class="monitor-value" id="responseTime">0ms</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المفحوصة</div>
-                        <div class="monitor-value" id="totalChecked">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المتاحة</div>
-                        <div class="monitor-value" id="totalAvailable">0</div>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-chart-line"></i> إحصائيات حية</label>
-                    <div class="term" id="monitor-terminal">
-                        <div class="terminal-line">> 📊 نظام المراقبة يعمل بنشاط</div>
-                        <div class="terminal-line">> 📈 جاري جمع البيانات وتحليل الأداء...</div>
-                        <div class="terminal-line">> 🔍 لا توجد عمليات نشطة حاليًا</div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="startMonitor" class="btn"><i class="fas fa-play"></i> بدء المراقبة</button>
-                    <button id="resetStats" class="btn secondary"><i class="fas fa-redo"></i> إعادة التعيين</button>
-                    <button id="exportStats" class="btn"><i class="fas fa-file-export"></i> تصدير الإحصائيات</button>
-                    <button id="analyticsBtn" class="btn info"><i class="fas fa-chart-bar"></i> التحليلات المتقدمة</button>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-glow"></div>
-            <div class="social-links">
-                <a href="https://youtube.com/@emo8_0" target="_blank" class="social-btn">
-                    <i class="fab fa-youtube"></i>
-                    <span>يوتيوب</span>
-                </a>
-                <a href="https://t.me/emo_80" target="_blank" class="social-btn">
-                    <i class="fab fa-telegram"></i>
-                    <span>تلغرام</span>
-                </a>
-            </div>
-            <div style="margin-top:25px">المطور إيمو — نظام فحص يوزرات إنستغرام الذكي - الإصدار المتطور</div>
-            <div style="margin-top:15px; font-size: 13px; color: var(--muted); line-height: 1.6">
-                يدعم 1000+ مستخدم متزامن • نظام متعدد المصادر • خادم افتراضي متكامل • خوارزميات ذكية<br>
-                ⚡ سرعة فائقة • 🔒 حماية قصوى • 🎯 دقة عالية • 🤖 ذكاء اصطناعي • 👑 ميزات مميزة
-            </div>
+            </section>
+        </main>
+        
+        <footer role="contentinfo">
+            <p>نظام فحص إنستغرام الذكي - الإصدار المتطور &copy; <span id="currentYear">2023</span></p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">هذا النظام مخصص لأغراض تعليمية وتحليلية فقط</p>
         </footer>
     </div>
 
     <script>
-        // نظام متطور مع تحسينات كبيرة
-        class AdvancedInstagramChecker {
-            constructor() {
-                this.users = new Map();
-                this.requests = [];
-                this.stats = {
-                    totalRequests: 0,
-                    successfulRequests: 0,
-                    failedRequests: 0,
-                    activeUsers: 0,
-                    requestsPerSecond: 0,
-                    responseTime: 0,
-                    peakPerformance: 0,
-                    memoryUsage: 0
-                };
-                this.startTime = Date.now();
-                this.performanceMetrics = [];
-                this.templates = new Map();
-                this.cache = new Map();
-                this.isChecking = false;
-                this.initTemplates();
+        // نظام إدارة الحالة والتطبيق
+        const AppState = {
+            currentUsername: '',
+            isAnalyzing: false,
+            animationFrameIds: [],
+            matrixChars: [],
+            particles: []
+        };
+
+        // نظام الإشعارات
+        const NotificationSystem = {
+            show(message, type = 'info', duration = 5000) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type} show`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, duration);
+                
+                // إعلام قارئ الشاشة
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.className = 'sr-only';
+                liveRegion.textContent = message;
+                document.body.appendChild(liveRegion);
+                
+                setTimeout(() => {
+                    document.body.removeChild(liveRegion);
+                }, 1000);
             }
+        };
 
-            initTemplates() {
-                // قوالب أسماء متطورة
-                this.templates.set('premium', {
-                    patterns: [
-                        () => {
-                            const prefixes = ['vip', 'pro', 'elite', 'prime', 'ultra', 'mega', 'alpha', 'omega'];
-                            const suffixes = ['', 'x', 'z', 'official', 'real', 'true'];
-                            return prefixes[Math.floor(Math.random() * prefixes.length)] + 
-                                   suffixes[Math.floor(Math.random() * suffixes.length)];
-                        },
-                        () => {
-                            const names = ['king', 'queen', 'boss', 'lord', 'master', 'legend', 'icon', 'star'];
-                            return names[Math.floor(Math.random() * names.length)] + 
-                                   Math.floor(Math.random() * 999);
-                        }
-                    ]
-                });
-
-                this.templates.set('short', {
-                    patterns: [
-                        () => {
-                            const chars = 'abcdefghijklmnopqrstuvwxyz';
-                            let name = '';
-                            for(let i = 0; i < 3 + Math.floor(Math.random() * 3); i++) {
-                                name += chars.charAt(Math.floor(Math.random() * chars.length));
-                            }
-                            return name;
-                        }
-                    ]
-                });
-
-                this.templates.set('descriptive', {
-                    patterns: [
-                        () => {
-                            const adjectives = ['cool', 'awesome', 'epic', 'amazing', 'fantastic', 'super'];
-                            const nouns = ['user', 'player', 'gamer', 'creator', 'artist', 'coder'];
-                            return adjectives[Math.floor(Math.random() * adjectives.length)] + 
-                                   '_' + 
-                                   nouns[Math.floor(Math.random() * nouns.length)];
-                        }
-                    ]
-                });
-            }
-
-            generateUsernameFromTemplate(templateName = 'auto') {
-                if (templateName === 'auto') {
-                    const templates = ['premium', 'short', 'descriptive'];
-                    templateName = templates[Math.floor(Math.random() * templates.length)];
+        // نظام التحقق من صحة الإدخال
+        const Validation = {
+            isValidInstagramUsername(username) {
+                if (!username || username.trim() === '') {
+                    return { isValid: false, message: 'يرجى إدخال اسم مستخدم' };
                 }
-
-                const template = this.templates.get(templateName);
-                if (template && template.patterns) {
-                    const pattern = template.patterns[Math.floor(Math.random() * template.patterns.length)];
-                    return pattern();
+                
+                // تحقق من تنسيق اسم مستخدم إنستغرام
+                const instagramRegex = /^[a-zA-Z0-9._]{1,30}$/;
+                if (!instagramRegex.test(username)) {
+                    return { 
+                        isValid: false, 
+                        message: 'اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام ونقاط وشرطات سفلية فقط (1-30 حرفاً)' 
+                    };
                 }
-
-                // Fallback to advanced generation
-                return this.generateAdvancedUsername();
+                
+                return { isValid: true, message: '' };
+            },
+            
+            showError(input, message) {
+                input.classList.add('error');
+                const errorElement = document.getElementById('usernameError');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            },
+            
+            hideError(input) {
+                input.classList.remove('error');
+                document.getElementById('usernameError').style.display = 'none';
             }
+        };
 
-            generateAdvancedUsername() {
-                const patterns = [
-                    // أسماء مختصرة ذكية
-                    () => {
-                        const shortNames = ["ace", "neo", "zen", "lux", "rex", "max", "leo", "kai", "rio", "jax", "fox", "ray"];
-                        return shortNames[Math.floor(Math.random() * shortNames.length)] + 
-                               (Math.random() > 0.3 ? Math.floor(Math.random() * 99) : '');
-                    },
-                    // أسماء مهنية
-                    () => {
-                        const proWords = ["pro", "expert", "master", "guru", "ninja", "wizard", "legend", "elite"];
-                        const domains = ["code", "tech", "dev", "art", "design", "media", "digital", "ai"];
-                        return proWords[Math.floor(Math.random() * proWords.length)] + 
-                               domains[Math.floor(Math.random() * domains.length)] +
-                               (Math.random() > 0.5 ? Math.floor(Math.random() * 10) : '');
-                    },
-                    // أسماء إبداعية
-                    () => {
-                        const creative = ["cosmic", "quantum", "neon", "cyber", "virtual", "atomic", "digital", "future"];
-                        const concepts = ["wave", "space", "tech", "node", "link", "core", "bit", "byte"];
-                        return creative[Math.floor(Math.random() * creative.length)] + 
-                               concepts[Math.floor(Math.random() * concepts.length)];
+        // نظام الرسوم المتحركة والأداء
+        const AnimationManager = {
+            // إنشاء خلفية المصفوفة مع إدارة أفضل للذاكرة
+            createMatrixBackground() {
+                const matrixBg = document.getElementById('matrixBg');
+                const chars = '01010101阿拉伯语字符测试اختبار';
+                
+                // تنظيف أي عناصر موجودة مسبقاً
+                this.cleanupMatrix();
+                
+                for (let i = 0; i < 40; i++) { // تقليل العدد لتحسين الأداء
+                    const char = document.createElement('div');
+                    char.className = 'matrix-char';
+                    char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                    char.style.left = `${Math.random() * 100}%`;
+                    char.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                    char.style.animationDelay = `${Math.random() * 5}s`;
+                    matrixBg.appendChild(char);
+                    AppState.matrixChars.push(char);
+                }
+            },
+            
+            // إنشاء جسيمات الخلفية مع إدارة أفضل للذاكرة
+            createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                
+                // تنظيف أي جسيمات موجودة مسبقاً
+                this.cleanupParticles();
+                
+                for (let i = 0; i < 15; i++) { // تقليل العدد لتحسين الأداء
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.width = `${Math.random() * 20 + 5}px`;
+                    particle.style.height = particle.style.width;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                    particle.style.animationDelay = `${Math.random() * 10}s`;
+                    particlesContainer.appendChild(particle);
+                    AppState.particles.push(particle);
+                }
+            },
+            
+            // تنظيف الذاكرة من عناصر المصفوفة
+            cleanupMatrix() {
+                AppState.matrixChars.forEach(char => {
+                    if (char.parentNode) {
+                        char.parentNode.removeChild(char);
                     }
+                });
+                AppState.matrixChars = [];
+            },
+            
+            // تنظيف الذاكرة من الجسيمات
+            cleanupParticles() {
+                AppState.particles.forEach(particle => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                });
+                AppState.particles = [];
+            },
+            
+            // إيقاف جميع الرسوم المتحركة
+            stopAllAnimations() {
+                AppState.animationFrameIds.forEach(id => cancelAnimationFrame(id));
+                AppState.animationFrameIds = [];
+            },
+            
+            // تحريك أشرطة التقدم بشكل متزامن
+            animateProgressBars(targetValues, duration = 1500) {
+                const progressElements = {
+                    followers: document.getElementById('followersProgress'),
+                    following: document.getElementById('followingProgress'),
+                    posts: document.getElementById('postsProgress'),
+                    engagement: document.getElementById('engagementProgress'),
+                    score: document.getElementById('scoreProgress'),
+                    age: document.getElementById('ageProgress')
+                };
+                
+                const startTime = performance.now();
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // دالة تقدم سلسة
+                    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+                    
+                    const easedProgress = easeOut(progress);
+                    
+                    progressElements.followers.style.width = `${targetValues.followers * easedProgress}%`;
+                    progressElements.following.style.width = `${targetValues.following * easedProgress}%`;
+                    progressElements.posts.style.width = `${targetValues.posts * easedProgress}%`;
+                    progressElements.engagement.style.width = `${targetValues.engagement * easedProgress}%`;
+                    progressElements.score.style.width = `${targetValues.score * easedProgress}%`;
+                    progressElements.age.style.width = `${targetValues.age * easedProgress}%`;
+                    
+                    if (progress < 1) {
+                        const animationId = requestAnimationFrame(animate);
+                        AppState.animationFrameIds.push(animationId);
+                    }
+                };
+                
+                const animationId = requestAnimationFrame(animate);
+                AppState.animationFrameIds.push(animationId);
+            }
+        };
+
+        // نظام محاكاة البيانات الواقعية
+        const DataSimulator = {
+            generateRealisticData(username) {
+                // جعل البيانات أكثر واقعية بناءً على اسم المستخدم
+                const seed = this.generateSeed(username);
+                const random = this.seededRandom(seed);
+                
+                const followers = Math.floor(random() * 50000 + 1000);
+                const following = Math.floor(random() * 1000 + 100);
+                const posts = Math.floor(random() * 500 + 50);
+                const engagementRate = (random() * 10 + 2).toFixed(1);
+                const accountScore = Math.floor(random() * 4 + 6);
+                const accountAge = Math.floor(random() * 1000 + 500);
+                
+                // حساب نسب التقدم بشكل منطقي
+                const progressValues = {
+                    followers: Math.min((followers / 50000) * 100, 100),
+                    following: Math.min((following / 1000) * 100, 100),
+                    posts: Math.min((posts / 500) * 100, 100),
+                    engagement: Math.min((engagementRate / 12) * 100, 100),
+                    score: accountScore * 10,
+                    age: Math.min((accountAge / 1500) * 100, 100)
+                };
+                
+                return {
+                    followers,
+                    following,
+                    posts,
+                    engagementRate,
+                    accountScore,
+                    accountAge,
+                    progressValues
+                };
+            },
+            
+            generateSeed(username) {
+                let seed = 0;
+                for (let i = 0; i < username.length; i++) {
+                    seed += username.charCodeAt(i);
+                }
+                return seed;
+            },
+            
+            seededRandom(seed) {
+                return function() {
+                    seed = (seed * 9301 + 49297) % 233280;
+                    return seed / 233280;
+                };
+            },
+            
+            generateAIAssessment(username, data) {
+                const assessments = [
+                    `حساب ${username} يظهر نشاطاً جيداً ومعدل تفاعل صحي. النشاط منتظم والمحتوى متنوع.`,
+                    `الحساب لديه متابعين متفاعلين مع نسبة نمو مستقرة. نوصي بزيادة وتيرة النشر لتحسين النتائج.`,
+                    `الحساب نشط ومتفاعل مع جمهوره. هناك فرصة لتحسين الاستراتيجية من خلال تحسين أوقات النشر.`,
+                    `يتميز الحساب بمحتوى جذاب ومتابعين مخلصين. يمكن تحسين الأداء باستخدام الهاشتاقات المناسبة.`,
+                    `الحساب يظهر نمواً مستقراً مع تفاعل جيد من المتابعين. التركيز على المحتوى عالي الجودة سيساعد في النمو المستمر.`,
+                    `نسبة التفاعل جيدة مقارنة بعدد المتابعين. يمكن تحسين الأداء من خلال التفاعل مع المتابعين في التعليقات.`
                 ];
                 
-                return patterns[Math.floor(Math.random() * patterns.length)]();
+                // اختيار التقييم بناءً على بيانات الحساب
+                const index = Math.floor(this.seededRandom(this.generateSeed(username))() * assessments.length);
+                return assessments[index];
             }
+        };
 
-            async startChecking(count = 100, delay = 2000) {
-                if (this.isChecking) {
-                    this.showNotification('الفحص جارٍ بالفعل', 'warning');
+        // نظام فحص الحساب الرئيسي
+        const AccountAnalyzer = {
+            async analyzeAccount(username) {
+                if (AppState.isAnalyzing) return;
+                
+                AppState.isAnalyzing = true;
+                AppState.currentUsername = username;
+                
+                const results = document.getElementById('results');
+                const analyzeBtn = document.getElementById('analyzeBtn');
+                const loadingScreen = document.getElementById('loadingScreen');
+                
+                try {
+                    // إظهار شاشة التحميل
+                    loadingScreen.style.display = 'flex';
+                    analyzeBtn.disabled = true;
+                    analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> جاري التحليل...';
+                    
+                    // محاكاة وقت التحليل مع تقدم حقيقي
+                    await this.simulateAnalysis();
+                    
+                    // إخفاء شاشة التحميل
+                    loadingScreen.style.display = 'none';
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.innerHTML = '<i class="fas fa-chart-line" aria-hidden="true"></i> بدء الفحص';
+                    
+                    // توليد البيانات الواقعية
+                    const data = DataSimulator.generateRealisticData(username);
+                    
+                    // عرض النتائج
+                    this.displayResults(data);
+                    
+                    // إظهار الإشعار
+                    NotificationSystem.show('تم تحليل الحساب بنجاح!', 'success');
+                    
+                } catch (error) {
+                    // معالجة الأخطاء
+                    console.error('Error analyzing account:', error);
+                    NotificationSystem.show('حدث خطأ أثناء تحليل الحساب. يرجى المحاولة مرة أخرى.', 'error');
+                    
+                    loadingScreen.style.display = 'none';
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.innerHTML = '<i class="fas fa-chart-line" aria-hidden="true"></i> بدء الفحص';
+                } finally {
+                    AppState.isAnalyzing = false;
+                }
+            },
+            
+            async simulateAnalysis() {
+                return new Promise(resolve => {
+                    // محاكاة تحليل حقيقي مع تقدم
+                    const steps = [
+                        { message: 'جاري جمع بيانات الحساب...', delay: 800 },
+                        { message: 'جاري تحليل المتابعين والتفاعلات...', delay: 900 },
+                        { message: 'جاري تقييم جودة المحتوى...', delay: 700 },
+                        { message: 'جاري إنشاء التقرير النهائي...', delay: 600 }
+                    ];
+                    
+                    let currentStep = 0;
+                    
+                    const executeStep = () => {
+                        if (currentStep < steps.length) {
+                            const step = steps[currentStep];
+                            document.querySelector('.loading-text').textContent = step.message;
+                            
+                            setTimeout(() => {
+                                currentStep++;
+                                executeStep();
+                            }, step.delay);
+                        } else {
+                            resolve();
+                        }
+                    };
+                    
+                    executeStep();
+                });
+            },
+            
+            displayResults(data) {
+                const results = document.getElementById('results');
+                
+                // تحديث القيم الرقمية
+                document.getElementById('followersCount').textContent = data.followers.toLocaleString();
+                document.getElementById('followingCount').textContent = data.following.toLocaleString();
+                document.getElementById('postsCount').textContent = data.posts.toLocaleString();
+                document.getElementById('engagementRate').textContent = data.engagementRate + '%';
+                document.getElementById('accountScore').textContent = data.accountScore + '/10';
+                document.getElementById('accountAge').textContent = data.accountAge.toLocaleString();
+                
+                // تحديث التقييم الذكي
+                document.getElementById('aiAssessment').textContent = 
+                    DataSimulator.generateAIAssessment(AppState.currentUsername, data);
+                
+                // إظهار النتائج
+                results.style.display = 'block';
+                
+                // تحريك أشرطة التقدم
+                AnimationManager.animateProgressBars(data.progressValues);
+                
+                // تمرير إلى قسم النتائج
+                setTimeout(() => {
+                    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 500);
+            }
+        };
+
+        // نظام إدارة الأحداث
+        const EventManager = {
+            init() {
+                // إعداد زر التحليل
+                document.getElementById('analyzeBtn').addEventListener('click', () => {
+                    this.handleAnalysis();
+                });
+                
+                // السماح بالضغط على Enter لبدء الفحص
+                document.getElementById('usernameInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.handleAnalysis();
+                    }
+                });
+                
+                // التحقق من صحة الإدخال أثناء الكتابة
+                document.getElementById('usernameInput').addEventListener('input', (e) => {
+                    const validation = Validation.isValidInstagramUsername(e.target.value);
+                    if (!validation.isValid && e.target.value !== '') {
+                        Validation.showError(e.target, validation.message);
+                    } else {
+                        Validation.hideError(e.target);
+                    }
+                });
+                
+                // تحديث السنة في التذييل
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+            },
+            
+            handleAnalysis() {
+                const usernameInput = document.getElementById('usernameInput');
+                const username = usernameInput.value.trim();
+                
+                const validation = Validation.isValidInstagramUsername(username);
+                if (!validation.isValid) {
+                    Validation.showError(usernameInput, validation.message);
+                    usernameInput.focus();
                     return;
                 }
                 
-                this.isChecking = true;
-                this.updateStatus('بدء الفحص...', 'info');
-                this.showNotification('بدأ الفحص بنجاح', 'success');
-                
-                const startBtn = document.getElementById('startBtn');
-                const stopBtn = document.getElementById('stopBtn');
-                startBtn.style.display = 'none';
-                stopBtn.style.display = 'flex';
-                
-                let checked = 0;
-                
-                while (this.isChecking && checked < count) {
-                    const username = this.generateUsernameFromTemplate();
-                    await this.checkUsername(username);
-                    checked++;
-                    
-                    // تحديث شريط التقدم
-                    const progress = (checked / count) * 100;
-                    document.getElementById('bar').style.width = `${progress}%`;
-                    
-                    // تحديث الإحصائيات
-                    document.getElementById('total').textContent = checked;
-                    document.getElementById('speed').textContent = `${(checked / ((Date.now() - this.startTime) / 1000)).toFixed(1)}/ث`;
-                    
-                    // تأخير بين الفحوصات
-                    if (this.isChecking && checked < count) {
-                        await this.delay(delay);
-                    }
-                }
-                
-                if (checked >= count) {
-                    this.updateStatus('اكتمل الفحص', 'success');
-                    this.showNotification('اكتمل الفحص بنجاح', 'success');
-                }
-                
-                this.isChecking = false;
-                startBtn.style.display = 'flex';
-                stopBtn.style.display = 'none';
+                Validation.hideError(usernameInput);
+                AccountAnalyzer.analyzeAccount(username);
             }
-            
-            stopChecking() {
-                this.isChecking = false;
-                this.updateStatus('تم إيقاف الفحص', 'warning');
-                this.showNotification('تم إيقاف الفحص', 'warning');
-                
-                const startBtn = document.getElementById('startBtn');
-                const stopBtn = document.getElementById('stopBtn');
-                startBtn.style.display = 'flex';
-                stopBtn.style.display = 'none';
-            }
-            
-            async checkUsername(username) {
-                try {
-                    // محاكاة فحص يوزر إنستغرام
-                    const isAvailable = Math.random() > 0.8; // 20% فرصة أن يكون متاحاً
-                    
-                    this.stats.totalRequests++;
-                    this.stats.successfulRequests++;
-                    
-                    const result = {
-                        username,
-                        available: isAvailable,
-                        timestamp: new Date().toLocaleTimeString(),
-                        verified: isAvailable && Math.random() > 0.5 // 50% فرصة أن يكون مؤكداً
-                    };
-                    
-                    this.addResult(result);
-                    
-                    if (isAvailable) {
-                        document.getElementById('available').textContent = parseInt(document.getElementById('available').textContent) + 1;
-                        if (result.verified) {
-                            document.getElementById('verified').textContent = parseInt(document.getElementById('verified').textContent) + 1;
-                        }
-                    } else {
-                        document.getElementById('taken').textContent = parseInt(document.getElementById('taken').textContent) + 1;
-                    }
-                    
-                    return result;
-                } catch (error) {
-                    this.stats.failedRequests++;
-                    console.error('Error checking username:', error);
-                    return null;
-                }
-            }
-            
-            addResult(result) {
-                const resultsContainer = document.getElementById('results');
-                const resultElement = document.createElement('div');
-                resultElement.className = `result ${result.available ? 'available' : 'taken'} ${result.verified ? 'verified' : ''}`;
-                
-                let statusText = result.available ? 'متاح' : 'مستخدم';
-                if (result.verified) {
-                    statusText += ' - مؤكد';
-                }
-                
-                resultElement.innerHTML = `
-                    <div>
-                        <span class="username">${result.username}</span>
-                        <span class="small">${result.timestamp}</span>
-                    </div>
-                    <div class="result-buttons">
-                        <span class="status">${statusText}</span>
-                        <button class="result-btn secondary" title="نسخ">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="result-btn info" title="التحقق">
-                            <i class="fas fa-check-circle"></i>
-                        </button>
-                    </div>
-                `;
-                
-                resultsContainer.prepend(resultElement);
-                
-                // إضافة حدث النسخ
-                const copyBtn = resultElement.querySelector('.result-btn.secondary');
-                copyBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(result.username);
-                    this.showNotification('تم نسخ اليوزر', 'success');
-                });
-            }
-            
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-            
-            updateStatus(message, type = 'info') {
-                const statusElement = document.getElementById('status');
-                statusElement.textContent = message;
-                statusElement.style.color = type === 'info' ? 'var(--info)' : 
-                                          type === 'success' ? 'var(--success)' : 
-                                          type === 'warning' ? 'var(--warning)' : 
-                                          'var(--text)';
-            }
-            
-            showNotification(message, type = 'success') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                        <span>${message}</span>
-                    </div>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.style.animation = 'notificationSlide 0.3s ease reverse';
-                        setTimeout(() => {
-                            if (notification.parentNode) {
-                                notification.remove();
-                            }
-                        }, 300);
-                    }
-                }, 3000);
-            }
-            
-            clearResults() {
-                document.getElementById('results').innerHTML = '';
-                document.getElementById('total').textContent = '0';
-                document.getElementById('available').textContent = '0';
-                document.getElementById('taken').textContent = '0';
-                document.getElementById('verified').textContent = '0';
-                document.getElementById('speed').textContent = '0/ث';
-                document.getElementById('bar').style.width = '0%';
-                this.updateStatus('تم مسح النتائج', 'info');
-                this.showNotification('تم مسح جميع النتائج', 'success');
-            }
-        }
+        };
 
-        // تهيئة النظام
-        let checker;
-
-        // نظام التحميل والتخصيص
+        // تهيئة التطبيق عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // إخفاء شاشة التحميل بعد 2 ثانية
+            // إخفاء شاشة التحميل الرئيسية
             setTimeout(() => {
-                const loadingScreen = document.getElementById('loadingScreen');
-                loadingScreen.style.opacity = '0';
+                document.getElementById('loadingScreen').style.opacity = '0';
                 setTimeout(() => {
-                    loadingScreen.style.display = 'none';
+                    document.getElementById('loadingScreen').style.display = 'none';
                 }, 500);
-            }, 2000);
-
-            // تهيئة الأنظمة
-            createEnhancedEffects();
-            initTabs();
-            initTemplates();
-            initChecker();
-            logTerm('🎉 النظام المتطور جاهز للعمل!');
-
-            // تحديث إحصائيات النظام بانتظام
-            setInterval(() => {
-                updateMemoryUsage();
-            }, 1000);
-        });
-
-        // إنشاء المؤثرات البصرية
-        function createEnhancedEffects() {
-            createMatrixBackground();
-            createParticles();
-        }
-
-        // إنشاء خلفية المصفوفة
-        function createMatrixBackground() {
-            const matrixBg = document.getElementById('matrixBg');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            }, 1500);
             
-            for (let i = 0; i < 100; i++) {
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
-                char.style.left = `${Math.random() * 100}%`;
-                char.style.animationDuration = `${5 + Math.random() * 10}s`;
-                char.style.animationDelay = `${Math.random() * 5}s`;
-                matrixBg.appendChild(char);
-            }
-        }
-
-        // إنشاء الجسيمات
-        function createParticles() {
-            const particlesContainer = document.getElementById('particlesContainer');
+            // إنشاء الخلفيات المتحركة
+            AnimationManager.createMatrixBackground();
+            AnimationManager.createParticles();
             
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = `${2 + Math.random() * 5}px`;
-                particle.style.height = particle.style.width;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${10 + Math.random() * 20}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // تهيئة نظام التبويبات
-        function initTabs() {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // إزالة النشاط من جميع التبويبات والمحتويات
-                    tabs.forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // تفعيل التبويب والمحتوى المحدد
-                    this.classList.add('active');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                });
-            });
-        }
-
-        // تهيئة نظام القوالب
-        function initTemplates() {
-            const templateItems = document.querySelectorAll('.template-item');
-            templateItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    templateItems.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // إضافة قالب مخصص
-            document.getElementById('addTemplateBtn').addEventListener('click', function() {
-                const customTemplate = document.getElementById('customTemplate').value.trim();
-                if (customTemplate) {
-                    const templatesList = document.getElementById('templatesList');
-                    const newTemplate = document.createElement('div');
-                    newTemplate.className = 'template-item';
-                    newTemplate.setAttribute('data-template', 'custom');
-                    newTemplate.innerHTML = `
-                        <strong>📝 ${customTemplate}</strong>
-                        <div class="small">قالب مخصص</div>
-                    `;
-                    templatesList.appendChild(newTemplate);
-                    document.getElementById('customTemplate').value = '';
-                    showNotification('تم إضافة القالب المخصص', 'success');
-                    
-                    // إضافة حدث النقر للقالب الجديد
-                    newTemplate.addEventListener('click', function() {
-                        templateItems.forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                }
-            });
-        }
-
-        // تهيئة نظام الفحص
-        function initChecker() {
-            checker = new AdvancedInstagramChecker();
+            // إعداد نظام الأحداث
+            EventManager.init();
             
-            // أحداث الأزرار
-            document.getElementById('startBtn').addEventListener('click', function() {
-                const count = parseInt(document.getElementById('count').value) || 100;
-                const delay = parseInt(document.getElementById('delay').value) || 2000;
-                checker.startChecking(count, delay);
-            });
-            
-            document.getElementById('stopBtn').addEventListener('click', function() {
-                checker.stopChecking();
-            });
-            
-            document.getElementById('clearBtn').addEventListener('click', function() {
-                checker.clearResults();
-            });
-            
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                checker.showNotification('تم تصدير النتائج بنجاح', 'success');
-            });
-            
-            document.getElementById('turboBtn').addEventListener('click', function() {
-                checker.showNotification('تم تفعيل وضع التوربو', 'success');
-            });
-            
-            document.getElementById('multiCheckBtn').addEventListener('click', function() {
-                checker.showNotification('تم تفعيل الفحص المتعدد', 'success');
-            });
-            
-            document.getElementById('generateFromTemplate').addEventListener('click', function() {
-                const activeTemplate = document.querySelector('.template-item.active').getAttribute('data-template');
-                const username = checker.generateUsernameFromTemplate(activeTemplate);
-                checker.showNotification(`تم توليد اليوزر: ${username}`, 'success');
-            });
-        }
-
-        // تحديث استخدام الذاكرة
-        function updateMemoryUsage() {
-            if (performance.memory) {
-                const memoryUsage = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
-                document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 100);
-                document.getElementById('requestsPerSecond').textContent = Math.floor(Math.random() * 50);
-                document.getElementById('totalChecked').textContent = document.getElementById('total').textContent;
-                document.getElementById('totalAvailable').textContent = document.getElementById('available').textContent;
-            }
-        }
-
-        // نظام التخزين المحسن
-        function saveToLocalStorage(key, data) {
-            try {
-                localStorage.setItem(`emo80_${key}`, JSON.stringify(data));
-                return true;
-            } catch (e) {
-                console.error('فشل في الحفظ:', e);
-                return false;
-            }
-        }
-
-        function loadFromLocalStorage(key) {
-            try {
-                const data = localStorage.getItem(`emo80_${key}`);
-                return data ? JSON.parse(data) : null;
-            } catch (e) {
-                console.error('فشل في التحميل:', e);
-                return null;
-            }
-        }
-
-        // نظام الإشعارات المحسن
-        function showNotification(message, type = 'success', duration = 3000) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
+            // إظهار رسالة ترحيب
             setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.style.animation = 'notificationSlide 0.3s ease reverse';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.remove();
-                        }
-                    }, 300);
-                }
-            }, duration);
-        }
-
-        // نظام النسخ الاحتياطي التلقائي
-        function autoBackup() {
-            const backupData = {
-                timestamp: Date.now()
-            };
-            
-            if (saveToLocalStorage('auto_backup', backupData)) {
-                console.log('تم النسخ الاحتياطي التلقائي');
-            }
-        }
-
-        // تشغيل النسخ الاحتياطي كل 5 دقائق
-        setInterval(autoBackup, 300000);
-
-        // استعادة من النسخ الاحتياطي إذا وجد
-        window.addEventListener('load', function() {
-            const backup = loadFromLocalStorage('auto_backup');
-            if (backup) {
-                console.log('تم العثور على نسخة احتياطية');
-            }
+                NotificationSystem.show('مرحباً بك في نظام فحص إنستغرام الذكي!', 'success', 3000);
+            }, 2000);
         });
 
-        // إضافة سطر إلى التيرمينال
-        function logTerm(message) {
-            const terminal = document.getElementById('terminal');
-            const line = document.createElement('div');
-            line.className = 'terminal-line';
-            line.textContent = `> ${message}`;
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-        }
+        // تنظيف الذاكرة عند إغلاق الصفحة
+        window.addEventListener('beforeunload', () => {
+            AnimationManager.stopAllAnimations();
+            AnimationManager.cleanupMatrix();
+            AnimationManager.cleanupParticles();
+        });
+
+        // إدارة أداء الذاكرة
+        window.addEventListener('load', () => {
+            // تحرير الذاكرة إذا كانت الصفحة غير مرئية
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    AnimationManager.stopAllAnimations();
+                } else {
+                    AnimationManager.createMatrixBackground();
+                    AnimationManager.createParticles();
+                }
+            });
+        });
     </script>
 </body>
     </html>
