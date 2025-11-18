@@ -3,13 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="نظام فحص إنستغرام الذكي - أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي">
-    <meta name="keywords" content="إنستغرام, تحليل, فحص, الذكاء الاصطناعي, إحصائيات">
-    <meta property="og:title" content="🚀 نظام فحص إنستغرام الذكي - الإصدار المتطور">
-    <meta property="og:description" content="أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي">
-    <meta property="og:type" content="website">
     <title>🚀 نظام فحص إنستغرام الذكي - الإصدار المتطور</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+    <link rel="icon" href="data:;base64,=">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -31,7 +26,6 @@
             --pink: #ff4d9d;
             --neon-blue: #00eeff;
             --gold: #ffd700;
-            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         * {
@@ -50,48 +44,9 @@
             direction: rtl;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            line-height: 1.6;
         }
 
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            
-            .matrix-char, .particle {
-                display: none !important;
-            }
-        }
-
-        /* Focus styles for accessibility */
-        *:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        /* Skip link for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            right: 10px;
-            background: var(--accent);
-            color: var(--bg);
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            z-index: 10000;
-            transition: var(--transition);
-        }
-
-        .skip-link:focus {
-            top: 10px;
-        }
-
-        /* Enhanced Matrix Background with performance improvements */
+        /* Enhanced Matrix Background */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -99,8 +54,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
+            opacity: 0.15;
         }
         
         .matrix-char {
@@ -112,7 +66,6 @@
             animation: matrixFall linear infinite;
             text-shadow: 0 0 8px var(--accent-glow);
             font-weight: bold;
-            user-select: none;
         }
         
         @keyframes matrixFall {
@@ -132,7 +85,7 @@
             }
         }
 
-        /* Particle Background with performance improvements */
+        /* Particle Background */
         .particles {
             position: fixed;
             top: 0;
@@ -140,14 +93,13 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            pointer-events: none;
         }
         
         .particle {
             position: absolute;
             background: var(--accent);
             border-radius: 50%;
-            opacity: 0.2;
+            opacity: 0.3;
             animation: float 20s infinite linear;
         }
         
@@ -180,7 +132,6 @@
                 var(--accent);
             background-size: 22px 22px;
             opacity: 0.03;
-            pointer-events: none;
         }
 
         /* Loading Screen */
@@ -293,8 +244,8 @@
             font-weight: 900;
             background: linear-gradient(to right, var(--accent), var(--neon-blue));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
             margin-bottom: 10px;
             text-shadow: 0 0 20px var(--accent-glow);
             letter-spacing: 1px;
@@ -322,7 +273,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid var(--glass);
             backdrop-filter: blur(10px);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         
         .card:hover {
@@ -375,25 +326,13 @@
             font-size: 1.1rem;
             color: var(--text);
             font-family: 'Cairo', sans-serif;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         
         .username-input:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        
-        .username-input.error {
-            border-color: var(--danger);
-            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
-        }
-        
-        .error-message {
-            color: var(--danger);
-            font-size: 0.9rem;
-            margin-top: 8px;
-            display: none;
         }
         
         .analyze-btn {
@@ -406,7 +345,7 @@
             font-weight: 700;
             font-family: 'Cairo', sans-serif;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -445,7 +384,7 @@
             border-radius: 12px;
             padding: 25px;
             text-align: center;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             border: 1px solid transparent;
         }
         
@@ -461,8 +400,8 @@
             margin: 15px 0;
             background: linear-gradient(to right, var(--accent), var(--neon-blue));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
         
         .stat-label {
@@ -517,39 +456,6 @@
             font-size: 1.5rem;
         }
         
-        /* Notification System */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
-            max-width: 400px;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background: var(--success);
-            color: var(--bg);
-        }
-        
-        .notification.error {
-            background: var(--danger);
-        }
-        
-        .notification.warning {
-            background: var(--warning);
-            color: var(--bg);
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -572,78 +478,26 @@
             .results-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .card-title {
-                font-size: 1.5rem;
-            }
-            
-            .logo {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            .wrap {
-                padding: 15px;
-            }
-            
-            .card {
-                padding: 15px;
-            }
-            
-            .stat-value {
-                font-size: 2rem;
-            }
-        }
-        
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --bg: #000000;
-                --card: #0a0a0a;
-                --text: #ffffff;
-                --muted: #cccccc;
-            }
-            
-            .card {
-                border: 2px solid var(--accent);
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">انتقل إلى المحتوى الرئيسي</a>
-    
     <!-- Background Elements -->
-    <div class="cyber-grid" aria-hidden="true"></div>
-    <div class="particles" id="particles" aria-hidden="true"></div>
-    <div class="matrix-bg" id="matrixBg" aria-hidden="true"></div>
-    
-    <!-- Notification System -->
-    <div class="notification" id="notification" role="alert" aria-live="polite"></div>
+    <div class="cyber-grid"></div>
+    <div class="particles" id="particles"></div>
+    <div class="matrix-bg" id="matrixBg"></div>
     
     <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen" aria-live="polite" aria-label="جاري تحميل النظام">
-        <div class="loading-spinner-large" aria-hidden="true"></div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner-large"></div>
         <div class="loading-text">جاري تحميل النظام...</div>
     </div>
     
     <div class="wrap">
-        <header role="banner">
-            <div class="header-glow" aria-hidden="true"></div>
+        <header>
+            <div class="header-glow"></div>
             <div class="brand">
-                <div class="logo" aria-hidden="true">
+                <div class="logo">
                     <i class="fas fa-rocket"></i>
                 </div>
                 <div class="brand-text">
@@ -653,50 +507,47 @@
             </div>
         </header>
         
-        <main id="main-content" role="main">
+        <main>
             <section class="card">
                 <div class="card-header">
-                    <div class="card-icon" aria-hidden="true">
+                    <div class="card-icon">
                         <i class="fas fa-search"></i>
                     </div>
                     <h2 class="card-title">فحص الحساب</h2>
                 </div>
                 
-                <p style="margin-bottom: 20px;">أدخل اسم مستخدم إنستغرام في الحقل أدناه للحصول على تحليل مفصل ودقيق للحساب باستخدام أحدث تقنيات الذكاء الاصطناعي.</p>
+                <p style="margin-bottom: 20px; line-height: 1.7;">أدخل اسم مستخدم إنستغرام في الحقل أدناه للحصول على تحليل مفصل ودقيق للحساب باستخدام أحدث تقنيات الذكاء الاصطناعي.</p>
                 
                 <div class="input-group">
-                    <div style="flex: 1; position: relative;">
-                        <input type="text" class="username-input" id="usernameInput" placeholder="اسم المستخدم بدون @" value="" aria-label="اسم مستخدم إنستغرام" aria-required="true">
-                        <div class="error-message" id="usernameError">يرجى إدخال اسم مستخدم صحيح</div>
-                    </div>
-                    <button class="analyze-btn" id="analyzeBtn" aria-label="بدء فحص الحساب">
-                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <input type="text" class="username-input" id="usernameInput" placeholder="اسم المستخدم بدون @" value="">
+                    <button class="analyze-btn" id="analyzeBtn">
+                        <i class="fas fa-chart-line"></i>
                         بدء الفحص
                     </button>
                 </div>
                 
                 <div class="features">
                     <div class="feature">
-                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        <i class="fas fa-shield-alt"></i>
                         <span>فحص أمني متقدم</span>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-robot" aria-hidden="true"></i>
+                        <i class="fas fa-robot"></i>
                         <span>تحليل بالذكاء الاصطناعي</span>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                        <i class="fas fa-chart-bar"></i>
                         <span>إحصائيات مفصلة</span>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                        <i class="fas fa-bolt"></i>
                         <span>نتائج فورية</span>
                     </div>
                 </div>
                 
-                <div id="results" aria-live="polite">
+                <div id="results">
                     <div class="card-header" style="margin-top: 30px;">
-                        <div class="card-icon" aria-hidden="true">
+                        <div class="card-icon">
                             <i class="fas fa-chart-pie"></i>
                         </div>
                         <h2 class="card-title">نتائج التحليل</h2>
@@ -704,63 +555,63 @@
                     
                     <div class="results-grid">
                         <div class="stat-card">
-                            <i class="fas fa-users" style="font-size: 2rem; color: var(--accent);" aria-hidden="true"></i>
+                            <i class="fas fa-users" style="font-size: 2rem; color: var(--accent);"></i>
                             <div class="stat-value" id="followersCount">0</div>
                             <div class="stat-label">المتابعون</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="followersProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 85%"></div>
                             </div>
                         </div>
                         
                         <div class="stat-card">
-                            <i class="fas fa-user-plus" style="font-size: 2rem; color: var(--info);" aria-hidden="true"></i>
+                            <i class="fas fa-user-plus" style="font-size: 2rem; color: var(--info);"></i>
                             <div class="stat-value" id="followingCount">0</div>
                             <div class="stat-label">يتبع</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="followingProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 45%"></div>
                             </div>
                         </div>
                         
                         <div class="stat-card">
-                            <i class="fas fa-images" style="font-size: 2rem; color: var(--purple);" aria-hidden="true"></i>
+                            <i class="fas fa-images" style="font-size: 2rem; color: var(--purple);"></i>
                             <div class="stat-value" id="postsCount">0</div>
                             <div class="stat-label">عدد المنشورات</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="postsProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 62%"></div>
                             </div>
                         </div>
                         
                         <div class="stat-card">
-                            <i class="fas fa-heart" style="font-size: 2rem; color: var(--pink);" aria-hidden="true"></i>
+                            <i class="fas fa-heart" style="font-size: 2rem; color: var(--pink);"></i>
                             <div class="stat-value" id="engagementRate">0%</div>
                             <div class="stat-label">معدل التفاعل</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="engagementProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 78%"></div>
                             </div>
                         </div>
                         
                         <div class="stat-card">
-                            <i class="fas fa-bolt" style="font-size: 2rem; color: var(--warning);" aria-hidden="true"></i>
+                            <i class="fas fa-bolt" style="font-size: 2rem; color: var(--warning);"></i>
                             <div class="stat-value" id="accountScore">0/10</div>
                             <div class="stat-label">تقييم الحساب</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="scoreProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 72%"></div>
                             </div>
                         </div>
                         
                         <div class="stat-card">
-                            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--neon-blue);" aria-hidden="true"></i>
+                            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--neon-blue);"></i>
                             <div class="stat-value" id="accountAge">0</div>
                             <div class="stat-label">عمر الحساب (أيام)</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" id="ageProgress" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 90%"></div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="card" style="margin-top: 30px;">
                         <div class="card-header">
-                            <div class="card-icon" aria-hidden="true">
+                            <div class="card-icon">
                                 <i class="fas fa-robot"></i>
                             </div>
                             <h2 class="card-title">التقييم الذكي</h2>
@@ -771,406 +622,91 @@
             </section>
         </main>
         
-        <footer role="contentinfo">
-            <p>نظام فحص إنستغرام الذكي - الإصدار المتطور &copy; <span id="currentYear">2023</span></p>
+        <footer>
+            <p>نظام فحص إنستغرام الذكي - الإصدار المتطور &copy; 2023</p>
             <p style="margin-top: 10px; font-size: 0.8rem;">هذا النظام مخصص لأغراض تعليمية وتحليلية فقط</p>
         </footer>
     </div>
 
     <script>
-        // نظام إدارة الحالة والتطبيق
-        const AppState = {
-            currentUsername: '',
-            isAnalyzing: false,
-            animationFrameIds: [],
-            matrixChars: [],
-            particles: []
-        };
-
-        // نظام الإشعارات
-        const NotificationSystem = {
-            show(message, type = 'info', duration = 5000) {
-                const notification = document.getElementById('notification');
-                notification.textContent = message;
-                notification.className = `notification ${type} show`;
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, duration);
-                
-                // إعلام قارئ الشاشة
-                const liveRegion = document.createElement('div');
-                liveRegion.setAttribute('aria-live', 'polite');
-                liveRegion.setAttribute('aria-atomic', 'true');
-                liveRegion.className = 'sr-only';
-                liveRegion.textContent = message;
-                document.body.appendChild(liveRegion);
-                
-                setTimeout(() => {
-                    document.body.removeChild(liveRegion);
-                }, 1000);
+        // إنشاء خلفية المصفوفة
+        function createMatrixBackground() {
+            const matrixBg = document.getElementById('matrixBg');
+            const chars = '01010101阿拉伯语字符测试اختبار';
+            
+            for (let i = 0; i < 50; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                char.style.left = `${Math.random() * 100}%`;
+                char.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                char.style.animationDelay = `${Math.random() * 5}s`;
+                matrixBg.appendChild(char);
             }
-        };
-
-        // نظام التحقق من صحة الإدخال
-        const Validation = {
-            isValidInstagramUsername(username) {
-                if (!username || username.trim() === '') {
-                    return { isValid: false, message: 'يرجى إدخال اسم مستخدم' };
-                }
-                
-                // تحقق من تنسيق اسم مستخدم إنستغرام
-                const instagramRegex = /^[a-zA-Z0-9._]{1,30}$/;
-                if (!instagramRegex.test(username)) {
-                    return { 
-                        isValid: false, 
-                        message: 'اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام ونقاط وشرطات سفلية فقط (1-30 حرفاً)' 
-                    };
-                }
-                
-                return { isValid: true, message: '' };
-            },
+        }
+        
+        // إنشاء جسيمات الخلفية
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
             
-            showError(input, message) {
-                input.classList.add('error');
-                const errorElement = document.getElementById('usernameError');
-                errorElement.textContent = message;
-                errorElement.style.display = 'block';
-            },
-            
-            hideError(input) {
-                input.classList.remove('error');
-                document.getElementById('usernameError').style.display = 'none';
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${Math.random() * 30 + 10}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
             }
-        };
-
-        // نظام الرسوم المتحركة والأداء
-        const AnimationManager = {
-            // إنشاء خلفية المصفوفة مع إدارة أفضل للذاكرة
-            createMatrixBackground() {
-                const matrixBg = document.getElementById('matrixBg');
-                const chars = '01010101阿拉伯语字符测试اختبار';
-                
-                // تنظيف أي عناصر موجودة مسبقاً
-                this.cleanupMatrix();
-                
-                for (let i = 0; i < 40; i++) { // تقليل العدد لتحسين الأداء
-                    const char = document.createElement('div');
-                    char.className = 'matrix-char';
-                    char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
-                    char.style.left = `${Math.random() * 100}%`;
-                    char.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                    char.style.animationDelay = `${Math.random() * 5}s`;
-                    matrixBg.appendChild(char);
-                    AppState.matrixChars.push(char);
-                }
-            },
+        }
+        
+        // محاكاة عملية الفحص
+        function analyzeAccount(username) {
+            const results = document.getElementById('results');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const loadingScreen = document.getElementById('loadingScreen');
             
-            // إنشاء جسيمات الخلفية مع إدارة أفضل للذاكرة
-            createParticles() {
-                const particlesContainer = document.getElementById('particles');
-                
-                // تنظيف أي جسيمات موجودة مسبقاً
-                this.cleanupParticles();
-                
-                for (let i = 0; i < 15; i++) { // تقليل العدد لتحسين الأداء
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.width = `${Math.random() * 20 + 5}px`;
-                    particle.style.height = particle.style.width;
-                    particle.style.left = `${Math.random() * 100}%`;
-                    particle.style.top = `${Math.random() * 100}%`;
-                    particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
-                    particle.style.animationDelay = `${Math.random() * 10}s`;
-                    particlesContainer.appendChild(particle);
-                    AppState.particles.push(particle);
-                }
-            },
+            // إظهار شاشة التحميل
+            loadingScreen.style.display = 'flex';
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحليل...';
             
-            // تنظيف الذاكرة من عناصر المصفوفة
-            cleanupMatrix() {
-                AppState.matrixChars.forEach(char => {
-                    if (char.parentNode) {
-                        char.parentNode.removeChild(char);
-                    }
-                });
-                AppState.matrixChars = [];
-            },
-            
-            // تنظيف الذاكرة من الجسيمات
-            cleanupParticles() {
-                AppState.particles.forEach(particle => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                });
-                AppState.particles = [];
-            },
-            
-            // إيقاف جميع الرسوم المتحركة
-            stopAllAnimations() {
-                AppState.animationFrameIds.forEach(id => cancelAnimationFrame(id));
-                AppState.animationFrameIds = [];
-            },
-            
-            // تحريك أشرطة التقدم بشكل متزامن
-            animateProgressBars(targetValues, duration = 1500) {
-                const progressElements = {
-                    followers: document.getElementById('followersProgress'),
-                    following: document.getElementById('followingProgress'),
-                    posts: document.getElementById('postsProgress'),
-                    engagement: document.getElementById('engagementProgress'),
-                    score: document.getElementById('scoreProgress'),
-                    age: document.getElementById('ageProgress')
-                };
-                
-                const startTime = performance.now();
-                
-                const animate = (currentTime) => {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // دالة تقدم سلسة
-                    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-                    
-                    const easedProgress = easeOut(progress);
-                    
-                    progressElements.followers.style.width = `${targetValues.followers * easedProgress}%`;
-                    progressElements.following.style.width = `${targetValues.following * easedProgress}%`;
-                    progressElements.posts.style.width = `${targetValues.posts * easedProgress}%`;
-                    progressElements.engagement.style.width = `${targetValues.engagement * easedProgress}%`;
-                    progressElements.score.style.width = `${targetValues.score * easedProgress}%`;
-                    progressElements.age.style.width = `${targetValues.age * easedProgress}%`;
-                    
-                    if (progress < 1) {
-                        const animationId = requestAnimationFrame(animate);
-                        AppState.animationFrameIds.push(animationId);
-                    }
-                };
-                
-                const animationId = requestAnimationFrame(animate);
-                AppState.animationFrameIds.push(animationId);
-            }
-        };
-
-        // نظام محاكاة البيانات الواقعية
-        const DataSimulator = {
-            generateRealisticData(username) {
-                // جعل البيانات أكثر واقعية بناءً على اسم المستخدم
-                const seed = this.generateSeed(username);
-                const random = this.seededRandom(seed);
-                
-                const followers = Math.floor(random() * 50000 + 1000);
-                const following = Math.floor(random() * 1000 + 100);
-                const posts = Math.floor(random() * 500 + 50);
-                const engagementRate = (random() * 10 + 2).toFixed(1);
-                const accountScore = Math.floor(random() * 4 + 6);
-                const accountAge = Math.floor(random() * 1000 + 500);
-                
-                // حساب نسب التقدم بشكل منطقي
-                const progressValues = {
-                    followers: Math.min((followers / 50000) * 100, 100),
-                    following: Math.min((following / 1000) * 100, 100),
-                    posts: Math.min((posts / 500) * 100, 100),
-                    engagement: Math.min((engagementRate / 12) * 100, 100),
-                    score: accountScore * 10,
-                    age: Math.min((accountAge / 1500) * 100, 100)
-                };
-                
-                return {
-                    followers,
-                    following,
-                    posts,
-                    engagementRate,
-                    accountScore,
-                    accountAge,
-                    progressValues
-                };
-            },
-            
-            generateSeed(username) {
-                let seed = 0;
-                for (let i = 0; i < username.length; i++) {
-                    seed += username.charCodeAt(i);
-                }
-                return seed;
-            },
-            
-            seededRandom(seed) {
-                return function() {
-                    seed = (seed * 9301 + 49297) % 233280;
-                    return seed / 233280;
-                };
-            },
-            
-            generateAIAssessment(username, data) {
-                const assessments = [
-                    `حساب ${username} يظهر نشاطاً جيداً ومعدل تفاعل صحي. النشاط منتظم والمحتوى متنوع.`,
-                    `الحساب لديه متابعين متفاعلين مع نسبة نمو مستقرة. نوصي بزيادة وتيرة النشر لتحسين النتائج.`,
-                    `الحساب نشط ومتفاعل مع جمهوره. هناك فرصة لتحسين الاستراتيجية من خلال تحسين أوقات النشر.`,
-                    `يتميز الحساب بمحتوى جذاب ومتابعين مخلصين. يمكن تحسين الأداء باستخدام الهاشتاقات المناسبة.`,
-                    `الحساب يظهر نمواً مستقراً مع تفاعل جيد من المتابعين. التركيز على المحتوى عالي الجودة سيساعد في النمو المستمر.`,
-                    `نسبة التفاعل جيدة مقارنة بعدد المتابعين. يمكن تحسين الأداء من خلال التفاعل مع المتابعين في التعليقات.`
-                ];
-                
-                // اختيار التقييم بناءً على بيانات الحساب
-                const index = Math.floor(this.seededRandom(this.generateSeed(username))() * assessments.length);
-                return assessments[index];
-            }
-        };
-
-        // نظام فحص الحساب الرئيسي
-        const AccountAnalyzer = {
-            async analyzeAccount(username) {
-                if (AppState.isAnalyzing) return;
-                
-                AppState.isAnalyzing = true;
-                AppState.currentUsername = username;
-                
-                const results = document.getElementById('results');
-                const analyzeBtn = document.getElementById('analyzeBtn');
-                const loadingScreen = document.getElementById('loadingScreen');
-                
-                try {
-                    // إظهار شاشة التحميل
-                    loadingScreen.style.display = 'flex';
-                    analyzeBtn.disabled = true;
-                    analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> جاري التحليل...';
-                    
-                    // محاكاة وقت التحليل مع تقدم حقيقي
-                    await this.simulateAnalysis();
-                    
-                    // إخفاء شاشة التحميل
-                    loadingScreen.style.display = 'none';
-                    analyzeBtn.disabled = false;
-                    analyzeBtn.innerHTML = '<i class="fas fa-chart-line" aria-hidden="true"></i> بدء الفحص';
-                    
-                    // توليد البيانات الواقعية
-                    const data = DataSimulator.generateRealisticData(username);
-                    
-                    // عرض النتائج
-                    this.displayResults(data);
-                    
-                    // إظهار الإشعار
-                    NotificationSystem.show('تم تحليل الحساب بنجاح!', 'success');
-                    
-                } catch (error) {
-                    // معالجة الأخطاء
-                    console.error('Error analyzing account:', error);
-                    NotificationSystem.show('حدث خطأ أثناء تحليل الحساب. يرجى المحاولة مرة أخرى.', 'error');
-                    
-                    loadingScreen.style.display = 'none';
-                    analyzeBtn.disabled = false;
-                    analyzeBtn.innerHTML = '<i class="fas fa-chart-line" aria-hidden="true"></i> بدء الفحص';
-                } finally {
-                    AppState.isAnalyzing = false;
-                }
-            },
-            
-            async simulateAnalysis() {
-                return new Promise(resolve => {
-                    // محاكاة تحليل حقيقي مع تقدم
-                    const steps = [
-                        { message: 'جاري جمع بيانات الحساب...', delay: 800 },
-                        { message: 'جاري تحليل المتابعين والتفاعلات...', delay: 900 },
-                        { message: 'جاري تقييم جودة المحتوى...', delay: 700 },
-                        { message: 'جاري إنشاء التقرير النهائي...', delay: 600 }
-                    ];
-                    
-                    let currentStep = 0;
-                    
-                    const executeStep = () => {
-                        if (currentStep < steps.length) {
-                            const step = steps[currentStep];
-                            document.querySelector('.loading-text').textContent = step.message;
-                            
-                            setTimeout(() => {
-                                currentStep++;
-                                executeStep();
-                            }, step.delay);
-                        } else {
-                            resolve();
-                        }
-                    };
-                    
-                    executeStep();
-                });
-            },
-            
-            displayResults(data) {
-                const results = document.getElementById('results');
-                
-                // تحديث القيم الرقمية
-                document.getElementById('followersCount').textContent = data.followers.toLocaleString();
-                document.getElementById('followingCount').textContent = data.following.toLocaleString();
-                document.getElementById('postsCount').textContent = data.posts.toLocaleString();
-                document.getElementById('engagementRate').textContent = data.engagementRate + '%';
-                document.getElementById('accountScore').textContent = data.accountScore + '/10';
-                document.getElementById('accountAge').textContent = data.accountAge.toLocaleString();
-                
-                // تحديث التقييم الذكي
-                document.getElementById('aiAssessment').textContent = 
-                    DataSimulator.generateAIAssessment(AppState.currentUsername, data);
+            // محاكاة وقت التحليل
+            setTimeout(() => {
+                // إخفاء شاشة التحميل
+                loadingScreen.style.display = 'none';
+                analyzeBtn.disabled = false;
+                analyzeBtn.innerHTML = '<i class="fas fa-chart-line"></i> بدء الفحص';
                 
                 // إظهار النتائج
                 results.style.display = 'block';
                 
-                // تحريك أشرطة التقدم
-                AnimationManager.animateProgressBars(data.progressValues);
+                // تعبئة البيانات (محاكاة)
+                document.getElementById('followersCount').textContent = (Math.random() * 50000 + 1000).toLocaleString();
+                document.getElementById('followingCount').textContent = Math.floor(Math.random() * 1000 + 100).toLocaleString();
+                document.getElementById('postsCount').textContent = Math.floor(Math.random() * 500 + 50).toLocaleString();
+                document.getElementById('engagementRate').textContent = (Math.random() * 10 + 2).toFixed(1) + '%';
+                document.getElementById('accountScore').textContent = Math.floor(Math.random() * 4 + 6) + '/10';
+                document.getElementById('accountAge').textContent = Math.floor(Math.random() * 1000 + 500).toLocaleString();
+                
+                // تقييم ذكي عشوائي
+                const assessments = [
+                    `حساب ${username} يظهر نشاطاً جيداً ومعدل تفاعل صحي. النشاط منتظم والمحتوى متنوع.`,
+                    `الحساب لديه متابعين متفاعلين مع نسبة نمو مستقرة. نوصي بزيادة وتيرة النشر لتحسين النتائج.`,
+                    `الحساب نشط ومتفاعل مع جمهوره. هناك فرصة لتحسين الاستراتيجية من خلال تحسين أوقات النشر.`,
+                    `يتميز الحساب بمحتوى جذاب ومتابعين مخلصين. يمكن تحسين الأداء باستخدام الهاشتاقات المناسبة.`
+                ];
+                
+                document.getElementById('aiAssessment').textContent = assessments[Math.floor(Math.random() * assessments.length)];
                 
                 // تمرير إلى قسم النتائج
-                setTimeout(() => {
-                    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 500);
-            }
-        };
-
-        // نظام إدارة الأحداث
-        const EventManager = {
-            init() {
-                // إعداد زر التحليل
-                document.getElementById('analyzeBtn').addEventListener('click', () => {
-                    this.handleAnalysis();
-                });
-                
-                // السماح بالضغط على Enter لبدء الفحص
-                document.getElementById('usernameInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.handleAnalysis();
-                    }
-                });
-                
-                // التحقق من صحة الإدخال أثناء الكتابة
-                document.getElementById('usernameInput').addEventListener('input', (e) => {
-                    const validation = Validation.isValidInstagramUsername(e.target.value);
-                    if (!validation.isValid && e.target.value !== '') {
-                        Validation.showError(e.target, validation.message);
-                    } else {
-                        Validation.hideError(e.target);
-                    }
-                });
-                
-                // تحديث السنة في التذييل
-                document.getElementById('currentYear').textContent = new Date().getFullYear();
-            },
-            
-            handleAnalysis() {
-                const usernameInput = document.getElementById('usernameInput');
-                const username = usernameInput.value.trim();
-                
-                const validation = Validation.isValidInstagramUsername(username);
-                if (!validation.isValid) {
-                    Validation.showError(usernameInput, validation.message);
-                    usernameInput.focus();
-                    return;
-                }
-                
-                Validation.hideError(usernameInput);
-                AccountAnalyzer.analyzeAccount(username);
-            }
-        };
-
-        // تهيئة التطبيق عند تحميل الصفحة
+                results.scrollIntoView({ behavior: 'smooth' });
+            }, 3000);
+        }
+        
+        // تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
             // إخفاء شاشة التحميل الرئيسية
             setTimeout(() => {
@@ -1180,35 +716,24 @@
                 }, 500);
             }, 1500);
             
-            // إنشاء الخلفيات المتحركة
-            AnimationManager.createMatrixBackground();
-            AnimationManager.createParticles();
+            // إنشاء الخلفيات
+            createMatrixBackground();
+            createParticles();
             
-            // إعداد نظام الأحداث
-            EventManager.init();
-            
-            // إظهار رسالة ترحيب
-            setTimeout(() => {
-                NotificationSystem.show('مرحباً بك في نظام فحص إنستغرام الذكي!', 'success', 3000);
-            }, 2000);
-        });
-
-        // تنظيف الذاكرة عند إغلاق الصفحة
-        window.addEventListener('beforeunload', () => {
-            AnimationManager.stopAllAnimations();
-            AnimationManager.cleanupMatrix();
-            AnimationManager.cleanupParticles();
-        });
-
-        // إدارة أداء الذاكرة
-        window.addEventListener('load', () => {
-            // تحرير الذاكرة إذا كانت الصفحة غير مرئية
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    AnimationManager.stopAllAnimations();
+            // إعداد زر التحليل
+            document.getElementById('analyzeBtn').addEventListener('click', function() {
+                const username = document.getElementById('usernameInput').value.trim();
+                if (username) {
+                    analyzeAccount(username);
                 } else {
-                    AnimationManager.createMatrixBackground();
-                    AnimationManager.createParticles();
+                    alert('يرجى إدخال اسم مستخدم إنستغرام');
+                }
+            });
+            
+            // السماح بالضغط على Enter لبدء الفحص
+            document.getElementById('usernameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('analyzeBtn').click();
                 }
             });
         });
