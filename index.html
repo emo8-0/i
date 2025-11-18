@@ -1495,333 +1495,4 @@
 
                 <div class="controls">
                     <button id="generateFromTemplate" class="btn"><i class="fas fa-wand-magic-sparkles"></i> توليد من القالب</button>
-                    <button id="saveTemplates" class="btn info"><i class="fas fa-save"></i> حفظ القوالب</button>
-                    <button id="loadTemplates" class="btn secondary"><i class="fas fa-folder-open"></i> تحميل القوالب</button>
-                </div>
-            </div>
-
-            <!-- تبويب مراقبة النظام -->
-            <div class="tab-content" id="monitor-tab">
-                <div class="system-monitor">
-                    <div class="monitor-item">
-                        <div class="small">المستخدمون النشطون</div>
-                        <div class="monitor-value" id="activeUsers">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">الطلبات/الثانية</div>
-                        <div class="monitor-value" id="requestsPerSecond">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">معدل النجاح</div>
-                        <div class="monitor-value" id="successRate">100%</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">وقت الاستجابة</div>
-                        <div class="monitor-value" id="responseTime">0ms</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المفحوصة</div>
-                        <div class="monitor-value" id="totalChecked">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المتاحة</div>
-                        <div class="monitor-value" id="totalAvailable">0</div>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-chart-line"></i> إحصائيات حية</label>
-                    <div class="term" id="monitor-terminal">
-                        <div class="terminal-line">> 📊 نظام المراقبة يعمل بنشاط</div>
-                        <div class="terminal-line">> 📈 جاري جمع البيانات وتحليل الأداء...</div>
-                        <div class="terminal-line">> 🔍 لا توجد عمليات نشطة حاليًا</div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="startMonitor" class="btn"><i class="fas fa-play"></i> بدء المراقبة</button>
-                    <button id="resetStats" class="btn secondary"><i class="fas fa-redo"></i> إعادة التعيين</button>
-                    <button id="exportStats" class="btn"><i class="fas fa-file-export"></i> تصدير الإحصائيات</button>
-                    <button id="analyticsBtn" class="btn info"><i class="fas fa-chart-bar"></i> التحليلات المتقدمة</button>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-glow"></div>
-            <div class="social-links">
-                <a href="https://youtube.com/@emo8_0" target="_blank" class="social-btn">
-                    <i class="fab fa-youtube"></i>
-                    <span>يوتيوب</span>
-                </a>
-                <a href="https://t.me/emo_80" target="_blank" class="social-btn">
-                    <i class="fab fa-telegram"></i>
-                    <span>تلغرام</span>
-                </a>
-                <a href="#" class="social-btn">
-                    <i class="fab fa-github"></i>
-                    <span>جيت هاب</span>
-                </a>
-            </div>
-            <div style="margin-top:25px">المطور إيمو — نظام فحص يوزرات إنستغرام الذكي - الإصدار المتطور</div>
-            <div style="margin-top:15px; font-size: 13px; color: var(--muted); line-height: 1.6">
-                يدعم 1000+ مستخدم متزامن • نظام متعدد المصادر • خادم افتراضي متكامل • خوارزميات ذكية<br>
-                ⚡ سرعة فائقة • 🔒 حماية قصوى • 🎯 دقة عالية • 🤖 ذكاء اصطناعي • 👑 ميزات مميزة
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // نظام متطور مع تحسينات كبيرة
-        class AdvancedInstagramChecker {
-            constructor() {
-                this.users = new Map();
-                this.requests = [];
-                this.stats = {
-                    totalRequests: 0,
-                    successfulRequests: 0,
-                    failedRequests: 0,
-                    activeUsers: 0,
-                    requestsPerSecond: 0,
-                    responseTime: 0,
-                    peakPerformance: 0,
-                    memoryUsage: 0
-                };
-                this.startTime = Date.now();
-                this.performanceMetrics = [];
-                this.templates = new Map();
-                this.cache = new Map();
-                this.initTemplates();
-            }
-
-            initTemplates() {
-                // قوالب أسماء متطورة
-                this.templates.set('premium', {
-                    patterns: [
-                        () => {
-                            const prefixes = ['vip', 'pro', 'elite', 'prime', 'ultra', 'mega', 'alpha', 'omega'];
-                            const suffixes = ['', 'x', 'z', 'official', 'real', 'true'];
-                            return prefixes[Math.floor(Math.random() * prefixes.length)] + 
-                                   suffixes[Math.floor(Math.random() * suffixes.length)];
-                        },
-                        () => {
-                            const names = ['king', 'queen', 'boss', 'lord', 'master', 'legend', 'icon', 'star'];
-                            return names[Math.floor(Math.random() * names.length)] + 
-                                   Math.floor(Math.random() * 999);
-                        }
-                    ]
-                });
-
-                this.templates.set('short', {
-                    patterns: [
-                        () => {
-                            const chars = 'abcdefghijklmnopqrstuvwxyz';
-                            let name = '';
-                            for(let i = 0; i < 3 + Math.floor(Math.random() * 3); i++) {
-                                name += chars.charAt(Math.floor(Math.random() * chars.length));
-                            }
-                            return name;
-                        }
-                    ]
-                });
-
-                this.templates.set('descriptive', {
-                    patterns: [
-                        () => {
-                            const adjectives = ['cool', 'awesome', 'epic', 'amazing', 'fantastic', 'super'];
-                            const nouns = ['user', 'player', 'gamer', 'creator', 'artist', 'coder'];
-                            return adjectives[Math.floor(Math.random() * adjectives.length)] + 
-                                   '_' + 
-                                   nouns[Math.floor(Math.random() * nouns.length)];
-                        }
-                    ]
-                });
-            }
-
-            generateUsernameFromTemplate(templateName = 'auto') {
-                if (templateName === 'auto') {
-                    const templates = ['premium', 'short', 'descriptive'];
-                    templateName = templates[Math.floor(Math.random() * templates.length)];
-                }
-
-                const template = this.templates.get(templateName);
-                if (template && template.patterns) {
-                    const pattern = template.patterns[Math.floor(Math.random() * template.patterns.length)];
-                    return pattern();
-                }
-
-                // Fallback to advanced generation
-                return this.generateAdvancedUsername();
-            }
-
-            generateAdvancedUsername() {
-                const patterns = [
-                    // أسماء مختصرة ذكية
-                    () => {
-                        const shortNames = ["ace", "neo", "zen", "lux", "rex", "max", "leo", "kai", "rio", "jax", "fox", "ray"];
-                        return shortNames[Math.floor(Math.random() * shortNames.length)] + 
-                               (Math.random() > 0.3 ? Math.floor(Math.random() * 99) : '');
-                    },
-                    // أسماء مهنية
-                    () => {
-                        const proWords = ["pro", "expert", "master", "guru", "ninja", "wizard", "legend", "elite"];
-                        const domains = ["code", "tech", "dev", "art", "design", "media", "digital", "ai"];
-                        return proWords[Math.floor(Math.random() * proWords.length)] + 
-                               domains[Math.floor(Math.random() * domains.length)] +
-                               (Math.random() > 0.5 ? Math.floor(Math.random() * 10) : '');
-                    },
-                    // أسماء إبداعية
-                    () => {
-                        const creative = ["cosmic", "quantum", "neon", "cyber", "virtual", "atomic", "digital", "future"];
-                        const concepts = ["wave", "space", "tech", "node", "link", "core", "bit", "byte"];
-                        return creative[Math.floor(Math.random() * creative.length)] + 
-                               concepts[Math.floor(Math.random() * concepts.length)];
-                    }
-                ];
-                
-                return patterns[Math.floor(Math.random() * patterns.length)]();
-            }
-
-            // ... (بقية الدوال المحسنة من الإصدار السابق)
-        }
-
-        // نظام التحميل والتخصيص
-        document.addEventListener('DOMContentLoaded', function() {
-            // إخفاء شاشة التحميل بعد 2 ثانية
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loadingScreen');
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 2000);
-
-            // تهيئة الأنظمة
-            createEnhancedEffects();
-            initTabs();
-            initTemplates();
-            logTerm('🎉 النظام المتطور جاهز للعمل!');
-
-            // تحديث إحصائيات النظام بانتظام
-            setInterval(() => {
-                virtualServer.updateStats();
-                updateMemoryUsage();
-            }, 1000);
-        });
-
-        // نظام القوالب الجديد
-        function initTemplates() {
-            const templateItems = document.querySelectorAll('.template-item');
-            templateItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    templateItems.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // إضافة قالب مخصص
-            document.getElementById('addTemplateBtn').addEventListener('click', function() {
-                const customTemplate = document.getElementById('customTemplate').value.trim();
-                if (customTemplate) {
-                    const templatesList = document.getElementById('templatesList');
-                    const newTemplate = document.createElement('div');
-                    newTemplate.className = 'template-item';
-                    newTemplate.innerHTML = `
-                        <strong>📝 ${customTemplate}</strong>
-                        <div class="small">قالب مخصص</div>
-                    `;
-                    templatesList.appendChild(newTemplate);
-                    document.getElementById('customTemplate').value = '';
-                    showNotification('تم إضافة القالب المخصص', 'success');
-                }
-            });
-        }
-
-        // تحديث استخدام الذاكرة
-        function updateMemoryUsage() {
-            if (performance.memory) {
-                const memoryUsage = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
-                virtualServer.stats.memoryUsage = memoryUsage;
-            }
-        }
-
-        // نظام التخزين المحسن
-        function saveToLocalStorage(key, data) {
-            try {
-                localStorage.setItem(`emo80_${key}`, JSON.stringify(data));
-                return true;
-            } catch (e) {
-                console.error('فشل في الحفظ:', e);
-                return false;
-            }
-        }
-
-        function loadFromLocalStorage(key) {
-            try {
-                const data = localStorage.getItem(`emo80_${key}`);
-                return data ? JSON.parse(data) : null;
-            } catch (e) {
-                console.error('فشل في التحميل:', e);
-                return null;
-            }
-        }
-
-        // تحسينات إضافية على النظام الحالي
-        // ... (يمكن إضافة المزيد من الميزات هنا)
-
-        // نظام الإشعارات المحسن
-        function showAdvancedNotification(message, type = 'success', duration = 3000) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.style.animation = 'notificationSlide 0.3s ease reverse';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.remove();
-                        }
-                    }, 300);
-                }
-            }, duration);
-        }
-
-        // نظام النسخ الاحتياطي التلقائي
-        function autoBackup() {
-            const backupData = {
-                stats: stats,
-                foundList: foundList,
-                verifiedList: verifiedList,
-                timestamp: Date.now()
-            };
-            
-            if (saveToLocalStorage('auto_backup', backupData)) {
-                console.log('تم النسخ الاحتياطي التلقائي');
-            }
-        }
-
-        // تشغيل النسخ الاحتياطي كل 5 دقائق
-        setInterval(autoBackup, 300000);
-
-        // استعادة من النسخ الاحتياطي إذا وجد
-        window.addEventListener('load', function() {
-            const backup = loadFromLocalStorage('auto_backup');
-            if (backup && confirm('تم العثور على نسخة احتياطية. هل تريد استعادتها؟')) {
-                stats = backup.stats || { total:0, available:0, taken:0, verified:0, unknown:0, speed:0 };
-                foundList = backup.foundList || [];
-                verifiedList = backup.verifiedList || [];
-                updateStats();
-                logTerm('✅ تم استعادة النسخة الاحتياطية');
-            }
-        });
-    </script>
-</body>
-    </html>
+                    <button id="saveTemplates" class="btn info"
