@@ -1,799 +1,692 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>🚀 نظام فحص إنستغرام الذكي - الإصدار المتطور</title>
-    <link rel="icon" href="data:;base64,=">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>𓆩𖤐 تطبيق زخرفة النصوص المتقدم 𖤐𓆪</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card: #111111;
-            --accent: #00ff88;
-            --accent-2: #00cc66;
-            --accent-3: #00994d;
-            --accent-glow: rgba(0, 255, 136, 0.6);
-            --danger: #ff4d4d;
-            --muted: #7f7f7f;
-            --glass: rgba(255,255,255,0.05);
-            --text: #e9ffe9;
-            --success: #00ff88;
-            --warning: #ffaa00;
-            --info: #00aaff;
-            --purple: #9d4dff;
-            --pink: #ff4d9d;
-            --neon-blue: #00eeff;
-            --gold: #ffd700;
+            --primary: #8B5FBF;
+            --primary-dark: #6A3093;
+            --primary-light: #9D7BC9;
+            --secondary: #FF6B8B;
+            --secondary-dark: #FF4757;
+            --accent: #00C9B7;
+            --dark: #1E1B2E;
+            --light: #F8F9FF;
+            --gray: #6C757D;
+            --success: #28A745;
+            --warning: #FFC107;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            font-family: 'Cairo', sans-serif;
         }
-        
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', 'Rajdhani', 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            direction: rtl;
-            overflow-x: hidden;
+
+        html {
             scroll-behavior: smooth;
         }
 
-        /* Matrix Background - تصميم هكر */
-        .matrix-bg {
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 95, 191, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 139, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 201, 183, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* تأثيرات الجسيمات المتحركة */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.08;
+            pointer-events: none;
         }
-        
-        .matrix-char {
+
+        .particle {
             position: absolute;
-            color: var(--accent);
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            opacity: 0;
-            animation: matrixFall linear infinite;
-            text-shadow: 0 0 5px var(--accent-glow);
-            font-weight: bold;
-        }
-        
-        @keyframes matrixFall {
-            0% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Cyber Grid Background */
-        .cyber-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            background: 
-                linear-gradient(90deg, var(--bg) 21px, transparent 1%) center,
-                linear-gradient(var(--bg) 21px, transparent 1%) center,
-                var(--accent);
-            background-size: 22px 22px;
-            opacity: 0.03;
-        }
-
-        /* Loading Screen - محسن */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        
-        .loading-spinner-large {
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(0, 255, 136, 0.3);
+            background: var(--primary-light);
             border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            animation: float 20s infinite linear;
+            opacity: 0.3;
         }
-        
-        .loading-text {
-            font-size: 18px;
-            color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 150px) rotate(90deg);
+            }
+            50% {
+                transform: translate(50px, 300px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-100px, 150px) rotate(270deg);
+            }
         }
-        
-        .wrap {
+
+        .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.5s forwards;
+            padding: 0 20px;
         }
-        
-        /* Enhanced Header Styles */
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            padding: 30px 4px;
+
+        /* Header متطور */
+        .hero-header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
             margin-bottom: 40px;
+        }
+
+        .header-content {
             position: relative;
+            z-index: 2;
+            padding: 40px;
+            background: rgba(30, 27, 46, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
         }
-        
-        .header-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            filter: blur(60px);
-            opacity: 0.2;
-            z-index: -1;
-        }
-        
-        .brand {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-        }
-        
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 50px var(--accent-glow), 0 0 100px rgba(0, 255, 136, 0.3);
+
+        .developer-badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(139, 95, 191, 0.3);
+            animation: pulse 2s infinite;
             position: relative;
             overflow: hidden;
         }
-        
-        .logo-container::before {
+
+        .developer-badge::before {
             content: '';
             position: absolute;
-            width: 80%;
-            height: 80%;
-            border-radius: 50%;
-            background: var(--bg);
-            z-index: 1;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
         }
-        
-        .logo-container i {
-            font-size: 50px;
-            color: var(--accent);
-            z-index: 2;
-            text-shadow: 0 0 20px var(--accent-glow);
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 20px rgba(139, 95, 191, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 30px rgba(139, 95, 191, 0.4);
+            }
         }
-        
-        .title-container {
-            text-align: center;
-            position: relative;
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
-        
-        .developer-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 52px;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--accent), var(--accent-2), var(--neon-blue), var(--purple));
+
+        .main-title {
+            font-size: 3.5rem;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.7);
-            letter-spacing: 3px;
+            margin: 20px 0;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
         }
-        
-        .developer-name::after {
+
+        .main-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--purple), var(--neon-blue), transparent);
+            background: var(--gradient);
             border-radius: 2px;
         }
-        
+
         .subtitle {
-            font-size: 20px;
-            color: var(--muted);
-            font-weight: 400;
-            margin-top: 15px;
-            letter-spacing: 1.5px;
+            font-size: 1.3rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 30px;
             line-height: 1.6;
         }
-        
-        /* Enhanced System Status */
-        .system-status {
+
+        .social-links {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+            margin-top: 30px;
         }
-        
-        .status-item {
+
+        .social-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 25px;
-            font-size: 15px;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-        
-        .status-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
-        }
-        
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 10px var(--success);
-        }
-        
-        .status-dot.warning {
-            background: var(--warning);
-            box-shadow: 0 0 10px var(--warning);
-        }
-        
-        .status-dot.danger {
-            background: var(--danger);
-            box-shadow: 0 0 10px var(--danger);
-        }
-        
-        @keyframes pulse {
-            0% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 0.7;
-                transform: scale(1.1);
-            }
-            100% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        /* Enhanced Card Styles */
-        .card {
-            background: linear-gradient(135deg, rgba(17, 17, 17, 0.95), rgba(10, 10, 10, 0.98));
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
+            gap: 12px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
-        
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link i {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(30, 27, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(139, 95, 191, 0.3);
+        }
+
         .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), var(--purple), var(--neon-blue), transparent);
-        }
-        
-        .tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .tab {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tab:hover {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: rgba(0, 255, 136, 0.3);
-        }
-        
-        .tab.active {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: #000;
-            font-weight: bold;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .form-group {
-            position: relative;
-        }
-        
-        label {
-            display: block;
-            font-size: 15px;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        input[type="text"], input[type="number"], select, textarea {
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.6);
-            color: inherit;
-            font-family: 'Cairo', sans-serif;
-            transition: all 0.3s;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
+            height: 5px;
+            background: var(--gradient);
         }
-        
-        input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            background: rgba(0, 0, 0, 0.8);
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: #000;
-            border: none;
-            padding: 16px 28px;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1.5px;
-            transition: all 0.3s;
-            font-size: 16px;
+
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: white;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.5);
-        }
-        
-        .btn:active {
-            transform: translateY(-2px);
-        }
-        
-        .btn.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn.danger {
-            background: var(--danger);
-            color: #fff;
-        }
-        
-        .btn.warning {
-            background: var(--warning);
-            color: #000;
-        }
-        
-        .btn.info {
-            background: var(--info);
-            color: #000;
-        }
-        
-        .btn.purple {
-            background: var(--purple);
-            color: #fff;
-        }
-        
-        .btn.gold {
-            background: linear-gradient(135deg, var(--gold), #ffaa00);
-            color: #000;
-        }
-        
-        .controls {
-            display: flex;
             gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 25px;
         }
-        
-        #status {
-            margin-top: 20px;
-            font-size: 15px;
-            color: var(--muted);
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-            font-size: 16px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
-        }
-        
-        .stat-value {
-            font-size: 28px;
-            font-weight: 800;
+
+        .card-title i {
             color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            font-size: 2rem;
         }
-        
-        .progress {
-            height: 16px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 25px;
+
+        /* Textarea */
+        .input-group {
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
         }
-        
-        .progress > i {
-            display: block;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--purple));
-            width: 0%;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #results {
-            margin-top: 25px;
-            max-height: 400px;
-            overflow: auto;
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
             padding: 20px;
-            border-radius: 15px;
-            background: var(--card);
-            direction: ltr;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-        
-        .result {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 12px;
-            font-family: 'Courier New', monospace;
-            transition: all 0.3s;
-            border-left: 5px solid transparent;
-            background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .result:hover {
-            transform: translateX(-5px) translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .result.available {
-            background: rgba(0, 255, 136, 0.1);
-            border-left-color: var(--accent);
-            color: #bfffcf;
-            animation: fadeIn 0.5s;
-        }
-        
-        .result.taken {
-            background: rgba(255, 77, 77, 0.1);
-            border-left-color: var(--danger);
-            color: #ffcfcf;
-        }
-        
-        .result.verified {
-            background: rgba(0, 255, 136, 0.2);
-            border-left-color: var(--success);
-            color: #bfffcf;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .small {
-            font-size: 14px;
-            color: var(--muted);
-        }
-        
-        .term {
-            margin-top: 25px;
-            height: 200px;
-            overflow: auto;
-            padding: 20px;
-            border-radius: 15px;
-            background: #000;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #cfeccf;
-            backdrop-filter: blur(10px);
-        }
-        
-        .terminal-line {
-            margin: 5px 0;
-            padding: 3px 0;
-        }
-        
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 15px;
-            padding-bottom: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 35px;
-            position: relative;
-        }
-        
-        .footer-glow {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .social-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 25px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 1.2rem;
+            resize: vertical;
+            transition: var(--transition);
         }
-        
-        .social-btn:hover {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--accent);
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 30px rgba(139, 95, 191, 0.2);
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Fonts Grid */
+        .fonts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-sm);
+            margin-top: 20px;
+        }
+
+        .font-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .font-item:hover {
+            background: rgba(139, 95, 191, 0.2);
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
-            border-color: rgba(0, 255, 136, 0.3);
         }
-        
-        .social-btn i {
-            font-size: 22px;
+
+        .font-item.active {
+            background: rgba(139, 95, 191, 0.3);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(139, 95, 191, 0.2);
         }
-        
-        /* تصغير الأيقونات في النتائج */
-        .result-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .result-btn {
-            padding: 6px 10px;
-            font-size: 11px;
-            border-radius: 6px;
+
+        .font-item .font-preview {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
         }
-        
-        .result-btn:hover {
-            transform: scale(1.1);
+
+        .font-name {
+            font-size: 0.9rem;
+            color: #ccc;
         }
-        
-        .result-btn i {
-            font-size: 11px;
-        }
-        
-        .verified-badge {
-            background: var(--success);
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-right: 8px;
-            animation: badgePulse 2s infinite;
-        }
-        
-        @keyframes badgePulse {
-            0%, 100% {
-                box-shadow: 0 0 5px var(--success);
-            }
-            50% {
-                box-shadow: 0 0 15px var(--success);
-            }
-        }
-        
-        /* System Monitor */
-        .system-monitor {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-        
-        .monitor-item {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
+
+        /* Preview Area */
+        .preview-area {
+            min-height: 250px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
             text-align: center;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
-        
-        .monitor-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.2);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+        .preview-area.active {
+            border-color: var(--accent);
+            background: rgba(0, 201, 183, 0.05);
         }
-        
-        .monitor-value {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-            margin: 10px 0;
+
+        #previewText {
+            font-size: 2.5rem;
+            line-height: 1.4;
+            text-align: center;
+            transition: var(--transition);
         }
-        
-        /* Enhanced Responsive */
-        @media (max-width: 1200px) {
-            .wrap {
-                padding: 15px;
-            }
-            
-            .developer-name {
-                font-size: 42px;
-            }
+
+        /* Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
         }
-        
+
         @media (max-width: 768px) {
-            .grid {
+            .action-buttons {
                 grid-template-columns: 1fr;
             }
-            
-            .brand {
-                flex-direction: column;
-                align-items: center;
+        }
+
+        .btn {
+            padding: 18px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 95, 191, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 107, 139, 0.2);
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.4);
+        }
+
+        .btn-accent {
+            background: rgba(0, 201, 183, 0.2);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 201, 183, 0.4);
+        }
+
+        /* Recent Designs */
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .design-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .design-card:hover {
+            transform: translateY(-8px);
+            background: rgba(139, 95, 191, 0.15);
+        }
+
+        .design-text {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .design-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            background: rgba(139, 95, 191, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(20, 18, 35, 0.95);
+            padding: 50px 0 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate {
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .slide-in-up {
+            animation-name: slideInUp;
+        }
+
+        .fade-in {
+            animation-name: fadeIn;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
             }
             
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
+            .developer-badge {
+                font-size: 1rem;
+                padding: 10px 20px;
             }
             
             .social-links {
@@ -801,1692 +694,878 @@
                 align-items: center;
             }
             
-            .social-btn {
-                width: 250px;
-                justify-content: center;
-            }
-            
-            .logo-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .logo-container i {
-                font-size: 40px;
-            }
-            
-            .developer-name {
-                font-size: 36px;
-            }
-            
-            .controls {
-                justify-content: center;
-            }
-            
-            .btn {
-                flex: 1;
-                min-width: 160px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-            
-            .system-monitor {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .status-item {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .developer-name {
-                font-size: 28px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .system-monitor {
-                grid-template-columns: 1fr;
+            .social-link {
+                width: 100%;
+                max-width: 300px;
             }
             
             .card {
                 padding: 20px;
             }
+            
+            .fonts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            #previewText {
+                font-size: 1.8rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .designs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-2);
-        }
-
-        /* Loading Animation */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 255, 136, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .fonts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .designs-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Notification System */
-        .notification {
+        /* Toast Notification */
+        .toast {
             position: fixed;
             top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 20px;
+            background: var(--success);
+            color: white;
             padding: 15px 25px;
-            border-radius: 10px;
-            color: #000;
-            font-weight: bold;
-            z-index: 10000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: notificationSlide 0.3s ease;
-        }
-        
-        @keyframes notificationSlide {
-            from {
-                transform: translateX(-50%) translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .notification.success {
-            background: var(--accent);
-        }
-        
-        .notification.error {
-            background: var(--danger);
-            color: #fff;
-        }
-        
-        .notification.warning {
-            background: var(--warning);
-        }
-
-        .template-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .template-item:hover {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: var(--accent);
-        }
-
-        .template-item.active {
-            background: rgba(0, 255, 136, 0.2);
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-        }
-    </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner-large"></div>
-        <div class="loading-text">جاري تحميل النظام المتطور...</div>
-    </div>
-
-    <div class="cyber-grid"></div>
-    <div class="matrix-bg" id="matrixBg"></div>
-
-    <div class="wrap">
-        <header>
-            <div class="header-glow"></div>
-            <div class="brand">
-                <div class="logo-container">
-                    <i class="fas fa-terminal"></i>
-                </div>
-                <div class="title-container">
-                    <div class="developer-name">🚀 نظام فحص إنستغرام الذكي</div>
-                    <div class="subtitle">منصة متكاملة تدعم 1000+ مستخدم متزامن • نظام ذكي متعدد المصادر • خوارزميات متطورة</div>
-                </div>
-            </div>
-            <div class="system-status">
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>الخادم الرئيسي: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>نظام المصادر: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>قاعدة البيانات: نشط</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot warning"></div>
-                    <span>المستخدمون النشطون: 0</span>
-                </div>
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>الأداء: 100%</span>
-                </div>
-            </div>
-        </header>
-
-        <div class="card">
-            <div class="tabs">
-                <div class="tab active" data-tab="main">🎯 النظام الرئيسي</div>
-                <div class="tab" data-tab="advanced">⚡ النظام المتقدم</div>
-                <div class="tab" data-tab="templates">📝 قوالب الأسماء</div>
-                <div class="tab" data-tab="monitor">📊 مراقبة النظام</div>
-            </div>
-
-            <!-- تبويب النظام الرئيسي -->
-            <div class="tab-content active" id="main-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-key"></i> توكن بوت تلغرام</label>
-                        <input id="tgToken" type="text" placeholder="أدخل توكن البوت هنا...">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-id-card"></i> معرف المحادثة</label>
-                        <input id="tgChatId" type="text" placeholder="أدخل معرف المحادثة...">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-list-ol"></i> عدد الفحوصات</label>
-                        <input id="count" type="number" min="1" max="5000" value="100">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-clock"></i> التأخير بين الفحوصات</label>
-                        <input id="delay" type="number" min="500" max="10000" value="2000">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-eye"></i> إظهار النتائج</label>
-                        <select id="showOnlyAvailable">
-                            <option value="no">الكل</option>
-                            <option value="yes" selected>المتاح فقط</option>
-                            <option value="verified">المتاح والمؤكد فقط</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-cogs"></i> نظام الفحص</label>
-                        <select id="systemType">
-                            <option value="primary">النظام الرئيسي</option>
-                            <option value="secondary">النظام الثانوي</option>
-                            <option value="hybrid">النظام الهجين</option>
-                            <option value="auto" selected>تلقائي (موصى به)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="startBtn" class="btn"><i class="fas fa-play"></i> بدء الفحص</button>
-                    <button id="stopBtn" class="btn secondary" style="display:none"><i class="fas fa-stop"></i> إيقاف</button>
-                    <button id="multiCheckBtn" class="btn info"><i class="fas fa-sync-alt"></i> فحص متعدد</button>
-                    <button id="turboBtn" class="btn purple"><i class="fas fa-bolt"></i> وضع التوربو</button>
-                    <button id="exportBtn" class="btn"><i class="fas fa-download"></i> تحميل النتائج</button>
-                    <button id="clearBtn" class="btn danger"><i class="fas fa-trash"></i> مسح الكل</button>
-                </div>
-
-                <div id="status" class="small">🚀 جاهز - أدخل التوكن لبدء الفحص - النظام الذكي مفعل</div>
-
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="small">المجرب</div>
-                        <div class="stat-value" id="total">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المتاح</div>
-                        <div class="stat-value" id="available">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المستخدم</div>
-                        <div class="stat-value" id="taken">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">المؤكد</div>
-                        <div class="stat-value" id="verified">0</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">الدقة</div>
-                        <div class="stat-value" id="accuracy">98%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="small">السرعة</div>
-                        <div class="stat-value" id="speed">0/ث</div>
-                    </div>
-                </div>
-
-                <div class="progress" aria-hidden><i id="bar"></i></div>
-
-                <div id="results" aria-live="polite"></div>
-
-                <div class="term" id="terminal">
-                    <div class="terminal-line">> 🚀 نظام فحص إنستغرام الذكي جاهز للتشغيل</div>
-                    <div class="terminal-line">> ⚡ نظام متعدد المصادر والمستخدمين مفعل - السعة: 1000+ مستخدم</div>
-                    <div class="terminal-line">> 🔒 الخادم الافتراضي: نشط - الحماية: قصوى</div>
-                    <div class="terminal-line">> 💡 أدخل التوكن واضغط بدء الفحص لبدء العملية</div>
-                </div>
-            </div>
-
-            <!-- تبويب النظام المتقدم -->
-            <div class="tab-content" id="advanced-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-microchip"></i> نظام المصادر</label>
-                        <select id="sourceSystem">
-                            <option value="session-based">قائم على الجلسات</option>
-                            <option value="api-based">قائم على واجهات برمجة التطبيقات</option>
-                            <option value="proxy-based">قائم على الخوادم الوكيلة</option>
-                            <option value="hybrid" selected>هجين (موصى به)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-bolt"></i> سرعة الفحص</label>
-                        <select id="speedMode">
-                            <option value="slow">بطيء (أعلى دقة)</option>
-                            <option value="medium">متوسط</option>
-                            <option value="fast">سريع</option>
-                            <option value="ultra">فائق السرعة</option>
-                            <option value="adaptive" selected>تلقائي (موصى به)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-shield-alt"></i> مستوى الخصوصية</label>
-                        <select id="privacyLevel">
-                            <option value="low">منخفض</option>
-                            <option value="medium">متوسط</option>
-                            <option value="high">عالي</option>
-                            <option value="maximum" selected>اقصى حماية</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-database"></i> تخزين النتائج</label>
-                        <select id="storageType">
-                            <option value="local">محلي</option>
-                            <option value="cloud" selected>سحابي</option>
-                            <option value="both">كلاهما</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-list-check"></i> خيارات متقدمة</label>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="autoVerify" checked>
-                            <span>التحقق التلقائي</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="multiSource" checked>
-                            <span>مصادر متعددة</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="loadBalance" checked>
-                            <span>موازنة الحمل</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                            <input type="checkbox" id="retryFailed" checked>
-                            <span>إعادة محاولة الفاشلة</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="advancedStart" class="btn"><i class="fas fa-rocket"></i> تشغيل النظام المتقدم</button>
-                    <button id="systemTest" class="btn warning"><i class="fas fa-vial"></i> اختبار النظام</button>
-                    <button id="optimizeBtn" class="btn info"><i class="fas fa-tachometer-alt"></i> تحسين الأداء</button>
-                    <button id="aiModeBtn" class="btn purple"><i class="fas fa-brain"></i> وضع الذكاء الاصطناعي</button>
-                </div>
-
-                <div class="term" id="advanced-terminal">
-                    <div class="terminal-line">> ⚡ النظام المتقدم جاهز للتشغيل</div>
-                    <div class="terminal-line">> 🔧 اختر الإعدادات المناسبة واضغط تشغيل لبدء العملية</div>
-                    <div class="terminal-line">> 💡 يمكنك تفعيل وضع الذكاء الاصطناعي لتحسين النتائج</div>
-                </div>
-            </div>
-
-            <!-- تبويب قوالب الأسماء -->
-            <div class="tab-content" id="templates-tab">
-                <div class="grid">
-                    <div class="form-group">
-                        <label><i class="fas fa-palette"></i> أنماط توليد الأسماء</label>
-                        <select id="namePattern">
-                            <option value="custom" selected>مخصص (الأنماط المطلوبة)</option>
-                            <option value="short">قصيرة ومميزة</option>
-                            <option value="descriptive">وصفية</option>
-                            <option value="professional">مهنية</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-sliders-h"></i> طول اليوزرنيم</label>
-                        <select id="nameLength">
-                            <option value="4-5" selected>4-5 أحرف</option>
-                            <option value="3-5">3-5 أحرف</option>
-                            <option value="6-8">6-8 أحرف</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-font"></i> تضمين الأرقام</label>
-                        <select id="includeNumbers">
-                            <option value="no" selected>لا</option>
-                            <option value="yes">نعم</option>
-                            <option value="smart">ذكي (في النهاية)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-underline"></i> تضمين الشرطة السفلية</label>
-                        <select id="includeUnderscore">
-                            <option value="yes" selected>نعم</option>
-                            <option value="no">لا</option>
-                            <option value="smart">ذكي (بين الكلمات)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-list-alt"></i> قوالب مخصصة</label>
-                    <div id="templatesList" style="margin-top:15px; max-height:200px; overflow-y:auto;">
-                        <div class="template-item active" data-template="custom">
-                            <strong>🎯 الأنماط المطلوبة</strong>
-                            <div class="small">fg_mw, bk_qh, hkli_, ghkb_, h_p_m</div>
-                        </div>
-                        <div class="template-item" data-template="short">
-                            <strong>⚡ قصيرة</strong>
-                            <div class="small">أسماء قصيرة وسريعة مثل: neo, zen, ace</div>
-                        </div>
-                        <div class="template-item" data-template="descriptive">
-                            <strong>🎯 وصفية</strong>
-                            <div class="small">أسماء تصفية مثل: cool_user, pro_player</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="generateFromTemplate" class="btn"><i class="fas fa-wand-magic-sparkles"></i> توليد من القالب</button>
-                    <button id="saveTemplates" class="btn info"><i class="fas fa-save"></i> حفظ القوالب</button>
-                </div>
-            </div>
-
-            <!-- تبويب مراقبة النظام -->
-            <div class="tab-content" id="monitor-tab">
-                <div class="system-monitor">
-                    <div class="monitor-item">
-                        <div class="small">المستخدمون النشطون</div>
-                        <div class="monitor-value" id="activeUsers">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">الطلبات/الثانية</div>
-                        <div class="monitor-value" id="requestsPerSecond">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">معدل النجاح</div>
-                        <div class="monitor-value" id="successRate">100%</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">وقت الاستجابة</div>
-                        <div class="monitor-value" id="responseTime">0ms</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المفحوصة</div>
-                        <div class="monitor-value" id="totalChecked">0</div>
-                    </div>
-                    <div class="monitor-item">
-                        <div class="small">اليوزرات المتاحة</div>
-                        <div class="monitor-value" id="totalAvailable">0</div>
-                    </div>
-                </div>
-
-                <div style="margin-top:25px">
-                    <label><i class="fas fa-chart-line"></i> إحصائيات حية</label>
-                    <div class="term" id="monitor-terminal">
-                        <div class="terminal-line">> 📊 نظام المراقبة يعمل بنشاط</div>
-                        <div class="terminal-line">> 📈 جاري جمع البيانات وتحليل الأداء...</div>
-                        <div class="terminal-line">> 🔍 لا توجد عمليات نشطة حاليًا</div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="startMonitor" class="btn"><i class="fas fa-play"></i> بدء المراقبة</button>
-                    <button id="resetStats" class="btn secondary"><i class="fas fa-redo"></i> إعادة التعيين</button>
-                    <button id="exportStats" class="btn"><i class="fas fa-file-export"></i> تصدير الإحصائيات</button>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-glow"></div>
-            <div class="social-links">
-                <a href="https://youtube.com/@emo8_0" target="_blank" class="social-btn">
-                    <i class="fab fa-youtube"></i>
-                    <span>يوتيوب</span>
-                </a>
-                <a href="https://t.me/emo_80" target="_blank" class="social-btn">
-                    <i class="fab fa-telegram"></i>
-                    <span>تلغرام</span>
-                </a>
-            </div>
-            <div style="margin-top:25px">المطور إيمو — نظام فحص يوزرات إنستغرام الذكي - الإصدار المتطور</div>
-            <div style="margin-top:15px; font-size: 13px; color: var(--muted); line-height: 1.6">
-                يدعم 1000+ مستخدم متزامن • نظام متعدد المصادر • خادم افتراضي متكامل • خوارزميات ذكية<br>
-                ⚡ سرعة فائقة • 🔒 حماية قصوى • 🎯 دقة عالية • 🤖 ذكاء اصطناعي
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        // نظام فحص إنستغرام المتطور - مدمج مع الأداة الأصلية
-        class AdvancedInstagramChecker {
-            constructor() {
-                this.users = new Map();
-                this.requests = [];
-                this.stats = {
-                    totalRequests: 0,
-                    successfulRequests: 0,
-                    failedRequests: 0,
-                    activeUsers: 0,
-                    requestsPerSecond: 0,
-                    responseTime: 0,
-                    peakPerformance: 0,
-                    memoryUsage: 0
-                };
-                this.startTime = Date.now();
-                this.performanceMetrics = [];
-                this.templates = new Map();
-                this.cache = new Map();
-                this.isChecking = false;
-                this.initTemplates();
-            }
-
-            initTemplates() {
-                // قوالب أسماء متطورة - الأنماط المطلوبة
-                this.templates.set('custom', {
-                    patterns: [
-                        // النمط: حرفين_حرفين (مثل: fg_mw)
-                        () => {
-                            const chars = 'abcdefghijklmnopqrstuvwxyz';
-                            const first = chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                                         chars.charAt(Math.floor(Math.random() * chars.length));
-                            const second = chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                                          chars.charAt(Math.floor(Math.random() * chars.length));
-                            return `${first}_${second}`;
-                        },
-                        // النمط: أربعة أحرف مع _ (مثل: hkli_)
-                        () => {
-                            const chars = 'abcdefghijklmnopqrstuvwxyz';
-                            let name = '';
-                            for(let i = 0; i < 4; i++) {
-                                name += chars.charAt(Math.floor(Math.random() * chars.length));
-                            }
-                            return name + '_';
-                        },
-                        // النمط: حرف_حرف_حرف (مثل: h_p_m)
-                        () => {
-                            const chars = 'abcdefghijklmnopqrstuvwxyz';
-                            const first = chars.charAt(Math.floor(Math.random() * chars.length));
-                            const second = chars.charAt(Math.floor(Math.random() * chars.length));
-                            const third = chars.charAt(Math.floor(Math.random() * chars.length));
-                            return `${first}_${second}_${third}`;
-                        }
-                    ]
-                });
-
-                this.templates.set('short', {
-                    patterns: [
-                        () => {
-                            const shortNames = ["ace", "neo", "zen", "lux", "rex", "max", "leo", "kai", "rio", "jax", "fox", "ray"];
-                            return shortNames[Math.floor(Math.random() * shortNames.length)];
-                        }
-                    ]
-                });
-
-                this.templates.set('descriptive', {
-                    patterns: [
-                        () => {
-                            const adjectives = ['cool', 'awesome', 'epic', 'amazing', 'fantastic', 'super'];
-                            const nouns = ['user', 'player', 'gamer', 'creator', 'artist', 'coder'];
-                            return adjectives[Math.floor(Math.random() * adjectives.length)] + 
-                                   '_' + 
-                                   nouns[Math.floor(Math.random() * nouns.length)];
-                        }
-                    ]
-                });
-            }
-
-            generateUsernameFromTemplate(templateName = 'custom') {
-                const template = this.templates.get(templateName);
-                if (template && template.patterns) {
-                    const pattern = template.patterns[Math.floor(Math.random() * template.patterns.length)];
-                    return pattern();
-                }
-
-                // Fallback to custom generation
-                return this.generateCustomUsername();
-            }
-
-            generateCustomUsername() {
-                const patterns = [
-                    // النمط: حرفين_حرفين (مثل: fg_mw)
-                    () => {
-                        const chars = 'abcdefghijklmnopqrstuvwxyz';
-                        const first = chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                                     chars.charAt(Math.floor(Math.random() * chars.length));
-                        const second = chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                                      chars.charAt(Math.floor(Math.random() * chars.length));
-                        return `${first}_${second}`;
-                    },
-                    // النمط: أربعة أحرف مع _ (مثل: hkli_)
-                    () => {
-                        const chars = 'abcdefghijklmnopqrstuvwxyz';
-                        let name = '';
-                        for(let i = 0; i < 4; i++) {
-                            name += chars.charAt(Math.floor(Math.random() * chars.length));
-                        }
-                        return name + '_';
-                    },
-                    // النمط: حرف_حرف_حرف (مثل: h_p_m)
-                    () => {
-                        const chars = 'abcdefghijklmnopqrstuvwxyz';
-                        const first = chars.charAt(Math.floor(Math.random() * chars.length));
-                        const second = chars.charAt(Math.floor(Math.random() * chars.length));
-                        const third = chars.charAt(Math.floor(Math.random() * chars.length));
-                        return `${first}_${second}_${third}`;
-                    }
-                ];
-                
-                return patterns[Math.floor(Math.random() * patterns.length)]();
-            }
-
-            async startChecking(count = 100, delay = 2000) {
-                if (this.isChecking) {
-                    this.showNotification('الفحص جارٍ بالفعل', 'warning');
-                    return;
-                }
-                
-                this.isChecking = true;
-                this.updateStatus('بدء الفحص...', 'info');
-                this.showNotification('بدأ الفحص بنجاح', 'success');
-                
-                const startBtn = document.getElementById('startBtn');
-                const stopBtn = document.getElementById('stopBtn');
-                startBtn.style.display = 'none';
-                stopBtn.style.display = 'flex';
-                
-                let checked = 0;
-                this.startTime = Date.now();
-                
-                while (this.isChecking && checked < count) {
-                    const username = this.generateUsernameFromTemplate('custom');
-                    await this.checkUsername(username);
-                    checked++;
-                    
-                    // تحديث شريط التقدم
-                    const progress = (checked / count) * 100;
-                    document.getElementById('bar').style.width = `${progress}%`;
-                    
-                    // تحديث الإحصائيات
-                    document.getElementById('total').textContent = checked;
-                    document.getElementById('speed').textContent = `${(checked / ((Date.now() - this.startTime) / 1000)).toFixed(1)}/ث`;
-                    
-                    // تأخير بين الفحوصات
-                    if (this.isChecking && checked < count) {
-                        await this.delay(delay);
-                    }
-                }
-                
-                if (checked >= count) {
-                    this.updateStatus('اكتمل الفحص', 'success');
-                    this.showNotification('اكتمل الفحص بنجاح', 'success');
-                }
-                
-                this.isChecking = false;
-                startBtn.style.display = 'flex';
-                stopBtn.style.display = 'none';
-            }
-            
-            stopChecking() {
-                this.isChecking = false;
-                this.updateStatus('تم إيقاف الفحص', 'warning');
-                this.showNotification('تم إيقاف الفحص', 'warning');
-                
-                const startBtn = document.getElementById('startBtn');
-                const stopBtn = document.getElementById('stopBtn');
-                startBtn.style.display = 'flex';
-                stopBtn.style.display = 'none';
-            }
-            
-            async checkUsername(username) {
-                try {
-                    // محاكاة فحص يوزر إنستغرام - زيادة فرصة الحصول على يوزرات متاحة
-                    const isAvailable = Math.random() > 0.7; // 30% فرصة أن يكون متاحاً
-                    
-                    this.stats.totalRequests++;
-                    this.stats.successfulRequests++;
-                    
-                    const result = {
-                        username,
-                        available: isAvailable,
-                        timestamp: new Date().toLocaleTimeString(),
-                        verified: isAvailable && Math.random() > 0.7 // 70% فرصة أن يكون مؤكداً
-                    };
-                    
-                    this.addResult(result);
-                    
-                    if (isAvailable) {
-                        document.getElementById('available').textContent = parseInt(document.getElementById('available').textContent) + 1;
-                        if (result.verified) {
-                            document.getElementById('verified').textContent = parseInt(document.getElementById('verified').textContent) + 1;
-                        }
-                    } else {
-                        document.getElementById('taken').textContent = parseInt(document.getElementById('taken').textContent) + 1;
-                    }
-                    
-                    return result;
-                } catch (error) {
-                    this.stats.failedRequests++;
-                    console.error('Error checking username:', error);
-                    return null;
-                }
-            }
-            
-            addResult(result) {
-                const resultsContainer = document.getElementById('results');
-                const resultElement = document.createElement('div');
-                resultElement.className = `result ${result.available ? 'available' : 'taken'} ${result.verified ? 'verified' : ''}`;
-                
-                let statusText = result.available ? 'متاح' : 'مستخدم';
-                if (result.verified) {
-                    statusText += ' - مؤكد';
-                }
-                
-                resultElement.innerHTML = `
-                    <div>
-                        <span class="username">${result.username}</span>
-                        <span class="small">${result.timestamp}</span>
-                    </div>
-                    <div class="result-buttons">
-                        <span class="status">${statusText}</span>
-                        <button class="result-btn secondary" title="نسخ">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="result-btn info" title="التحقق">
-                            <i class="fas fa-check-circle"></i>
-                        </button>
-                    </div>
-                `;
-                
-                resultsContainer.prepend(resultElement);
-                
-                // إضافة حدث النسخ
-                const copyBtn = resultElement.querySelector('.result-btn.secondary');
-                copyBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(result.username);
-                    this.showNotification('تم نسخ اليوزر', 'success');
-                });
-            }
-            
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-            
-            updateStatus(message, type = 'info') {
-                const statusElement = document.getElementById('status');
-                statusElement.textContent = message;
-                statusElement.style.color = type === 'info' ? 'var(--info)' : 
-                                          type === 'success' ? 'var(--success)' : 
-                                          type === 'warning' ? 'var(--warning)' : 
-                                          'var(--text)';
-            }
-            
-            showNotification(message, type = 'success') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                        <span>${message}</span>
-                    </div>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.style.animation = 'notificationSlide 0.3s ease reverse';
-                        setTimeout(() => {
-                            if (notification.parentNode) {
-                                notification.remove();
-                            }
-                        }, 300);
-                    }
-                }, 3000);
-            }
-            
-            clearResults() {
-                document.getElementById('results').innerHTML = '';
-                document.getElementById('total').textContent = '0';
-                document.getElementById('available').textContent = '0';
-                document.getElementById('taken').textContent = '0';
-                document.getElementById('verified').textContent = '0';
-                document.getElementById('speed').textContent = '0/ث';
-                document.getElementById('bar').style.width = '0%';
-                this.updateStatus('تم مسح النتائج', 'info');
-                this.showNotification('تم مسح جميع النتائج', 'success');
-            }
-        }
-
-        // تهيئة النظام
-        let checker;
-
-        // نظام التحميل والتخصيص
-        document.addEventListener('DOMContentLoaded', function() {
-            // إخفاء شاشة التحميل بعد 2 ثانية
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loadingScreen');
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 2000);
-
-            // تهيئة الأنظمة
-            createEnhancedEffects();
-            initTabs();
-            initTemplates();
-            initChecker();
-            logTerm('🎉 النظام المتطور جاهز للعمل!');
-
-            // تحديث إحصائيات النظام بانتظام
-            setInterval(() => {
-                updateMemoryUsage();
-            }, 1000);
-        });
-
-        // إنشاء المؤثرات البصرية
-        function createEnhancedEffects() {
-            createMatrixBackground();
-        }
-
-        // إنشاء خلفية المصفوفة
-        function createMatrixBackground() {
-            const matrixBg = document.getElementById('matrixBg');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            
-            for (let i = 0; i < 80; i++) {
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
-                char.style.left = `${Math.random() * 100}%`;
-                char.style.animationDuration = `${3 + Math.random() * 7}s`;
-                char.style.animationDelay = `${Math.random() * 5}s`;
-                matrixBg.appendChild(char);
-            }
-        }
-
-        // تهيئة نظام التبويبات
-        function initTabs() {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // إزالة النشاط من جميع التبويبات والمحتويات
-                    tabs.forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // تفعيل التبويب والمحتوى المحدد
-                    this.classList.add('active');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                });
-            });
-        }
-
-        // تهيئة نظام القوالب
-        function initTemplates() {
-            const templateItems = document.querySelectorAll('.template-item');
-            templateItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    templateItems.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            document.getElementById('generateFromTemplate').addEventListener('click', function() {
-                const activeTemplate = document.querySelector('.template-item.active').getAttribute('data-template');
-                const username = checker.generateUsernameFromTemplate(activeTemplate);
-                checker.showNotification(`تم توليد اليوزر: ${username}`, 'success');
-            });
-        }
-
-        // تهيئة نظام الفحص
-        function initChecker() {
-            checker = new AdvancedInstagramChecker();
-            
-            // أحداث الأزرار
-            document.getElementById('startBtn').addEventListener('click', function() {
-                const count = parseInt(document.getElementById('count').value) || 100;
-                const delay = parseInt(document.getElementById('delay').value) || 2000;
-                checker.startChecking(count, delay);
-            });
-            
-            document.getElementById('stopBtn').addEventListener('click', function() {
-                checker.stopChecking();
-            });
-            
-            document.getElementById('clearBtn').addEventListener('click', function() {
-                checker.clearResults();
-            });
-            
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                checker.showNotification('تم تصدير النتائج بنجاح', 'success');
-            });
-            
-            document.getElementById('turboBtn').addEventListener('click', function() {
-                checker.showNotification('تم تفعيل وضع التوربو', 'success');
-            });
-            
-            document.getElementById('multiCheckBtn').addEventListener('click', function() {
-                checker.showNotification('تم تفعيل الفحص المتعدد', 'success');
-            });
-        }
-
-        // تحديث استخدام الذاكرة
-        function updateMemoryUsage() {
-            if (performance.memory) {
-                const memoryUsage = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
-                document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 100);
-                document.getElementById('requestsPerSecond').textContent = Math.floor(Math.random() * 50);
-                document.getElementById('totalChecked').textContent = document.getElementById('total').textContent;
-                document.getElementById('totalAvailable').textContent = document.getElementById('available').textContent;
-            }
-        }
-
-        // نظام التخزين المحسن
-        function saveToLocalStorage(key, data) {
-            try {
-                localStorage.setItem(`emo80_${key}`, JSON.stringify(data));
-                return true;
-            } catch (e) {
-                console.error('فشل في الحفظ:', e);
-                return false;
-            }
-        }
-
-        function loadFromLocalStorage(key) {
-            try {
-                const data = localStorage.getItem(`emo80_${key}`);
-                return data ? JSON.parse(data) : null;
-            } catch (e) {
-                console.error('فشل في التحميل:', e);
-                return null;
-            }
-        }
-
-        // نظام النسخ الاحتياطي التلقائي
-        function autoBackup() {
-            const backupData = {
-                timestamp: Date.now()
-            };
-            
-            if (saveToLocalStorage('auto_backup', backupData)) {
-                console.log('تم النسخ الاحتياطي التلقائي');
-            }
-        }
-
-        // تشغيل النسخ الاحتياطي كل 5 دقائق
-        setInterval(autoBackup, 300000);
-
-        // إضافة سطر إلى التيرمينال
-        function logTerm(message) {
-            const terminal = document.getElementById('terminal');
-            const line = document.createElement('div');
-            line.className = 'terminal-line';
-            line.textContent = `> ${message}`;
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-    </script>
-</body>
-    </html>        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', 'Rajdhani', 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            direction: rtl;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* Enhanced Matrix Background */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-        
-        .matrix-char {
-            position: absolute;
-            color: var(--accent);
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            opacity: 0;
-            animation: matrixFall linear infinite;
-            text-shadow: 0 0 8px var(--accent-glow);
-            font-weight: bold;
-        }
-        
-        @keyframes matrixFall {
-            0% {
-                transform: translateY(-100px) rotateX(0deg);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotateX(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-        
-        .particle {
-            position: absolute;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 20s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(30vh) translateX(30vw) rotate(120deg);
-            }
-            66% {
-                transform: translateY(-20vh) translateX(-20vw) rotate(240deg);
-            }
-            100% {
-                transform: translateY(0) translateX(0) rotate(360deg);
-            }
-        }
-
-        /* Cyber Grid Background */
-        .cyber-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            background: 
-                linear-gradient(90deg, var(--bg) 21px, transparent 1%) center,
-                linear-gradient(var(--bg) 21px, transparent 1%) center,
-                var(--accent);
-            background-size: 22px 22px;
-            opacity: 0.03;
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        
-        .loading-spinner-large {
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(0, 255, 136, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--accent);
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        
-        .loading-text {
-            font-size: 18px;
-            color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-        }
-        
-        .wrap {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.5s forwards;
-        }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Enhanced Header Styles */
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            padding: 30px 4px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .header-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            filter: blur(60px);
-            opacity: 0.3;
-            z-index: -1;
-        }
-        
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .logo {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--accent), var(--neon-blue));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 0 30px var(--accent-glow);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .brand-text {
-            text-align: center;
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            background: linear-gradient(to right, var(--accent), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px var(--accent-glow);
-            letter-spacing: 1px;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--muted);
-            font-weight: 400;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-        
-        /* Main Content Styles */
-        main {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        
-        .card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
-            border-color: var(--accent);
-        }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass);
-        }
-        
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--glass);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--accent);
-        }
-        
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text);
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        /* Form Styles */
-        .input-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .username-input {
-            flex: 1;
-            padding: 18px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--glass);
-            border-radius: 12px;
-            font-size: 1.1rem;
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            transition: all 0.3s ease;
-        }
-        
-        .username-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        
-        .analyze-btn {
-            padding: 0 35px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            border: none;
-            border-radius: 12px;
-            color: var(--bg);
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            animation: slideInRight 0.3s, fadeOut 0.3s 2.7s;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        .analyze-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0, 255, 136, 0.4);
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-        
-        .analyze-btn:active {
-            transform: translateY(0);
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
         }
-        
-        .analyze-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Results Section */
-        #results {
+
+        /* Loading Animation */
+        .loading {
             display: none;
-            margin-top: 20px;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .stat-card {
-            background: var(--glass);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-        
-        .stat-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            font-family: 'Orbitron', sans-serif;
-            margin: 15px 0;
-            background: linear-gradient(to right, var(--accent), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .stat-label {
-            color: var(--muted);
-            font-size: 1rem;
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: var(--glass);
-            border-radius: 4px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--neon-blue));
-            border-radius: 4px;
-            width: 0%;
-            transition: width 1.5s ease;
-        }
-        
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            text-align: center;
-            padding: 30px 0;
-            color: var(--muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--glass);
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .feature {
-            display: flex;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: var(--glass);
-            border-radius: 10px;
+            justify-content: center;
         }
-        
-        .feature i {
-            color: var(--accent);
-            font-size: 1.5rem;
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .input-group {
-                flex-direction: column;
-            }
-            
-            .analyze-btn {
-                justify-content: center;
-                padding: 18px;
-            }
-            
-            .results-grid {
-                grid-template-columns: 1fr;
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="cyber-grid"></div>
+    <!-- Particles Background -->
     <div class="particles" id="particles"></div>
-    <div class="matrix-bg" id="matrixBg"></div>
-    
+
     <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner-large"></div>
-        <div class="loading-text">جاري تحميل النظام...</div>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
     </div>
-    
-    <div class="wrap">
-        <header>
-            <div class="header-glow"></div>
-            <div class="brand">
-                <div class="logo">
-                    <i class="fas fa-rocket"></i>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero-header animate slide-in-up">
+            <div class="header-content">
+                <div class="developer-badge animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-crown"></i> تطوير: ايمو 𓆩♔𓆪
                 </div>
-                <div class="brand-text">
-                    <h1>نظام فحص إنستغرام الذكي</h1>
-                    <p class="tagline">أداة متطورة لتحليل حسابات إنستغرام باستخدام الذكاء الاصطناعي - اكتشف الإحصائيات المخفية وتقييم الحساب بشكل دقيق</p>
+                
+                <h1 class="main-title animate__animated animate__fadeInDown">
+                    𓆩𖤐 زخرفة النصوص الاحترافية 𖤐𓆪
+                </h1>
+                
+                <p class="subtitle animate__animated animate__fadeInUp">
+                    زخرف نصوصك العربية والإنجليزية بأكثر من 50 نمط احترافي. 
+                    أنسخ وألصق في أي مكان - وسائل التواصل الاجتماعي، الألعاب، التعليقات والمزيد!
+                </p>
+
+                <div class="social-links">
+                    <a href="https://t.me/emo_80" class="social-link" target="_blank" id="telegramBtn">
+                        <i class="fab fa-telegram-plane"></i>
+                        <span>قناة التليجرام الرسمية</span>
+                    </a>
+                    <a href="https://youtube.com/@emo8_0" class="social-link" target="_blank" id="youtubeBtn">
+                        <i class="fab fa-youtube"></i>
+                        <span>قناة اليوتيوب الرسمية</span>
+                    </a>
                 </div>
             </div>
         </header>
-        
-        <main>
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h2 class="card-title">فحص الحساب</h2>
-                </div>
-                
-                <p style="margin-bottom: 20px; line-height: 1.7;">أدخل اسم مستخدم إنستغرام في الحقل أدناه للحصول على تحليل مفصل ودقيق للحساب باستخدام أحدث تقنيات الذكاء الاصطناعي.</p>
+
+        <!-- Stats -->
+        <div class="stats-container animate fade-in">
+            <div class="stat-card">
+                <div class="stat-number" id="fontsCount">0</div>
+                <div class="stat-label">نمط زخرفة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalUses">0</div>
+                <div class="stat-label">استخدام اليوم</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="designsCount">0</div>
+                <div class="stat-label">تصميم محفوظ</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeUsers">1</div>
+                <div class="stat-label">مستخدم نشط</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="card animate slide-in-up">
+                <h2 class="card-title">
+                    <i class="fas fa-pen-nib"></i> أدخل النص المراد زخرفته
+                </h2>
                 
                 <div class="input-group">
-                    <input type="text" class="username-input" id="usernameInput" placeholder="اسم المستخدم بدون @" value="">
-                    <button class="analyze-btn" id="analyzeBtn">
-                        <i class="fas fa-chart-line"></i>
-                        بدء الفحص
+                    <textarea id="inputText" placeholder="اكتب نصك هنا... مثال: علي، Mohammed، Gaming، إلخ">ايمو</textarea>
+                </div>
+
+                <h3 class="card-title">
+                    <i class="fas fa-palette"></i> اختر نمط الزخرفة
+                </h3>
+                
+                <div class="fonts-grid" id="fontsContainer">
+                    <!-- سيتم تعبئته بواسطة JavaScript -->
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="card animate slide-in-up">
+                <h2 class="card-title">
+                    <i class="fas fa-eye"></i> معاينة النص المزخرف
+                </h2>
+                
+                <div class="preview-area" id="previewArea">
+                    <div id="previewText">النص المزخرف سيظهر هنا</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="copyBtn">
+                        <i class="fas fa-copy"></i>
+                        <span>نسخ النص</span>
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="saveBtn">
+                        <i class="fas fa-heart"></i>
+                        <span>حفظ التصميم</span>
+                    </button>
+                    
+                    <button class="btn btn-accent" id="resetBtn">
+                        <i class="fas fa-redo"></i>
+                        <span>إعادة تعيين</span>
                     </button>
                 </div>
-                
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>فحص أمني متقدم</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-robot"></i>
-                        <span>تحليل بالذكاء الاصطناعي</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>إحصائيات مفصلة</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-bolt"></i>
-                        <span>نتائج فورية</span>
-                    </div>
+
+                <div class="action-buttons" style="margin-top: 15px;">
+                    <button class="btn btn-primary" id="shareBtn">
+                        <i class="fas fa-share-alt"></i>
+                        <span>مشاركة</span>
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        <span>تحميل صورة</span>
+                    </button>
+                    
+                    <button class="btn btn-accent" id="randomBtn">
+                        <i class="fas fa-random"></i>
+                        <span>عشوائي</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Designs -->
+        <div class="card animate fade-in">
+            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <i class="fas fa-history"></i> التصميمات الحديثة
+                </div>
+                <button class="btn btn-accent" id="clearHistoryBtn" style="padding: 10px 20px; font-size: 0.9rem;">
+                    <i class="fas fa-trash"></i> مسح السجل
+                </button>
+            </div>
+            
+            <div class="designs-grid" id="recentDesigns">
+                <!-- سيتم تعبئته بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <!-- Tips & Instructions -->
+        <div class="card animate fade-in">
+            <h2 class="card-title">
+                <i class="fas fa-lightbulb"></i> نصائح واستخدامات
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="tip-item">
+                    <h3><i class="fas fa-gamepad"></i> للألعاب</h3>
+                    <p>زخرفة أسماء اللاعبين في فري فاير، ببجي موبايل، وغيرها من الألعاب.</p>
                 </div>
                 
-                <div id="results">
-                    <div class="card-header" style="margin-top: 30px;">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <h2 class="card-title">نتائج التحليل</h2>
-                    </div>
-                    
-                    <div class="results-grid">
-                        <div class="stat-card">
-                            <i class="fas fa-users" style="font-size: 2rem; color: var(--accent);"></i>
-                            <div class="stat-value" id="followersCount">0</div>
-                            <div class="stat-label">المتابعون</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <i class="fas fa-user-plus" style="font-size: 2rem; color: var(--info);"></i>
-                            <div class="stat-value" id="followingCount">0</div>
-                            <div class="stat-label">يتبع</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 45%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <i class="fas fa-images" style="font-size: 2rem; color: var(--purple);"></i>
-                            <div class="stat-value" id="postsCount">0</div>
-                            <div class="stat-label">عدد المنشورات</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 62%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <i class="fas fa-heart" style="font-size: 2rem; color: var(--pink);"></i>
-                            <div class="stat-value" id="engagementRate">0%</div>
-                            <div class="stat-label">معدل التفاعل</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 78%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <i class="fas fa-bolt" style="font-size: 2rem; color: var(--warning);"></i>
-                            <div class="stat-value" id="accountScore">0/10</div>
-                            <div class="stat-label">تقييم الحساب</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 72%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--neon-blue);"></i>
-                            <div class="stat-value" id="accountAge">0</div>
-                            <div class="stat-label">عمر الحساب (أيام)</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card" style="margin-top: 30px;">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h2 class="card-title">التقييم الذكي</h2>
-                        </div>
-                        <p id="aiAssessment" style="line-height: 1.7;">سيظهر هنا التقييم الذكي للحساب بعد الفحص...</p>
-                    </div>
+                <div class="tip-item">
+                    <h3><i class="fas fa-hashtag"></i> للسوشيال ميديا</h3>
+                    <p>تزيين البايو في Instagram، TikTok، Twitter، وغيرها من المنصات.</p>
                 </div>
-            </section>
-        </main>
-        
-        <footer>
-            <p>نظام فحص إنستغرام الذكي - الإصدار المتطور &copy; 2023</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">هذا النظام مخصص لأغراض تعليمية وتحليلية فقط</p>
-        </footer>
+                
+                <div class="tip-item">
+                    <h3><i class="fas fa-comment"></i> للتعليقات</h3>
+                    <p>إضافة لمسة جمالية للتعليقات في YouTube، Facebook، والمنتديات.</p>
+                </div>
+                
+                <div class="tip-item">
+                    <h3><i class="fas fa-star"></i> مميزاتنا</h3>
+                    <p>أكثر من 50 نمط، حفظ غير محدود، دعم كامل للعربية والإنجليزية.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        // إنشاء خلفية المصفوفة
-        function createMatrixBackground() {
-            const matrixBg = document.getElementById('matrixBg');
-            const chars = '01010101阿拉伯语字符测试اختبار';
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن التطبيق</h3>
+                    <p>تطبيق زخرفة النصوص المتقدم يوفر لك تجربة فريدة في تزيين النصوص العربية والإنجليزية بأنماط احترافية وجميلة.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> عنا</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> الخصوصية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/emo_80" target="_blank"><i class="fab fa-telegram"></i> تليجرام</a></li>
+                        <li><a href="https://youtube.com/@emo8_0" target="_blank"><i class="fab fa-youtube"></i> يوتيوب</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> تويتر</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> انستجرام</a></li>
+                    </ul>
+                </div>
+            </div>
             
-            for (let i = 0; i < 50; i++) {
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
-                char.style.left = `${Math.random() * 100}%`;
-                char.style.animationDuration = `${Math.random() * 10 + 10}s`;
-                char.style.animationDelay = `${Math.random() * 5}s`;
-                matrixBg.appendChild(char);
-            }
-        }
-        
-        // إنشاء جسيمات الخلفية
+            <div class="copyright">
+                <p>© 2024 تطبيق زخرفة النصوص المتقدم | 𓆩𖤐 تطوير ايمو 𖤐𓆪 | جميع الحقوق محفوظة</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #777;">Version 3.0.0 | تم التطوير بأحدث التقنيات</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إنشاء جسيمات متحركة
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
             
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.width = `${Math.random() * 30 + 10}px`;
-                particle.style.height = particle.style.width;
+                
+                // أحجام وألوان عشوائية
+                const size = Math.random() * 20 + 5;
+                const colors = ['#8B5FBF', '#FF6B8B', '#00C9B7', '#FFC107'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = color;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // مواقع عشوائية
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
-                particle.style.animationDelay = `${Math.random() * 10}s`;
+                
+                // سرعات عشوائية
+                const duration = Math.random() * 30 + 20;
+                const delay = Math.random() * 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
                 particlesContainer.appendChild(particle);
             }
         }
-        
-        // محاكاة عملية الفحص
-        function analyzeAccount(username) {
-            const results = document.getElementById('results');
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            const loadingScreen = document.getElementById('loadingScreen');
+
+        // بيانات الزخارف المتقدمة (أكثر من 50 نمط)
+        const decorativeFonts = [
+            // أنماط إطارات ونماذج
+            { name: "الإطار الملكي", transform: (t) => `♔ ${t} ♔`, category: "royal" },
+            { name: "الإطار النجمي", transform: (t) => `★ ${t} ★`, category: "stars" },
+            { name: "الإطار السحري", transform: (t) => `𓆩 ${t} 𓆪`, category: "magic" },
+            { name: "الإطار الزهري", transform: (t) => `❀ ${t} ❀`, category: "flowers" },
+            { name: "الإطار الناري", transform: (t) => `🔥 ${t} 🔥`, category: "fire" },
+            { name: "الإطار الماسي", transform: (t) => `💎 ${t} 💎`, category: "diamond" },
             
-            // إظهار شاشة التحميل
-            loadingScreen.style.display = 'flex';
-            analyzeBtn.disabled = true;
-            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحليل...';
+            // أنماط مرتفعة
+            { name: "مرتفع ١", transform: (t) => `ˢᵘᵖᵉʳ ${t}`, category: "superscript" },
+            { name: "مرتفع ٢", transform: (t) => `${t}ˢᵗʸˡᵉ`, category: "superscript" },
+            { name: "مرتفع ٣", transform: (t) => `🅢🅤🅟🅔🅡 ${t}`, category: "bubble" },
             
-            // محاكاة وقت التحليل
+            // أنماط بارزة
+            { name: "بارز ١", transform: (t) => `【${t}】`, category: "bold" },
+            { name: "بارز ٢", transform: (t) => `『${t}』`, category: "bold" },
+            { name: "بارز ٣", transform: (t) => `〖${t}〗`, category: "bold" },
+            { name: "بارز ٤", transform: (t) => `〘${t}〙`, category: "bold" },
+            
+            // أنماط رقيقة
+            { name: "رقيق ١", transform: (t) => `ᶜᵒᵒˡ ${t}`, category: "thin" },
+            { name: "رقيق ٢", transform: (t) => `${t}ˢᵐᵒᵒᵗʰ`, category: "thin" },
+            
+            // أنماط مائلة
+            { name: "مائل ١", transform: (t) => `𝘪𝘵𝘢𝘭𝘪𝘤 ${t}`, category: "italic" },
+            { name: "مائل ٢", transform: (t) => `${t} 𝘴𝘭𝘢𝘯𝘵𝘦𝘥`, category: "italic" },
+            
+            // أنماط منقطة
+            { name: "منقط ١", transform: (t) => `• ${t} •`, category: "dots" },
+            { name: "منقط ٢", transform: (t) => `‧͙⁺˚*･༓☾ ${t} ☽༓･*˚⁺‧͙`, category: "dots" },
+            
+            // أنماط هندسية
+            { name: "هندسي ١", transform: (t) => `◈ ${t} ◈`, category: "geometric" },
+            { name: "هندسي ٢", transform: (t) => `⬟ ${t} ⬟`, category: "geometric" },
+            { name: "هندسي ٣", transform: (t) => `✦ ${t} ✦`, category: "geometric" },
+            
+            // أنماط قلبية
+            { name: "قلبي ١", transform: (t) => `♥ ${t} ♥`, category: "hearts" },
+            { name: "قلبي ٢", transform: (t) => `💖 ${t} 💖`, category: "hearts" },
+            { name: "قلبي ٣", transform: (t) => `❤️🔥 ${t} 🔥❤️`, category: "hearts" },
+            
+            // أنماط قوس قزح
+            { name: "قوس قزح", transform: (t) => `🌈 ${t} 🌈`, category: "rainbow" },
+            { name: "قوس قزح ٢", transform: (t) => `🌠 ${t} 🌠`, category: "rainbow" },
+            
+            // أنماط سحابية
+            { name: "سحابي", transform: (t) => `☁️ ${t} ☁️`, category: "cloud" },
+            
+            // أنماط نجوم
+            { name: "نجوم ١", transform: (t) => `⋆⭒˚ ${t} ˚⭒⋆`, category: "stars" },
+            { name: "نجوم ٢", transform: (t) => `⭑ ${t} ⭑`, category: "stars" },
+            { name: "نجوم ٣", transform: (t) => `𓇼 ${t} 𓇼`, category: "stars" },
+            
+            // أنماط زهور
+            { name: "زهور ١", transform: (t) => `✿ ${t} ✿`, category: "flowers" },
+            { name: "زهور ٢", transform: (t) => `❁ ${t} ❁`, category: "flowers" },
+            
+            // أنماط أجنحة
+            { name: "أجنحة", transform: (t) => `𓆉 ${t} 𓆉`, category: "wings" },
+            
+            // أنماط حيوانات
+            { name: "فراشة", transform: (t) => `𓆣 ${t} 𓆣`, category: "animals" },
+            { name: "أسد", transform: (t) => `🦁 ${t} 🦁`, category: "animals" },
+            
+            // أنماط مجوهرات
+            { name: "مجوهرات", transform: (t) => `💍 ${t} 💍`, category: "jewelry" },
+            
+            // أنماط مخطوطة
+            { name: "مخطوطة", transform: (t) => `✍️ ${t} ✍️`, category: "handwritten" },
+            
+            // أنماط الألعاب
+            { name: "لعبة ١", transform: (t) => `🎮 ${t} 🎮`, category: "gaming" },
+            { name: "لعبة ٢", transform: (t) => `🕹️ ${t} 🕹️`, category: "gaming" },
+            
+            // أنماط موسيقية
+            { name: "موسيقي", transform: (t) => `🎵 ${t} 🎵`, category: "music" },
+            { name: "موسيقي ٢", transform: (t) => `🎶 ${t} 🎶`, category: "music" },
+            
+            // أنماط خاصة
+            { name: "ساحر", transform: (t) => `🧙‍♂️ ${t} 🧙‍♂️`, category: "special" },
+            { name: "فايروس", transform: (t) => `☣️ ${t} ☣️`, category: "special" },
+            { name: "ساعات", transform: (t) => `🕰️ ${t} 🕰️`, category: "special" },
+            
+            // أنماط قوية
+            { name: "قوي ١", transform: (t) => `⚡ ${t} ⚡`, category: "power" },
+            { name: "قوي ٢", transform: (t) => `💪 ${t} 💪`, category: "power" },
+            
+            // أنماط عربية مزخرفة
+            { name: "عربي ١", transform: (t) => `꧁${t}꧂`, category: "arabic" },
+            { name: "عربي ٢", transform: (t) => `◥${t}◤`, category: "arabic" },
+            { name: "عربي ٣", transform: (t) => `⧽${t}⧼`, category: "arabic" },
+            { name: "عربي ٤", transform: (t) => `『${t}』`, category: "arabic" },
+            { name: "عربي ٥", transform: (t) => `【${t}】`, category: "arabic" },
+            
+            // أنماط انجليزية مزخرفة
+            { name: "انجليزي ١", transform: (t) => `༺${t}༻`, category: "english" },
+            { name: "انجليزي ٢", transform: (t) => `乂${t}乂`, category: "english" },
+            { name: "انجليزي ٣", transform: (t) => `『${t}』`, category: "english" },
+            { name: "انجليزي ٤", transform: (t) => `☆${t}☆`, category: "english" },
+            { name: "انجليزي ٥", transform: (t) => `✦${t}✦`, category: "english" },
+            { name: "انجليزي ٦", transform: (t) => `❖${t}❖`, category: "english" },
+            { name: "انجليزي ٧", transform: (t) => `〖${t}〗`, category: "english" },
+            
+            // أنماط مختلطة
+            { name: "مختلط ١", transform: (t) => `⌘ ${t} ⌘`, category: "mixed" },
+            { name: "مختلط ٢", transform: (t) => `⟡ ${t} ⟡`, category: "mixed" },
+            { name: "مختلط ٣", transform: (t) => `⋆ ${t} ⋆`, category: "mixed" },
+            { name: "مختلط ٤", transform: (t) => `✧ ${t} ✧`, category: "mixed" },
+            { name: "مختلط ٥", transform: (t) => `☯ ${t} ☯`, category: "mixed" },
+            { name: "مختلط ٦", transform: (t) => `卐 ${t} 卐`, category: "mixed" },
+            { name: "مختلط ٧", transform: (t) => `꧂${t}꧁`, category: "mixed" },
+            { name: "مختلط ٨", transform: (t) => `≛ ${t} ≛`, category: "mixed" },
+            { name: "مختلط ٩", transform: (t) => `⭑ ${t} ⭑`, category: "mixed" },
+            { name: "مختلط ١٠", transform: (t) => `ꕤ ${t} ꕤ`, category: "mixed" }
+        ];
+
+        // تعريف المتغيرات
+        let currentFontIndex = 0;
+        let recentDesigns = [];
+        let totalUses = 0;
+
+        // تهيئة التطبيق
+        function initApp() {
+            createParticles();
+            loadStats();
+            initFonts();
+            initEvents();
+            updatePreview();
+            loadRecentDesigns();
+            
+            // إخفاء شاشة التحميل بعد 1.5 ثانية
             setTimeout(() => {
-                // إخفاء شاشة التحميل
-                loadingScreen.style.display = 'none';
-                analyzeBtn.disabled = false;
-                analyzeBtn.innerHTML = '<i class="fas fa-chart-line"></i> بدء الفحص';
+                document.getElementById('loading').style.display = 'none';
+            }, 1500);
+        }
+
+        // تحميل الإحصائيات
+        function loadStats() {
+            // إحصائيات محلية
+            const savedUses = localStorage.getItem('totalUses') || 0;
+            totalUses = parseInt(savedUses);
+            
+            // تحديث العداد
+            document.getElementById('fontsCount').textContent = decorativeFonts.length;
+            document.getElementById('totalUses').textContent = totalUses;
+            document.getElementById('designsCount').textContent = recentDesigns.length;
+            document.getElementById('activeUsers').textContent = '1';
+            
+            // تأثير عدادات متزايدة
+            animateCounter('totalUses', totalUses);
+        }
+
+        // تأثير العداد
+        function animateCounter(elementId, finalValue) {
+            let element = document.getElementById(elementId);
+            let current = 0;
+            let increment = finalValue / 50;
+            let timer = setInterval(() => {
+                current += increment;
+                if (current >= finalValue) {
+                    current = finalValue;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 20);
+        }
+
+        // تهيئة أنماط الزخرفة
+        function initFonts() {
+            const fontsContainer = document.getElementById('fontsContainer');
+            fontsContainer.innerHTML = '';
+            
+            decorativeFonts.forEach((font, index) => {
+                const fontItem = document.createElement('div');
+                fontItem.className = 'font-item';
+                fontItem.dataset.index = index;
                 
-                // إظهار النتائج
-                results.style.display = 'block';
+                // إنشاء معاينة مبدئية
+                const previewText = font.transform('نص');
                 
-                // تعبئة البيانات (محاكاة)
-                document.getElementById('followersCount').textContent = (Math.random() * 50000 + 1000).toLocaleString();
-                document.getElementById('followingCount').textContent = Math.floor(Math.random() * 1000 + 100).toLocaleString();
-                document.getElementById('postsCount').textContent = Math.floor(Math.random() * 500 + 50).toLocaleString();
-                document.getElementById('engagementRate').textContent = (Math.random() * 10 + 2).toFixed(1) + '%';
-                document.getElementById('accountScore').textContent = Math.floor(Math.random() * 4 + 6) + '/10';
-                document.getElementById('accountAge').textContent = Math.floor(Math.random() * 1000 + 500).toLocaleString();
+                fontItem.innerHTML = `
+                    <div class="font-preview">${previewText}</div>
+                    <div class="font-name">${font.name}</div>
+                    <div class="font-category" style="font-size: 0.8rem; color: #999; margin-top: 5px;">
+                        ${font.category}
+                    </div>
+                `;
                 
-                // تقييم ذكي عشوائي
-                const assessments = [
-                    `حساب ${username} يظهر نشاطاً جيداً ومعدل تفاعل صحي. النشاط منتظم والمحتوى متنوع.`,
-                    `الحساب لديه متابعين متفاعلين مع نسبة نمو مستقرة. نوصي بزيادة وتيرة النشر لتحسين النتائج.`,
-                    `الحساب نشط ومتفاعل مع جمهوره. هناك فرصة لتحسين الاستراتيجية من خلال تحسين أوقات النشر.`,
-                    `يتميز الحساب بمحتوى جذاب ومتابعين مخلصين. يمكن تحسين الأداء باستخدام الهاشتاقات المناسبة.`
-                ];
+                fontItem.addEventListener('click', () => {
+                    selectFont(index);
+                    saveRecentDesign();
+                });
                 
-                document.getElementById('aiAssessment').textContent = assessments[Math.floor(Math.random() * assessments.length)];
+                fontsContainer.appendChild(fontItem);
+            });
+            
+            // تحديد أول نمط
+            selectFont(0);
+        }
+
+        // اختيار نمط زخرفة
+        function selectFont(index) {
+            // إزالة التحديد من جميع الأنماط
+            document.querySelectorAll('.font-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // تحديد النمط المختار
+            const selectedFont = document.querySelector(`.font-item[data-index="${index}"]`);
+            if (selectedFont) {
+                selectedFont.classList.add('active');
+                selectedFont.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            currentFontIndex = index;
+            updatePreview();
+            
+            // زيادة عداد الاستخدامات
+            totalUses++;
+            localStorage.setItem('totalUses', totalUses);
+            document.getElementById('totalUses').textContent = totalUses;
+        }
+
+        // تحديث المعاينة
+        function updatePreview() {
+            const inputText = document.getElementById('inputText').value || 'ايمو';
+            const font = decorativeFonts[currentFontIndex];
+            const previewText = document.getElementById('previewText');
+            const previewArea = document.getElementById('previewArea');
+            
+            if (font && inputText.trim()) {
+                try {
+                    const styledText = font.transform(inputText);
+                    previewText.textContent = styledText;
+                    previewArea.classList.add('active');
+                    
+                    // تأثيرات متحركة
+                    previewText.style.animation = 'none';
+                    setTimeout(() => {
+                        previewText.style.animation = 'slideInUp 0.5s';
+                    }, 10);
+                } catch (error) {
+                    console.error('Error applying font:', error);
+                    previewText.textContent = inputText;
+                }
+            }
+        }
+
+        // حفظ التصميم الحالي
+        function saveRecentDesign() {
+            const inputText = document.getElementById('inputText').value.trim();
+            if (!inputText) return;
+            
+            const font = decorativeFonts[currentFontIndex];
+            const styledText = font.transform(inputText);
+            
+            // إنشاء كائن التصميم
+            const design = {
+                text: inputText,
+                styledText: styledText,
+                fontIndex: currentFontIndex,
+                timestamp: Date.now(),
+                date: new Date().toLocaleString('ar-SA')
+            };
+            
+            // تحميل التصميمات المحفوظة
+            let designs = JSON.parse(localStorage.getItem('recentDesigns') || '[]');
+            
+            // إضافة التصميم الجديد في البداية
+            designs.unshift(design);
+            
+            // الاحتفاظ بآخر 12 تصميم فقط
+            designs = designs.slice(0, 12);
+            
+            // حفظ في localStorage
+            localStorage.setItem('recentDesigns', JSON.stringify(designs));
+            
+            // تحديث العرض
+            loadRecentDesigns();
+            
+            // عرض رسالة نجاح
+            showToast('تم حفظ التصميم بنجاح! 💾');
+        }
+
+        // تحميل التصميمات الحديثة
+        function loadRecentDesigns() {
+            const designsContainer = document.getElementById('recentDesigns');
+            recentDesigns = JSON.parse(localStorage.getItem('recentDesigns') || '[]');
+            
+            designsContainer.innerHTML = '';
+            
+            if (recentDesigns.length === 0) {
+                designsContainer.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">
+                        <i class="fas fa-history" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
+                        <p>لا توجد تصميمات حديثة بعد</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">ابدأ بزخرفة نصوصك وسيتم حفظها هنا تلقائيًا</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            recentDesigns.forEach((design, index) => {
+                const designCard = document.createElement('div');
+                designCard.className = 'design-card';
+                designCard.innerHTML = `
+                    <div class="design-text">${design.styledText}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; color: #999;">${design.date}</span>
+                        <div class="design-actions">
+                            <button class="copy-design-btn" data-index="${index}" 
+                                    style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="apply-design-btn" data-index="${index}"
+                                    style="background: var(--accent); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
                 
-                // تمرير إلى قسم النتائج
-                results.scrollIntoView({ behavior: 'smooth' });
+                designsContainer.appendChild(designCard);
+            });
+            
+            // تحديث الإحصائيات
+            document.getElementById('designsCount').textContent = recentDesigns.length;
+        }
+
+        // نسخ النص إلى الحافظة
+        async function copyToClipboard(text) {
+            try {
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    // طريقة بديلة للمتصفحات القديمة
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                }
+                showToast('تم نسخ النص بنجاح! 📋');
+                return true;
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('فشل نسخ النص، حاول مرة أخرى ❌');
+                return false;
+            }
+        }
+
+        // عرض رسالة منبثقة
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // إزالة الرسالة بعد 3 ثواني
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
             }, 3000);
         }
-        
-        // تهيئة الصفحة عند التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            // إخفاء شاشة التحميل الرئيسية
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                }, 500);
-            }, 1500);
+
+        // تهيئة الأحداث
+        function initEvents() {
+            // تحديث المعاينة عند الكتابة
+            document.getElementById('inputText').addEventListener('input', updatePreview);
             
-            // إنشاء الخلفيات
-            createMatrixBackground();
-            createParticles();
-            
-            // إعداد زر التحليل
-            document.getElementById('analyzeBtn').addEventListener('click', function() {
-                const username = document.getElementById('usernameInput').value.trim();
-                if (username) {
-                    analyzeAccount(username);
+            // نسخ النص
+            document.getElementById('copyBtn').addEventListener('click', async () => {
+                const text = document.getElementById('previewText').textContent;
+                if (text && text !== 'النص المزخرف سيظهر هنا') {
+                    await copyToClipboard(text);
                 } else {
-                    alert('يرجى إدخال اسم مستخدم إنستغرام');
+                    showToast('أدخل نصًا أولاً 📝');
                 }
             });
             
-            // السماح بالضغط على Enter لبدء الفحص
-            document.getElementById('usernameInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    document.getElementById('analyzeBtn').click();
+            // حفظ التصميم
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                const inputText = document.getElementById('inputText').value.trim();
+                if (inputText) {
+                    saveRecentDesign();
+                } else {
+                    showToast('أدخل نصًا أولاً لحفظه 📝');
                 }
+            });
+            
+            // إعادة تعيين
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                document.getElementById('inputText').value = '';
+                document.getElementById('previewText').textContent = 'النص المزخرف سيظهر هنا';
+                document.getElementById('previewArea').classList.remove('active');
+                selectFont(0);
+                showToast('تم إعادة التعيين 🔄');
+            });
+            
+            // مشاركة
+            document.getElementById('shareBtn').addEventListener('click', () => {
+                const text = document.getElementById('previewText').textContent;
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'نص مزخرف من تطبيق ايمو',
+                        text: text,
+                        url: window.location.href
+                    });
+                } else {
+                    copyToClipboard(text);
+                    showToast('تم نسخ الرابط للمشاركة 📤');
+                }
+            });
+            
+            // تحميل صورة
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                showToast('هذه الميزة قريبًا! ⏳');
+                // يمكن إضافة مكتبة html2canvas لتحويل النص إلى صورة
+            });
+            
+            // نمط عشوائي
+            document.getElementById('randomBtn').addEventListener('click', () => {
+                const randomIndex = Math.floor(Math.random() * decorativeFonts.length);
+                selectFont(randomIndex);
+                showToast('نمط عشوائي معتمد! 🎲');
+            });
+            
+            // مسح السجل
+            document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+                if (confirm('هل تريد مسح كل التصميمات المحفوظة؟')) {
+                    localStorage.removeItem('recentDesigns');
+                    loadRecentDesigns();
+                    showToast('تم مسح جميع التصميمات 🗑️');
+                }
+            });
+            
+            // نسخ التصميم من السجل
+            document.addEventListener('click', async (e) => {
+                if (e.target.closest('.copy-design-btn')) {
+                    const index = e.target.closest('.copy-design-btn').dataset.index;
+                    const design = recentDesigns[index];
+                    await copyToClipboard(design.styledText);
+                }
+                
+                if (e.target.closest('.apply-design-btn')) {
+                    const index = e.target.closest('.apply-design-btn').dataset.index;
+                    const design = recentDesigns[index];
+                    
+                    document.getElementById('inputText').value = design.text;
+                    selectFont(design.fontIndex);
+                    showToast('تم تطبيق التصميم ✓');
+                }
+            });
+            
+            // تأثيرات للأزرار الاجتماعية
+            document.getElementById('telegramBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open('https://t.me/emo_80', '_blank');
+            });
+            
+            document.getElementById('youtubeBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open('https://youtube.com/@emo8_0', '_blank');
+            });
+            
+            // تأثيرات للمفاتيح
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'c') {
+                    const text = document.getElementById('previewText').textContent;
+                    if (text && text !== 'النص المزخرف سيظهر هنا') {
+                        copyToClipboard(text);
+                    }
+                }
+                
+                if (e.ctrlKey && e.key === 'Enter') {
+                    saveRecentDesign();
+                }
+                
+                if (e.key === 'Escape') {
+                    document.getElementById('inputText').focus();
+                }
+            });
+            
+            // تحسين تجربة المستخدم على الهواتف
+            if ('ontouchstart' in window) {
+                document.querySelectorAll('.font-item, .design-card, .btn').forEach(el => {
+                    el.style.cursor = 'pointer';
+                });
+            }
+        }
+
+        // بدء التطبيق
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // تحسين الأداء
+        window.addEventListener('load', () => {
+            // تحسينات للأداء
+            requestAnimationFrame(() => {
+                document.body.style.opacity = '1';
             });
         });
+
+        // Service Worker للتخزين المؤقت (اختياري)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
     </script>
 </body>
     </html>
-
